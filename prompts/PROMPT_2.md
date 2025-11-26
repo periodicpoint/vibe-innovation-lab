@@ -1,5 +1,5 @@
 # Prompt 2: Die Synthese (Solution Architect)
-Wenn der Dialog aus Phase 1 abgeschlossen und zu einem klaren Ergebnis gekommen ist, dann gehe bitte folgendermaßen vor:
+Wenn der Dialog aus Phase 1 abgeschlossen und zu einem klaren Ergebnis gekommen ist, dann gehe jetzt bitte folgendermaßen vor:
 
 1. Bleibe im selben Chat!
 2. Kopiere den folgenden Prompt komplett und unverändert in denselben Chat:
