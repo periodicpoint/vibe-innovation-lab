@@ -1,0 +1,13 @@
+streamlit              # Für Websites/Web-Apps (Das Herzstück)
+pandas                 # Für Datenanalyse & Excel-Tabellen
+numpy                  # Für mathematische Berechnungen
+openpyxl               # Damit Pandas Excel-Dateien (.xlsx) lesen kann
+plotly                 # Für interaktive Diagramme (Zoom, Mouseover)
+altair                 # Alternative für deklarative statistische Charts
+matplotlib             # Für klassische, statische Diagramme
+seaborn                # Für schönere statistische Visualisierungen
+Pillow                 # Für Bildbearbeitung und Uploads
+fpdf                   # Um PDF-Berichte zu generieren
+streamlit-extras       # Coole Zusatz-Widgets (Karten, Emojis, Kameras)
+streamlit-option-menu  # Für professionelle Navigations-Leisten
+graphviz               # Für Prozess- und Flussdiagramme
