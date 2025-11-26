@@ -43,6 +43,6 @@ Bitte geht nach und nach durch die folgenden Datein und folgt den Anleitungen do
 3. [Prompt 3: Die Realisierung (Dev: Senior Developer)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_3.md)
 
 # 🆘 Hilfe und Tipps
-1. Irgendetwas funktioniert nicht? Beschreibt, was das Problem ist, macht einen Screenshot und fragt die KI! 💡
+1. Irgendetwas funktioniert nicht? Beschreibt der KI was das Problem ist, macht einen Screenshot und fragt die KI nach einer Lösung! 💡
 2. Der Code funktioniert nicht? Fragt die KI! ;) Kopiert die Fehlermeldung und sagt: „Fixe diesen Fehler für mich“. Bleibt im selben Chat, mindestens aber im selben Projekt.
 3. Martin fragen. :)
