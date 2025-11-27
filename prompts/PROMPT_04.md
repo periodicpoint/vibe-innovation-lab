@@ -1,7 +1,7 @@
 # Warm-up 4: Systematisch (30 Minuten Teamwork)
 ## Ideenfindung im Team (5 Minuten)
 
-Findet im Team einen realen, einfachen Anwendungsfall aus eurer letzter Arbeitswoche, bei dem KI hilfreich sein könnte.
+Findet im Team einen realen, einfachen Anwendungsfall aus eurer letzten Arbeitswoche, bei dem KI hilfreich sein könnte.
 Geht dabei wie folgt vor:
 
 1.	Schreib innerhalb von 1 Minute jeweils für dich 1 realen, einfachen Anwendungsfall auf 1 Zettel.
