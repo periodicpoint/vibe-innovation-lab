@@ -1,4 +1,4 @@
-# Warm-up 3: Iteration (10 Minuten Teamwork)
+# Warm-up 3: Iteration (5 Minuten Teamwork)
 
 1. Ihr erhaltet folgende viel zu lange E-Mail.
 2. Lasst euch
