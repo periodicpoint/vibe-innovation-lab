@@ -1,4 +1,4 @@
-# Warm-up 2: Immer schön freundlich! :) (5 Minuten Teamwork)
+# Warm-up 2: Konkret (5 Minuten Teamwork)
 
 1. Ihr erhaltet folgende *un*freundliche E-Mail.
 2. Schreibt mithilfe von KI eine freundliche Antwort-E-Mail.
