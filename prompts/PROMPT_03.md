@@ -56,5 +56,5 @@
   > Mit freundlichen Grüßen
   > 
   > Dr. König
-<details>
+</details>
 
