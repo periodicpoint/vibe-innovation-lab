@@ -1,17 +1,26 @@
 # Übung 2: Warm-up (20 Minuten Teamwork)
 ## Auftrag 1 (10 Minuten)
 Ihr erhaltet folgende *un*freundliche E-Mail.
+
 Schreibt mithilfe von KI eine freundliche Antwort-E-Mail.
 
 Betreff: WAS SOLL DAS BITTE?! – Bestellung #45873 IMMER NOCH NICHT DA!!!
+
 Hallo „Service-Team“ (falls man das überhaupt so nennen kann),
 ich bin stinksauer!
+
 Am 3. Juli habe ich die Kaffeemaschine AromaPro 9000 bestellt, EXPRESS-Versand bezahlt und bis heute (17. Juli!) ist bei mir NICHTS angekommen. Kein Paket, keine Tracking-Info, nicht mal eine vernünftige Antwort von euch.
+
 Ehrlich gesagt fühle ich mich verarscht – so schwer kann es ja wohl nicht sein, ein Paket rechtzeitig loszuschicken! Andere Shops schaffen das schließlich auch ohne großes Theater.
+
 Falls ihr das noch nicht kapiert habt: Ich brauche die Maschine für eine Firmenveranstaltung nächste Woche. Wenn ihr mir nicht SOFORT (heißt: innerhalb der nächsten 24 Stunden) bestätigt, dass das Teil morgen bei mir aufschlägt, storniere ich den Auftrag, hole mir mein Geld zurück und lasse jeden wissen, was für ein Saftladen ihr seid – Social Media, Google-Bewertungen, was auch immer!
+
 Und kommt mir bloß nicht mit Standard-Textbausteinen oder „wir bitten um Verständnis“. Davon habe ich echt genug. Regelt. Das. Jetzt.
+
 Verärgert wie selten,
+
 – Sandra Klein
+
 (P.S.: Eine Entschuldigung wäre übrigens das Mindeste.)
 
 ## Lösung
