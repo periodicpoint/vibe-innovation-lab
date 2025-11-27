@@ -1,4 +1,4 @@
-# Warm-up 1: Bootstrapping (5 Minuten Einzelarbeit)
+# Warm-up 1: Bootstrapping (2 Minuten Einzelarbeit)
 
 1.	Starte deine KI-Anwendung.
 2.	Gehe in dein Projekt mit dem Namen: „Vibe Innovation“.
