@@ -28,6 +28,7 @@
 > HelioCore Solutions GmbH 
 
 # Lösung
+
 <details>
   <summary>Spoiler warning!</summary>
   
