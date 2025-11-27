@@ -1,4 +1,4 @@
-# Warm-up 4: Systematisch (45 Minuten Teamwork)
+# Warm-up 4: Systematisch (30 Minuten Teamwork)
 ## Ideenfindung im Team (5 Minuten)
 
 Findet im Team einen realen, einfachen Anwendungsfall aus eurer letzter Arbeitswoche, bei dem KI hilfreich sein könnte.
@@ -10,7 +10,7 @@ Geht dabei wie folgt vor:
 4.	Mache bis zu 3 Striche auf den Zettel, wenn dir der Anwendungsfall gefällten.
 5.	Widerhole den Vorgang solange, bis du wieder deinen eigenen ursprünglichen Zettel vor dir liegen hast.
 
-## Abstimmung im Team (2 Minuten)
+## Abstimmung im Team (1 Minuten)
 
 Tausche dich in deinem Team aus und wähle einen Anwendungsfall aus, den ihr gemeinsam bearbeiten wollt.
 Achtet darauf, dass der Anwendungsfall konkret genug ist und innerhalb von 15 Minuten bearbeitet werden kann.
@@ -21,7 +21,7 @@ Achtet darauf, dass der Anwendungsfall konkret genug ist und innerhalb von 15 Mi
 2.	Füllt die *Zielvorstellung* so konkret und kurz wie möglich aus.
 3.	Füllt die einzelnen Schritte im *ZAUBER-Schema* (Zauberformel) so konkret und kurz wie möglich aus.
 
-## Lösungsfindung im Team mit der KI (15 Minuten)
+## Lösungsfindung im Team mit der KI (10 Minuten)
 
 1.	Öffne deine KI-Anwendung.
 2.	Gehe zu deinem Projekt mit dem Namen: „Vibe Innovation“.
