@@ -1,4 +1,4 @@
-# Warm-up 4: System (45 Minuten Teamwork)
+# Warm-up 4: Systematisch (45 Minuten Teamwork)
 ## Ideenfindung im Team (5 Minuten)
 
 Findet im Team einen realen, einfachen Anwendungsfall aus eurer letzter Arbeitswoche, bei dem KI hilfreich sein könnte.
