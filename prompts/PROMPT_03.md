@@ -1,7 +1,8 @@
-# Übung 3: Warm-up (10 Minuten Teamwork)
+# Warm-up 3 (10 Minuten Teamwork)
 
 Ihr erhaltet folgende viel zu lange E-Mail. Lasst euch (a) diese E-Mail mithilfe von KI zusammenfassen und (b) schreibt mithilfe von KI eine kurze Antwort-E-Mail, die maximal 3 Sätze umfasst.
 
+````text
 Betreff: Fortschreibung diverser Abstimmungs- und Orientierungsparameter im Kontext unserer langfristigen Kollaboration sowie einige damit verbundene Konsolidierungsaspekte – vertraulich
 
 Sehr geehrter Herr Dr. König,
@@ -21,9 +22,11 @@ Dr. Matthias Feldmann
 Leitung Strategisches Partnermanagement
 
 HelioCore Solutions GmbH 
+````
 
 # Lösung
-
+<details>
+  <summary>Spoiler warning!</summary>
 ## Prompt 1
 
 Was ist die Kernaussage der folgenden E-Mail?
@@ -48,3 +51,5 @@ den aktualisierten Vertragsentwurf erhalten Sie bis 5. August 2025. Für Rü
 Mit freundlichen Grüßen
 
 Dr. König
+<details>
+
