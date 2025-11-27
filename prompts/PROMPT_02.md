@@ -1,4 +1,4 @@
-# Warm-up 2: Konkret (4 Minuten Teamwork)
+# Prompt Paterns 2: Konkret (4 Minuten Teamwork)
 
 1. Ihr erhaltet folgende *un*freundliche E-Mail.
 2. Schreibt mithilfe von KI eine freundliche Antwort-E-Mail.
