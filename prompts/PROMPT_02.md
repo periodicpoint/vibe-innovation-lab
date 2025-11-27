@@ -1,5 +1,5 @@
 # Übung 2: Warm-up (10 Minuten Teamwork)
-## Auftrag 1 (10 Minuten)
+
 Ihr erhaltet folgende *un*freundliche E-Mail.
 
 Schreibt mithilfe von KI eine freundliche Antwort-E-Mail.
