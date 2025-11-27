@@ -1,7 +1,7 @@
 # Prompt 1: Der Sokratische Dialog (Coach: Mäeutik-Protokoll)
 Wenn die Ideenfindungsphase abegschossen ist und du erste Ideen hast, dann gehe jetzt bitte folgendermaßen vor:
 
-1. Starte deine KI.
+1. Starte deine KI-Anwendung.
 2. Gehe in dein Projekt.
 3. Starte einen neuen Chat.
 4. Kopiere den folgenden Prompt komplett in den neuen Chat.
