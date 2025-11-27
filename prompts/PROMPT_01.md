@@ -1,5 +1,4 @@
-# Übung 1: Warm-up: Der erste Prompt (5 Minuten Einzelarbeit)
-## Auftrag (5 Minuten)
+# Warm-up 1: Der erste Prompt (5 Minuten Einzelarbeit)
 
 1.	Starte deine KI-Anwendung.
 2.	Gehe in dein Projekt mit dem Namen: „Vibe Innovation“.
