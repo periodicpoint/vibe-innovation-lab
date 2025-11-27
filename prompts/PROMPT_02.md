@@ -29,14 +29,21 @@ Verärgert wie selten,
   Liebe Frau Klein,
   
   es tut uns leid. Dass Ihre AromaPro 9000 trotz Expressversand seit dem 3. Juli nicht angekommen ist, entspricht in keiner Weise unserem Anspruch.
+  
   Ich habe Ihren Fall persönlich übernommen und soeben Folgendes veranlasst:
-  •	Ein Ersatzgerät verlässt noch heute unser Lager per UPS Express. Geplante Zustellung: morgen, 18. Juli, bis 12 Uhr. Die Sendungsnummer folgt in einer separaten Mail, sobald UPS sie freigibt.
-  •	Parallel läuft eine Nachforschung für das ursprünglich versandte Paket.
+  
+  - Ein Ersatzgerät verlässt noch heute unser Lager per UPS Express. Geplante Zustellung: morgen, 18. Juli, bis 12 Uhr. Die Sendungsnummer folgt in einer separaten Mail, sobald UPS sie freigibt.
+  - Parallel läuft eine Nachforschung für das ursprünglich versandte Paket.
+  
   Den Expresszuschlag erstatten wir heute auf Ihr ursprüngliches Zahlungsmittel. Zusätzlich erhalten Sie einen Gutschein über 15 Prozent für Ihre nächste Bestellung.
+  
   Falls das Ersatzgerät wider Erwarten nicht pünktlich eintreffen sollte, genügt eine kurze Rückmeldung. Wir stornieren dann umgehend und erstatten den vollen Betrag.
+  
   Ich hoffe, das bringt Ihre Firmenveranstaltung wieder auf Kurs. Noch einmal Entschuldigung für den Ärger und vielen Dank für Ihre Geduld.
   
   Herzliche Grüße
+  
   Max Berger
+
   Leiter Kundenservice
 </details>
