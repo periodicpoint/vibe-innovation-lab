@@ -20,6 +20,7 @@ Verärgert wie selten,
   
   ### Prompt
   Bitte schreibe eine freundliche, professionelle und versöhnliche Antwort auf die folgende E-Mail:
+  
   [… E-Mail von oben …]
 
   ### KI-Antwort
