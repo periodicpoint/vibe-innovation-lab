@@ -1,4 +1,4 @@
-# Warm-up 4: Systematisch (30 Minuten Teamwork)
+# Prompt Patterns 4: Systematisch (30 Minuten Teamwork)
 ## Ideenfindung im Team (5 Minuten)
 
 Findet im Team einen realen, einfachen Anwendungsfall aus eurer letzten Arbeitswoche, bei dem KI hilfreich sein könnte.
