@@ -10,7 +10,7 @@ Geht dabei wie folgt vor:
 4.	Mache bis zu 3 Striche auf den Zettel, wenn dir der Anwendungsfall gefällten.
 5.	Widerhole den Vorgang solange, bis du wieder deinen eigenen ursprünglichen Zettel vor dir liegen hast.
 
-## Abstimmung im Team (5 Minuten)
+## Abstimmung im Team (2 Minuten)
 
 Tausche dich in deinem Team aus und wähle einen Anwendungsfall aus, den ihr gemeinsam bearbeiten wollt.
 Achtet darauf, dass der Anwendungsfall konkret genug ist und innerhalb von 15 Minuten bearbeitet werden kann.
