@@ -1,4 +1,4 @@
-# Warm-up 3: Iterativ (5 Minuten Teamwork)
+# Prompt Patterns 3: Iterativ (5 Minuten Teamwork)
 
 1. Ihr erhaltet folgende viel zu lange E-Mail.
 2. Lasst euch
