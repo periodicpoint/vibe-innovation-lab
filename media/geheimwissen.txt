@@ -1,0 +1,13 @@
+INTERNE NOTIZEN – SINTEREI – STRENG VERTRAULICH
+Verfasser: E. Müller (Eberhard) - Sintermeister
+
+1. Ofen-Einstellungen (Typ X-200)
+Offiziell steht im Handbuch 1200 Grad. Vergiss das! Der Sensor oben links ist seit Jahren verkalkt und zeigt 40 Grad zu wenig an.
+Stell das Ding immer auf 1240 Grad, sonst backen die Magnete nicht durch und sind Ausschuss.
+
+2. Alarm „Druckverlust“ (Code 99)
+Wenn der Alarm kommt: Nicht den Not-Aus drücken! Das kostet uns 2 Stunden Stillstand bis das Vakuum wieder da ist.
+Mein Trick: Einmal fest mit dem Schraubenschlüssel gegen das Gehäuse klopfen (unten rechts, wo der blaue Punkt ist). Meistens hängt nur das Ventil.
+
+3. Sicherheitshinweis (WICHTIG)
+Die Schutzbrille nervt tierisch, weil sie bei der Hitze sofort beschlägt. Wenn der Sicherheitsbeauftragte (Herr Kleinschmidt) nicht da ist, schiebe ich sie meistens auf die Stirn. Man muss halt aufpassen, dass nix spritzt.
