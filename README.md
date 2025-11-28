@@ -36,11 +36,13 @@ streamlit run app.py
 4. Klickt einfach darauf, und die Seite aktualisiert sich sofort.
 
 ### 2.4 Start-Prompts
-Bitte geht nach und nach durch die folgenden Datein und folgt den Anleitungen dort:
+Bitte geht nach und nach durch die folgenden Datein und folgt den Anleitungen dort.
 
-1. [Prompt 1: Der Sokratische Dialog (Coach: Mäeutik-Protokoll)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_1.md)
-2. [Prompt 2: Die Synthese (Solution Architect)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_2.md)
-3. [Prompt 3: Die Realisierung (Dev: Senior Developer)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_3.md)
+Hier geht es direkt zu den Vibe Innovation Prompts:
+
+1. [Prompt 1: Der Sokratische Dialog (Coach: Mäeutik-Protokoll)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_08.md)
+2. [Prompt 2: Die Synthese (Solution Architect)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_09.md)
+3. [Prompt 3: Die Realisierung (Dev: Senior Developer)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_10.md)
 
 # 🆘 Hilfe und Tipps
 1. Irgendetwas funktioniert nicht? Beschreibt der KI was das Problem ist, macht einen Screenshot und fragt die KI nach einer Lösung! 💡
