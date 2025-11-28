@@ -1,4 +1,4 @@
-# Context Engineering: System Prompts
+# Context Engineering: System Prompts (45 Minuten Teamwork)
 
 ## System Prompt 1
 
