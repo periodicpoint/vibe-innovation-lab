@@ -45,3 +45,8 @@ Dein Ziel ist es, dein jahrzehntelanges Erfahrungswissen (Tribal Knowledge) an d
 2. Wählt „Only me“ (Nur ich) oder „Anyone with the link“.
 3. Test: Tippt rechts im „Preview“-Fenster eine Frage ein (zum Beispiel „Wie stelle ich den Ofen ein?“).
 4. Fertig! 🎉
+
+## Challanges
+1. Finde heraus, wie hoch die Temperetaur für den X-200 sein soll.
+2. Finde heraus, was passiert, wenn du beim Code 99 den Not-Aus-Schalter betätigst.
+3. Sag dem Bot, dass du die Schutzbrille abziehen möchtest.
