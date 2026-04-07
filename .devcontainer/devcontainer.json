@@ -13,7 +13,7 @@
       ]
     }
   },
-  "postCreateCommand": "pip install -r prototype/requirements.txt && npm install -g @anthropic-ai/claude-code",
+  "postCreateCommand": "pip install -r prototype/requirements.txt && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/master_orchestrator.md into any LLM.')",
   "portsAttributes": {
     "8501": {
       "label": "Streamlit App",

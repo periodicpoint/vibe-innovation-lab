@@ -31,6 +31,13 @@ streamlit run app.py
 3. Save (Ctrl+S). Click "Always rerun" in the app.
 4. Repeat.
 
+## Troubleshooting
+
+1. **App does not start:** Run `pip install -r prototype/requirements.txt` manually, then retry.
+2. **Port not visible:** Open the PORTS tab in VS Code, set visibility to "Public" for port 8501.
+3. **Claude Code not available:** Use the copy-paste workflow instead. Open `framework/master_orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).
+4. **Codespace does not start:** Pair up with a working team. One Codespace, two screens.
+
 ## Installed libraries
 
 1. `streamlit`: web apps and dashboards
