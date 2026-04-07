@@ -12,7 +12,7 @@ st.set_page_config(page_title="Vibe Innovation Lab", layout="wide")
 st.title("🚀 Vibe Innovation Lab")
 
 # Schreibt normalen Text unter die Überschrift (in HTML)
-st.write("Mäeutik-Protokoll: Von der Idee über den Code zur Website/App.")
+st.write("Von der Idee über den Code zur Website oder App.")
 
 # 4. Der Hinweis-Kasten
 # Erzeugt eine blaue Info-Box. Der Text darin ("... Test!") wird angezeigt.

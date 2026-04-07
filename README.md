@@ -1,50 +1,78 @@
-# 🚀 Vibe Innovation Lab
+# Vibe Innovation Lab
 
-Willkommen in eurer digitalen Werkstatt!
-Hier entwickeln wir heute Software-Prototypen, um echte Probleme zu lösen – **ganz ohne selbst zu programmieren.**
+A prompt-based framework for human-AI, co-intelligence, co-creation, co-innovation, across the full innovation lifecycle. From pre-concept exploration (TRL -2) to validated learning (TRL 4). Works with any LLM that follows structured prompts.
 
-## 1. 🏁 Start: So öffnet ihr die Werkstatt
+## Quick start
 
-Ihr braucht nichts auf eurem Laptop zu installieren. Alles läuft in der Cloud in eurem Browser.
+### With Claude Code
 
-1.  Klickt oben rechts auf den grünen Button **`<> Code`**.
-2.  Wählt den Reiter **`Codespaces`**.
-3.  Klickt auf den grünen Button **`Create codespace on main`**.
-
-*Es dauert nun ca. 1-2 Minuten, bis euer Virtueller Computer eingerichtet ist. Holt euch einen Kaffee ☕.*
-
-## 2. 🛠️ Vibe Loop Anleitung
-### 2.1 Die Webiste/App starten
-Sobald Visual Studio Code im Browser geladen ist, kopiert den folgenden Befehl und fügt ihn `mit der rechten Maustaste` unten im **Terminal** (dem schwarzen Fenster) ein und drückt `Enter`:
-
-```bash
-streamlit run app.py
+```
+/innovate
 ```
 
-### 2.2 Die Website/App ansehen
-1. Schaut in VS Code im unteren Bereich (dort, wo auch das Terminal ist).
-2. Klickt auf den Reiter PORTS (neben Terminal und Debug Console).
-3. Ihr seht eine Zeile mit `Streamlit App (8501)` oder `Streamlit Port`.
-4. Fahrt mit der Maus über die Spalte „Weitergeleitete Adresse“ oder „Forwarded Address“.
-5. Es erscheinen kleine Symbole: Klickt auf das Weltkugel-Icon 🌐 „In Browser öffnen“ oder „Open in Browser“.
-6. Ein neuer Tab öffnet sich mit eurer Website/App.
+### With any LLM
 
-### 2.3 Die Website/App aktualisieren
-1. Ihr müsst die Website/App *nicht* jedes Mal schließen.
-2. Lasst den Browser-Tab mit der App offen.
-3. Wenn ihr den Code ändert und speichert (Strg + S), dann erscheint oben rechts in der Website/App ein Button „Always rerun“.
-4. Klickt einfach darauf, und die Seite aktualisiert sich sofort.
+Paste the contents of `framework/master_orchestrator.md` into a new conversation.
 
-### 2.4 Start-Prompts
-Bitte geht nach und nach durch die folgenden Datein und folgt den Anleitungen dort.
+### How it works
 
-Hier geht es direkt zu den Vibe Innovation Prompts:
+The Master Orchestrator asks your starting point, time budget, and biggest uncertainty. It generates a session plan and guides you through the phases. Compressed phases (up to 20 min) run inline. Full phases (60 to 90 min) use the dedicated phase files. The LLM manages the ICD. Between sessions, copy the ICD output to preserve state.
 
-1. [Prompt 1: Der Sokratische Dialog (Coach: Mäeutik-Protokoll)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_08.md)
-2. [Prompt 2: Die Synthese (Solution Architect)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_09.md)
-3. [Prompt 3: Die Realisierung (Dev: Senior Developer)](https://github.com/periodicpoint/vibe-innovation-lab/blob/main/prompts/PROMPT_10.md)
+## Framework overview
 
-# 🆘 Hilfe und Tipps
-1. Irgendetwas funktioniert nicht? Beschreibt der KI was das Problem ist, macht einen Screenshot und fragt die KI nach einer Lösung! 💡
-2. Der Code funktioniert nicht? Fragt die KI! ;) Kopiert die Fehlermeldung und sagt: „Fixe diesen Fehler für mich“. Bleibt im selben Chat, mindestens aber im selben Projekt.
-3. Martin fragen. :)
+The Vibe Innovation Framework consists of six phases connected through a shared Innovation Canvas Document (ICD). The process is hub-and-spoke, not a rigid pipeline. Enter at whatever phase matches your uncertainty. Loop back when evidence warrants it.
+
+### Phases and TRL mapping
+
+| Phase | Name | TRL | Artifact | Core question |
+|---|---|---|---|---|
+| 0 | Strategic framing | -2 to -1 | Situation map | Why are we innovating? Where should we look? |
+| 1 | Problem discovery | -1 to 0 | Problem statement | Who has what problem? Why does it matter? |
+| 2 | Ideation | 0 to 1 | Idea (concept sketch) | What could we build? |
+| 3 | Value architecture | 1 to 2 | Proof of concept (on paper) | Why would anyone care? |
+| 4 | Build and validate | 2 to 4 | Spike, prototype, or MVP | Can we build it? Does it work? |
+| 5 | Decision | 4 | Go, Kill, Pivot, Loop-back | What did we learn? What happens next? |
+
+### Why the framework stops at TRL 4
+
+TRL 4 produces a validated MVP and a Go, Kill, Pivot, or Loop-back decision. Everything beyond TRL 4 is product development, not innovation. The two disciplines require different feedback loops (assumption-validation in days versus usage-optimization in weeks), different failure modes (building the wrong thing versus building the thing wrong), and different team structures (small cross-functional teams versus specialized delivery teams). A Go decision at TRL 4 is the handoff point. See `framework/trl_specification.md` for the full rationale and the mapping to standard TRL (NASA, ISO 16290).
+
+### Design principles
+
+1. **Hub-and-spoke, not pipeline.** Enter at the phase matching your uncertainty. Loop back when evidence warrants it.
+2. **State travels in the ICD.** Each phase reads from and writes to the shared canvas. No context is lost.
+3. **Diverge before converge.** Separate idea generation from evaluation.
+4. **Red team everything.** Every phase ends with a structured challenge to its own output.
+5. **Iteration has a budget.** Max 2 intra-phase, max 2 inter-phase to same target, max 5 total.
+6. **Compressed mode available.** Every phase has a time-constrained version.
+7. **Bricolage escape hatch.** Minimal viable process when the full version is too heavy.
+
+### Methodological foundations
+
+Synthesizes classical (Stage-Gate, Double Diamond, Design Thinking, Business Model Canvas, JTBD) and modern (Lean Startup, Pretotyping, Effectuation, Wardley Mapping, Cynefin) methodologies with AI-native approaches (LLM-as-divergence-engine, synthetic empathy, red team protocol, vibe coding).
+
+## Repository structure
+
+```
+framework/          Innovation process (Master Orchestrator, ICD, TRL spec, 6 phases, principles)
+prototype/          Streamlit starter for rapid prototyping (Phase 4)
+.claude/skills/     Claude Code skill definitions (/innovate, /innovate-phase, /innovate-status)
+.devcontainer/      GitHub Codespaces configuration
+```
+
+## Usage modes
+
+1. **Solo innovator:** Use `/innovate` or paste framework prompts into any LLM. The ICD keeps you honest about what you know versus what you assume.
+2. **Team:** Share the ICD as a versioned markdown file. Each team member can run phases independently, then merge ICD updates.
+
+## License
+
+MIT
+
+## Author
+
+Martin Maga. Building on the Vibe Innovation Framework.
+
+## Version
+
+2026-04-01T21:11:02+02:00/0b45e9a
