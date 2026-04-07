@@ -60,18 +60,13 @@ prototype/          Streamlit starter for rapid prototyping (Phase 4)
 .devcontainer/      GitHub Codespaces configuration
 ```
 
-## Usage modes
-
-1. **Solo innovator:** Use `/innovate` or paste framework prompts into any LLM. The ICD keeps you honest about what you know versus what you assume.
-2. **Team:** Share the ICD as a versioned markdown file. Each team member can run phases independently, then merge ICD updates.
-
 ## License
 
 MIT
 
 ## Author
 
-Martin Maga. Building on the Vibe Innovation Framework.
+Martin Maga
 
 ## Version
 
