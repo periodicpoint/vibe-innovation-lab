@@ -34,7 +34,11 @@ streamlit run app.py
 ## Troubleshooting
 
 1. **App does not start:** Run `pip install -r prototype/requirements.txt` manually, then retry.
-2. **Port not visible:** Open the PORTS tab in VS Code, set visibility to "Public" for port 8501.
+2. **Port not visible or stops working:** This is the most common Codespace issue. The fix depends on timing:
+   - If the port **never appeared**: Open the PORTS tab in VS Code, right-click port 8501, set visibility to "Public".
+   - If the port **stopped working after a while**: Stop Streamlit with Ctrl+C, then restart with `streamlit run prototype/app.py`. The environment is pre-configured to bind to the correct address.
+   - If restarting does not help, run this in the terminal: `mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml` and then restart Streamlit.
+   - As a last resort: Stop the Codespace (Codespaces menu, top left, "Stop Codespace"), then restart it. Do **not** rebuild.
 3. **Claude Code not available:** Use the copy-paste workflow instead. Open `framework/master_orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).
 4. **Codespace does not start:** Pair up with a working team. One Codespace, two screens.
 

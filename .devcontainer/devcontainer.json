@@ -5,6 +5,14 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
+  "containerEnv": {
+    "STREAMLIT_SERVER_HEADLESS": "true",
+    "STREAMLIT_SERVER_ADDRESS": "0.0.0.0",
+    "STREAMLIT_SERVER_PORT": "8501",
+    "STREAMLIT_SERVER_ENABLE_CORS": "false",
+    "STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION": "false",
+    "STREAMLIT_BROWSER_GATHER_USAGE_STATS": "false"
+  },
   "customizations": {
     "vscode": {
       "settings": {},
@@ -13,11 +21,14 @@
       ]
     }
   },
-  "postCreateCommand": "pip install -r prototype/requirements.txt && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/master_orchestrator.md into any LLM.')",
+  "postCreateCommand": "pip install -r prototype/requirements.txt && mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/master_orchestrator.md into any LLM.')",
+  "postStartCommand": "mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml",
+  "forwardPorts": [8501],
   "portsAttributes": {
     "8501": {
       "label": "Streamlit App",
-      "onAutoForward": "notify"
+      "onAutoForward": "openBrowser",
+      "visibility": "public"
     }
   }
 }
