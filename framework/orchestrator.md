@@ -55,12 +55,13 @@ Each phase has a defined input contract (what it needs to start) and output cont
 
 The ICD accumulates structured output from every phase. Each phase reads from and writes to the ICD. The Large Language Model (LLM), meaning the AI you are working with, manages the ICD content.
 
-**ICD management depends on the environment:**
+**ICD management depends on the environment** (see Step 2 of the entry protocol for detection logic):
 
-1. **With file system access** (Claude Code, IDE, Codespace): The LLM reads and writes the ICD as a file in the working directory. No manual copying needed.
-2. **In chat mode** (copy-paste into any LLM): The ICD exists only as text in the conversation. The LLM must follow the ICD checkpoint protocol below to prevent state loss.
+1. **Project mode** (full file read and write): The LLM reads and writes the ICD as a file in the working directory. No manual copying needed.
+2. **Upload mode** (file read but no write): The LLM can read uploaded framework files but cannot save the ICD. The ICD checkpoint protocol below applies.
+3. **Chat mode** (no file access): The ICD exists only as text in the conversation. The ICD checkpoint protocol below applies.
 
-### ICD checkpoint protocol (chat mode)
+### ICD checkpoint protocol (upload mode and chat mode)
 
 In chat mode, the conversation is the only memory. LLMs lose track of the ICD as conversations grow, and users do not know when to save it. This protocol solves both problems.
 
@@ -126,10 +127,13 @@ Once the user responds, switch to that language for **all** further interaction,
 
 ### Step 2: Environment detection
 
-Immediately after language is settled, determine the working environment. Do not ask the user. Detect it automatically and communicate the result.
+Immediately after language is settled, determine the working environment. Do not ask the user. Detect it automatically and communicate the result. The critical question is: **can you write files?** This determines how the ICD is managed.
 
-1. **Project mode** (file system access available, for example Claude Code, IDE, Codespace): Verify that the framework files exist in the `framework/` directory. If any are missing, inform the user. Tell the user: "I have access to the project files. I will manage your Innovation Canvas Document (ICD) as a file. You do not need to copy anything manually."
-2. **Chat mode** (no file system access, for example content pasted into ChatGPT, Gemini, Claude, or another LLM): Tell the user immediately: "We are working in chat mode. I will output your complete project document (the ICD) at the end of every phase between clear markers. Please copy and save it each time. If this conversation gets too long or you start a new chat, paste it back when I ask." For compressed mode sessions, the inline instructions in this document are sufficient. For full mode sessions, the dedicated phase files are required. Tell the user which files will be needed and ask them to paste the content when prompted, or upfront if they prefer. The files are listed in the "File references" section at the end of this document. In chat mode, follow the ICD checkpoint protocol (see "ICD checkpoint protocol" in the Process architecture section) throughout the entire session.
+1. **Project mode** (full file system read and write, for example Claude Code, IDE, Codespace): Verify that the framework files exist in the `framework/` directory. If any are missing, inform the user. Tell the user: "I have access to the project files. I will manage your Innovation Canvas Document (ICD) as a file. You do not need to copy anything manually."
+2. **Upload mode** (files uploaded but no write access, for example Claude.ai Projects, ChatGPT with file uploads, Gemini with uploads): You can read the uploaded framework files but cannot write the ICD back to a file. Tell the user: "I can read the framework files you uploaded. However, I cannot save files back. I will output your project document (the ICD) at the end of every phase between clear markers. Please copy and save it each time. To continue in a later session, upload it again or paste it when I ask." Follow the ICD checkpoint protocol (see "ICD checkpoint protocol" in the Process architecture section) throughout the session. For full mode phases, the uploaded phase files are directly available. No pasting needed.
+3. **Chat mode** (no file access at all, content pasted into any LLM): Tell the user immediately: "We are working in chat mode. I will output your complete project document (the ICD) at the end of every phase between clear markers. Please copy and save it each time. If this conversation gets too long or you start a new chat, paste it back when I ask." For compressed mode sessions, the inline instructions in this document are sufficient. For full mode sessions, the dedicated phase files are required. Tell the user which files will be needed and ask them to paste the content when prompted, or upfront if they prefer. The files are listed in the "File references" section at the end of this document. Follow the ICD checkpoint protocol throughout the session.
+
+**Detection logic:** If you can list files in a directory, you are in project mode. If you can read uploaded files but cannot create or modify files, you are in upload mode. If you have no file access at all, you are in chat mode.
 
 This step does not require a separate user response. Combine it with the language confirmation or the identity question in Step 3.
 
