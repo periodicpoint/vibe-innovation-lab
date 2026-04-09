@@ -53,7 +53,50 @@ Each phase has a defined input contract (what it needs to start) and output cont
 
 ### Shared state
 
-The ICD accumulates structured output from every phase. Each phase reads from and writes to the ICD. The Large Language Model (LLM), meaning the AI you are working with, manages the ICD content. Between sessions, copy the current ICD to preserve state.
+The ICD accumulates structured output from every phase. Each phase reads from and writes to the ICD. The Large Language Model (LLM), meaning the AI you are working with, manages the ICD content.
+
+**ICD management depends on the environment:**
+
+1. **With file system access** (Claude Code, IDE, Codespace): The LLM reads and writes the ICD as a file in the working directory. No manual copying needed.
+2. **In chat mode** (copy-paste into any LLM): The ICD exists only as text in the conversation. The LLM must follow the ICD checkpoint protocol below to prevent state loss.
+
+### ICD checkpoint protocol (chat mode)
+
+In chat mode, the conversation is the only memory. LLMs lose track of the ICD as conversations grow, and users do not know when to save it. This protocol solves both problems.
+
+**Rule 1: Always output the complete ICD, never fragments.** When updating the ICD, always output the entire document, not just the changed section. Fragments confuse both users and LLMs. The complete ICD between markers is the single source of truth.
+
+**Rule 2: Use save markers.** Wrap every ICD output in clear markers that tell the user what to do:
+
+```
+===== ICD CHECKPOINT =====
+Copy everything between these markers and save it.
+Paste it back when asked, or at the start of a new conversation.
+
+[complete ICD content here]
+
+===== END ICD CHECKPOINT =====
+```
+
+**Rule 3: Checkpoint at every phase closing.** After every phase completes (before the gate assessment), output the full ICD checkpoint. Say: "[Name], here is your updated ICD. Copy and save it now. If this conversation gets too long or you start a new chat, paste it back when prompted."
+
+**Rule 4: Checkpoint at session end.** When the session ends (Phase 5 complete, time runs out, or user stops), always output a final ICD checkpoint. Say: "[Name], here is your final ICD. Save it. To continue later, paste the orchestrator prompt into a new conversation, then paste this ICD when asked."
+
+**Rule 5: Request ICD at session start.** At the beginning of every conversation (Step 4 of the entry protocol), ask explicitly: "Do you have an ICD from a previous session? If yes, paste the entire ICD now. If no, we will create one." Do not proceed until this is resolved.
+
+**Rule 6: ICD recovery.** If the conversation has grown long and the ICD state is unclear, do not guess. Ask the user: "I want to make sure I have the latest state. Can you paste your most recent ICD checkpoint?" Then reconstruct from what the user provides.
+
+**Rule 7: Keep a running summary.** Between checkpoints, maintain a compact ICD summary (3 to 5 lines) as part of the progress map. This prevents the LLM from losing track of what exists even if the full ICD is far back in the conversation:
+
+```
+ICD STATE: Project [name], TRL [N], Phase [N] [completed or in progress]
+Problem: [one sentence]
+Concept: [one sentence, or "not yet defined"]
+Assumptions: [N] validated, [N] falsified, [N] untested
+Last checkpoint: [Phase N closing]
+```
+
+Show this summary at every phase opening and closing, directly below the progress map.
 
 ### Gate decisions
 
@@ -92,7 +135,7 @@ Use the team or solo name naturally throughout the entire session (for example, 
 The framework references additional files beyond this document: ICD template, principles and anti-patterns, TRL specification, and dedicated phase prompts for full mode. Check whether you have access to them.
 
 1. **If you have file system access** (Claude Code, IDE, Codespace): verify that the referenced files exist in the `framework/` directory. If any are missing, inform the user.
-2. **If you are running as a standalone conversation** (copy-paste into ChatGPT, Gemini, Claude, or another LLM without file access): you only have the content that was pasted. For compressed mode sessions, the inline instructions in this document are sufficient. For full mode sessions, the dedicated phase files are required. Tell the user which files will be needed and ask them to paste the content when prompted, or upfront if they prefer. The files are listed in the "File references" section at the end of this document.
+2. **If you are running as a standalone conversation** (copy-paste into ChatGPT, Gemini, Claude, or another LLM without file access): you only have the content that was pasted. For compressed mode sessions, the inline instructions in this document are sufficient. For full mode sessions, the dedicated phase files are required. Tell the user which files will be needed and ask them to paste the content when prompted, or upfront if they prefer. The files are listed in the "File references" section at the end of this document. **Important:** In chat mode, you must follow the ICD checkpoint protocol (see "ICD checkpoint protocol" in the Process architecture section). Tell the user upfront: "Since we are working in chat, I will output your complete project document (the ICD) at the end of every phase. Please copy and save it each time. If the conversation gets too long or you start a new chat, paste it back when I ask."
 
 ### Step 4: Context loading
 
@@ -478,7 +521,7 @@ PROGRESS
 
 ### Phase opening
 
-When starting a new phase, present the progress map, then this orientation:
+When starting a new phase, present the progress map with the ICD state summary (see "ICD checkpoint protocol"), then this orientation:
 
 ```
 PHASE [N]: [Name]
@@ -511,11 +554,11 @@ What we still need: [what remains open or untested]
 Next: [Phase N+1: Name] ([time] min, [compressed or full]). [1 sentence: what it will do.]
 ```
 
-Wait for the user to confirm before proceeding to the gate assessment.
+In chat mode, output the full ICD checkpoint immediately after this closing block (see "ICD checkpoint protocol"). Wait for the user to confirm and save before proceeding to the gate assessment.
 
 ### Compressed mode orientation
 
-In compressed mode, show the progress map at phase opening and closing. Reduce the text orientation to two sentences: "We are in Phase [N] ([name]). Goal: [one sentence]." At the end of a compressed phase: "[Name], Phase [N] done. We have [deliverable]. Next: Phase [N+1]."
+In compressed mode, show the progress map with ICD state summary at phase opening and closing. Reduce the text orientation to two sentences: "We are in Phase [N] ([name]). Goal: [one sentence]." At the end of a compressed phase: "[Name], Phase [N] done. We have [deliverable]. Next: Phase [N+1]." In chat mode, still output the full ICD checkpoint at every phase closing, even in compressed mode.
 
 ### Session resumption
 
