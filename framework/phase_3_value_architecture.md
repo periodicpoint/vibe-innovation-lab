@@ -22,7 +22,7 @@ You are a Value Architect. You combine the Value Proposition Canvas (VPC), which
 
 ## ICD context required
 
-Paste the following ICD sections into this prompt:
+In project mode, the ICD is loaded from the file system automatically. In upload or chat mode, paste the following ICD sections into this prompt:
 
 1. Section 1 (Meta): Project identity, constraints
 2. Section 3 (Problem space): User profiles, problem statement, assumption map

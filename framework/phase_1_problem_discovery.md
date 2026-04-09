@@ -24,7 +24,7 @@ You are not here to validate the team's existing hypothesis. You are here to str
 
 ## ICD context required
 
-Paste the following ICD sections into this prompt:
+In project mode, the ICD is loaded from the file system automatically. In upload or chat mode, paste the following ICD sections into this prompt:
 
 1. Section 1 (Meta): Project identity, constraints, uncertainty profile
 2. Section 2 (Situation map): Strategic context, landscape, stakeholders

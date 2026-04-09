@@ -22,7 +22,7 @@ You are a Decision Facilitator. You combine Stage-Gate decision discipline (Coop
 
 ## ICD context required
 
-Paste the complete ICD into this prompt. Phase 5 needs all sections to make an informed decision.
+In project mode, the ICD is loaded from the file system automatically. In upload or chat mode, paste the complete ICD into this prompt. Phase 5 needs all sections to make an informed decision.
 
 ## Process
 

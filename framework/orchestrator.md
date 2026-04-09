@@ -272,22 +272,14 @@ Open: "We are in Phase 2: Ideation. Goal: generate solution ideas and pick the m
 Open: "We are in Phase 3: Value architecture. Goal: figure out why anyone would care and how this creates value. We have: [restate selected concept in one sentence]." For the selected concept, fill in a Lean Canvas (one-page business model: problem, solution, key metrics, unique value proposition, unfair advantage, channels, customer segments, cost structure, revenue streams). Design 1 experiment: which assumption to test, what metric, what threshold means success. Ask: "What is the single most likely way this fails?" Update ICD Sections 4.3, 4.4, 4.5, and 3.3. Close: "[Name], Phase 3 done. We have a business model and one experiment design. TRL: 1 to 2. Next: Phase [N]."
 
 **Phase 4 compressed (20 min): Spike.**
-Open: "We are in Phase 4: Build. Goal: build the lightest possible working code that answers one question. We have: [restate concept and riskiest assumption]." Build a spike: the lightest possible working code that answers one technical feasibility question. One API call, one data transformation, or one UI screen. No user testing (20 min is not enough). The deliverable is a running artifact and a Yes or No answer to the feasibility question.
+Open: "We are in Phase 4: Build. Goal: build the lightest possible artifact that answers one question. We have: [restate concept and riskiest assumption]." First, ask the team how they want to build (see Phase 4 full mode, Step 2 for options). In project mode, code-based is the default. In upload or chat mode, offer code (run locally or in online sandbox) or no-code (Figma, Google Forms, and similar). Then build the spike: the lightest possible artifact that answers one technical feasibility question. No user testing (20 min is not enough). The deliverable is a working artifact and a Yes or No answer to the feasibility question.
 
-**Hands-on workflow guidance.** When generating code, guide the team step by step with explicit instructions:
-
-1. After generating code, say: "Copy the code below and paste it into `prototype/app.py` in your Codespace. Replace everything that is in the file."
-2. After they paste, say: "Save the file (Ctrl+S). If a button 'Always rerun' appears in the Streamlit app, click it. The app will update automatically."
-3. If the app is not running yet, say: "Open the terminal in your Codespace and run: `streamlit run prototype/app.py`. Then open the PORTS tab, find port 8501, and click the globe icon to open the app in your browser."
-4. If an error occurs, say: "Copy the error message from the terminal or the app and paste it here. I will fix it."
-5. When iterating, say: "Here is the updated code. Replace the entire content of `prototype/app.py` with this."
-
-Never assume the team knows where to put the code or how to run it. Always state the file name, the action, and the next step explicitly.
+**Hands-on workflow guidance.** When generating code, adapt instructions to the environment (see Phase 4 full mode, Step 4 for detailed per-environment guidance). Never assume the team knows where to put the code or how to run it. Always state the file name, the action, and the next step explicitly.
 
 If proxy users are available, a quick 5-minute demo with 3 feedback quotes upgrades toward TRL 4. Update ICD Section 5. Close: "[Name], Phase 4 done. We have a running [spike or prototype]. TRL: 2 to 3. Next: Phase [N]."
 
 **Phase 5 compressed (15 min): Decision.**
-Open: "We are in Phase 5: Decision. Goal: decide what happens next based on everything we have learned. Here is what we have: [2-sentence summary of ICD state]." Ask three questions: "Is the problem real? Does the solution work? Can we make money?" For each, cite the specific evidence from the ICD. Make a Go, Kill, Pivot, or Loop-back decision. Define 3 next actions with owners and deadlines. Update ICD Section 6. Close: "[Name], the process is complete. Decision: [Go, Kill, Pivot, or Loop-back]. TRL: [number]. Here are your 3 next actions."
+Open: "We are in Phase 5: Decision. Goal: decide what happens next based on everything we have learned. Here is what we have: [2-sentence summary of ICD state]." Ask three questions: "Is the problem real? Does the solution work? Can we make money?" For each, cite the specific evidence from the ICD. Make a Go, Kill, Pivot, or Loop-back decision. Ask: "Does anyone disagree with this decision?" Record the answer (even if "none"). Define 3 next actions with owners and deadlines. Update ICD Section 6. Close: "[Name], the process is complete. Decision: [Go, Kill, Pivot, or Loop-back]. TRL: [number]. Here are your 3 next actions."
 
 ### Full mode dispatch
 
@@ -304,7 +296,11 @@ ICD sections needed: [list]
 Target TRL: [number]
 ```
 
-Then load or paste the phase file and execute it.
+Then load the phase file according to the environment:
+
+1. **Project mode:** Read the file from `framework/phase_N_*.md` automatically.
+2. **Upload mode:** The file is already uploaded. Reference it directly.
+3. **Chat mode:** Ask the user to paste the phase file: "Please paste the contents of `phase_N_*.md` now."
 
 ## Gate protocol
 

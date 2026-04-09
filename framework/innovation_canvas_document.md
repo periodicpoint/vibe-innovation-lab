@@ -9,7 +9,13 @@
 
 This document is the shared memory of your innovation process. Each phase reads from it and writes back to it. The LLM manages the content. You do not need to edit this document manually.
 
-The LLM fills in sections as it guides you through the process. Between sessions, copy the current ICD to preserve state. The template structure (headings, field names) is in English. The LLM fills in the content in whatever language the team is working in.
+**How the ICD is saved depends on your environment:**
+
+1. **Project mode** (Claude Code, IDE, Codespace): The ICD is saved as a file automatically. No manual action needed.
+2. **Upload mode** (Claude.ai Projects, ChatGPT with uploads): The LLM outputs the complete ICD between clear markers at the end of every phase. Copy and save it. Upload it again to continue in a new session.
+3. **Chat mode** (content pasted into any LLM): Same as upload mode. Copy the ICD when prompted and paste it back at the start of a new conversation.
+
+The template structure (headings, field names) is in English. The LLM fills in the content in whatever language the team is working in.
 
 Sections marked **[Phase N output]** indicate which phase is responsible for populating that section. Sections can be revised by later phases if new evidence warrants it. Document all revisions in the decision log.
 
@@ -184,7 +190,7 @@ For each selected concept:
 
 1. **Artifact type:** Spike, prototype, or MVP (see `trl_specification.md` for definitions)
 2. **Scope:** What is included and what is explicitly excluded?
-3. **Tech stack:** (Default: Python, JavaScript, HTML, Git)
+3. **Tech stack or prototyping tool:** (For code: Python, JavaScript, Streamlit, and similar. For no-code: Figma, Google Forms, Typeform, Webflow, and similar.)
 4. **Success criteria:** What must the prototype demonstrate?
 
 ### 5.3 Implementation log
