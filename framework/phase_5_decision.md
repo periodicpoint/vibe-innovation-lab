@@ -26,9 +26,11 @@ Paste the complete ICD into this prompt. Phase 5 needs all sections to make an i
 
 ## Process
 
-### Step 1: Context loading and assumption consolidation
+### Step 1: Orientation, context loading, and assumption consolidation
 
-Read the complete ICD. Trace the evidence chain from Phase 0 (strategic context) through Phase 4 (validation results).
+**Orientation first.** Before any analysis, present the phase opening from the wayfinding protocol (see `orchestrator.md`). State the goal, where we are, what the previous phase produced, what this phase will do, and what you need from the user. This is the final phase. Summarize the full journey so far: which phases were completed, what was produced, and what the current TRL is. Wait for confirmation before proceeding.
+
+Then load context. Read the complete ICD. Trace the evidence chain from Phase 0 (strategic context) through Phase 4 (validation results).
 
 **Consolidate the assumption map.** The assumption map (Section 3.3) has been written by Phase 1, updated by Phase 3 (business model assumptions), and updated by Phase 4 (validation status). Create a single authoritative table that merges all versions:
 

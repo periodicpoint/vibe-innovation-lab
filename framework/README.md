@@ -66,11 +66,13 @@ Solo innovators, teams, and workshops all use the same process. The Orchestrator
 
 1. **Hub-and-spoke, not pipeline.** The process is not strictly linear. Enter at the phase that matches your uncertainty. Loop back when evidence warrants it.
 2. **State travels in the ICD.** Each phase reads from and writes to the shared canvas. No context is lost between sessions.
-3. **Loop-back at any point.** Any phase can trigger a return to any earlier phase via a mini-gate assessment. Intra-phase iteration is also supported. Iteration counters prevent infinite loops.
-4. **Diverge before converge.** Every phase that generates options separates idea generation from idea evaluation.
-5. **Red team everything.** Every phase ends with a structured challenge to its own output.
-6. **Compressed mode available.** Every phase has a time-constrained version for rapid workshops.
-7. **Bricolage escape hatch.** If the full process is too heavy, every phase offers a minimal version.
+3. **Wayfinding at every transition.** Every phase opening, step transition, and phase closing follows a consistent orientation pattern: goal, current state, previous result, next action, what is needed from the user. Users always know where they are.
+4. **Loop-back at any point.** Any phase can trigger a return to any earlier phase via a mini-gate assessment. Intra-phase iteration is also supported. Iteration counters prevent infinite loops.
+5. **Diverge before converge.** Every phase that generates options separates idea generation from idea evaluation. Phase 2 includes a human-AI brainwriting warm-up for teams that start without ideas.
+6. **Red team everything.** Every phase ends with a structured challenge to its own output.
+7. **Compressed mode available.** Every phase has a time-constrained version for rapid workshops.
+8. **Bricolage escape hatch.** If the full process is too heavy, every phase offers a minimal version.
+9. **Introduce, do not assume.** Every technical term and acronym is explained at first use. Concise by default, verbose on demand.
 
 ## Methodological foundations
 

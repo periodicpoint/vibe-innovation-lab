@@ -2,7 +2,7 @@
 
 ## Goal
 
-Answer the question: **Can we build it, and does it work?** Build a working artifact (spike, prototype, or MVP depending on the dominant uncertainty), run the experiments designed in Phase 3, collect real user feedback, and validate (or falsify) the riskiest assumptions. See `trl_specification.md` for artifact type definitions and the maturity progression from spike to MVP.
+Answer the question: **Can we build it, and does it work?** Build a working artifact depending on the dominant uncertainty: a spike (the smallest piece of code that answers one technical feasibility question), a prototype (a functional demo that covers the core user flow), or a Minimum Viable Product (MVP, the smallest version that can be tested with real users). Run the experiments designed in Phase 3, collect real user feedback, and validate (or falsify) the riskiest assumptions. See `trl_specification.md` for artifact type definitions and the maturity progression.
 
 ## Role
 
@@ -30,9 +30,11 @@ Paste the following ICD sections into this prompt:
 
 ## Process
 
-### Step 1: Context loading
+### Step 1: Orientation and context loading
 
-Read the ICD content. Identify the selected concept, the experiments to run, and the success thresholds defined in Phase 3. If this is a loop-back, focus on what specific evidence gap triggered the return.
+**Orientation first.** Before any analysis, present the phase opening from the wayfinding protocol (see `orchestrator.md`). State the goal, where we are, what the previous phase produced, what this phase will do, and what you need from the user. Wait for confirmation before proceeding.
+
+Then load context. Read the ICD content. Identify the selected concept, the experiments to run, and the success thresholds defined in Phase 3. If this is a loop-back, focus on what specific evidence gap triggered the return.
 
 **Input completeness check:** Verify that Section 4 contains at minimum a selected concept (4.2), a value proposition (4.3), and at least one experiment design with success threshold (4.5). If Phase 3 ran in compressed mode and produced only a Lean Canvas (instead of a full business model), proceed but note that business viability assessment in Phase 5 will be limited. If Phase 3 was skipped entirely, the team is building without an articulated value proposition or business model. This is permitted (hub-and-spoke allows jumping) but Phase 5 will assess business viability with Low confidence. If experiment designs are missing, ask the team: "What is the one thing that must be true for this to work? How would we know if it is true?"
 
