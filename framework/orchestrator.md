@@ -161,7 +161,7 @@ Add 10-minute breaks between phases when the total session exceeds 2 hours.
 3. **Phase 5 is included only when TRL 4 is reachable** within the time budget. A formal decision on insufficient evidence is worse than no formal decision.
 4. **Phase 0 and Phase 2 are never combined.** They serve different functions (landscape mapping versus idea generation). If both are needed and time is short, both run compressed.
 
-**Session plan format.** After looking up the route, present the plan:
+**Session plan format.** After looking up the route, present the progress map (all phases marked `·`, first phase marked `▶`) followed by the plan table:
 
 ```
 SESSION PLAN
@@ -169,6 +169,11 @@ SESSION PLAN
 Available time: [hours]
 Entry TRL: [number]
 Target exit TRL: [number]
+
+PROGRESS
+  ▶  Phase [N]: [Name] ([c or f])            TRL [entry] → [exit]  ← start here
+  ·  Phase [N]: [Name] ([c or f])            TRL [entry] → [exit]
+  ·  ...
 
 | Step | Phase | Mode | Time | Deliverable |
 |------|-------|------|------|-------------|
@@ -407,9 +412,51 @@ Use these introductions when a term appears for the first time in a session. Aft
 
 Users must always know where they are, where they came from, and where they are going. Apply the following orientation patterns at every transition point. Keep each orientation brief (3 to 5 sentences). Do not skip orientations even when time is short.
 
+### Progress map
+
+Show the progress map at every phase opening, phase closing, and session resumption. The map visualizes the session plan as a vertical metro line. Mark completed phases with `✓`, the current phase with `▶`, and upcoming phases with `·`. Only show phases that are in the session plan (not all 6 if some were skipped). Include TRL at each stop.
+
+**Template:**
+
+```
+PROGRESS
+  ✓  Phase 0: Strategic framing              TRL -2 → -1
+  ✓  Phase 1: Problem discovery               TRL -1 → 0
+  ▶  Phase 2: Ideation                        TRL  0 → 1  ← you are here
+  ·  Phase 3: Value architecture              TRL  1 → 2
+  ·  Phase 4: Build and validate              TRL  2 → 4
+  ·  Phase 5: Decision                        TRL  4
+```
+
+**Adaptation rules:**
+
+1. If phases are skipped in the session plan, omit them from the map. Only show the phases the team will actually do.
+2. In compressed mode, add `(c)` after the phase name. In full mode, add `(f)`.
+3. If a loop-back occurred, mark the looped phase with `↺` instead of `✓` and add a note: `(loop-back from Phase N)`.
+4. After Phase 5, replace the `▶` marker with `✓` and add a final line: `  ✓  Decision: [Go, Kill, Pivot, or Loop-back]`.
+
+**Example for a 2-hour session entering at TRL 0:**
+
+```
+PROGRESS
+  ▶  Phase 2: Ideation (c)                   TRL  0 → 1  ← you are here
+  ·  Phase 4: Build (c)                       TRL  2 → 3
+```
+
+**Example mid-session with loop-back:**
+
+```
+PROGRESS
+  ✓  Phase 1: Problem discovery (c)           TRL -1 → 0
+  ↺  Phase 2: Ideation (c)                    TRL  0 → 1  (loop-back from Phase 3)
+  ✓  Phase 3: Value architecture (c)          TRL  1 → 2
+  ▶  Phase 4: Build (f)                       TRL  2 → 4  ← you are here
+  ·  Phase 5: Decision (c)                    TRL  4
+```
+
 ### Phase opening
 
-When starting a new phase, present this orientation before doing anything else:
+When starting a new phase, present the progress map, then this orientation:
 
 ```
 PHASE [N]: [Name]
@@ -430,7 +477,7 @@ Do not move to the next step without this marker. Wait for the user to confirm o
 
 ### Phase closing and between-phases checkpoint
 
-When a phase completes, present this before the gate assessment:
+When a phase completes, present the updated progress map (current phase now `✓`, next phase now `▶`), then:
 
 ```
 PHASE [N] COMPLETE
@@ -446,11 +493,11 @@ Wait for the user to confirm before proceeding to the gate assessment.
 
 ### Compressed mode orientation
 
-In compressed mode, reduce the orientation to two sentences: "We are in Phase [N] ([name]). Goal: [one sentence]." At the end of a compressed phase: "[Name], Phase [N] done. We have [deliverable]. Next: Phase [N+1]."
+In compressed mode, show the progress map at phase opening and closing. Reduce the text orientation to two sentences: "We are in Phase [N] ([name]). Goal: [one sentence]." At the end of a compressed phase: "[Name], Phase [N] done. We have [deliverable]. Next: Phase [N+1]."
 
 ### Session resumption
 
-When a user returns with an existing ICD from a previous session, summarize the current state before doing anything else:
+When a user returns with an existing ICD from a previous session, show the progress map with the current state, then:
 
 "Welcome back, [name]. Last session you completed Phase [N] and reached TRL [number]. Your ICD contains: [2 to 3 sentence summary of what exists]. The next step in your session plan is Phase [N+1]. Shall we continue?"
 
