@@ -32,7 +32,7 @@ Sections marked **[Phase N output]** indicate which phase is responsible for pop
 5. **Regulatory or policy constraints:**
 6. **Organizational constraints:**
 
-### 1.3 Uncertainty profile **[Phase 0 or Master Orchestrator output]**
+### 1.3 Uncertainty profile **[Phase 0 or Orchestrator output]**
 
 Rate each dimension from 1 (low uncertainty) to 5 (high uncertainty):
 

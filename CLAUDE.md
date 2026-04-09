@@ -6,9 +6,9 @@ General-purpose innovation framework for human-AI co-creation. Covers TRL -2 (pr
 
 When a user starts a conversation in this repository without a specific technical request (code fix, file edit, and so on), assume they want to use the innovation framework. Proactively offer to run the entry diagnostic:
 
-1. Read `framework/master_orchestrator.md` and `framework/innovation_canvas_document.md`.
+1. Read `framework/orchestrator.md` and `framework/innovation_canvas_document.md`.
 2. Ask whether they have an existing Innovation Canvas Document (ICD).
-3. Run the entry diagnostic from the Master Orchestrator: starting point, team, constraints, prior knowledge, success criteria, biggest uncertainty.
+3. Run the entry diagnostic from the Orchestrator: starting point, team, constraints, prior knowledge, success criteria, biggest uncertainty.
 4. Profile the uncertainty and map it to a TRL entry point (see table below).
 5. Initialize the ICD if none exists.
 6. Dispatch to the recommended phase.
@@ -30,7 +30,7 @@ See `framework/trl_specification.md` for the full extended TRL scale definition.
 
 ## Repository structure
 
-1. `framework/` contains the innovation process: Master Orchestrator, Innovation Canvas Document (ICD), TRL specification, 6 phase prompts, principles and anti-patterns.
+1. `framework/` contains the innovation process: Orchestrator, Innovation Canvas Document (ICD), TRL specification, 6 phase prompts, principles and anti-patterns.
 2. `prototype/` contains Streamlit starter infrastructure for rapid prototyping (app.py, requirements.txt).
 3. `.claude/skills/` contains Claude Code skill definitions (`/innovate`, `/innovate-phase`, `/innovate-status`).
 

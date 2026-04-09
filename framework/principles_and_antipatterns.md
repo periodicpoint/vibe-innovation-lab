@@ -38,7 +38,7 @@ Loop-backs are healthy. Infinite loop-backs are not. Maximum 2 intra-phase itera
 
 ## Cognitive bias watchlist
 
-These biases are the most dangerous in innovation contexts. The Master Orchestrator and all phase prompts should actively watch for and challenge them.
+These biases are the most dangerous in innovation contexts. The Orchestrator and all phase prompts should actively watch for and challenge them.
 
 ### Confirmation bias
 

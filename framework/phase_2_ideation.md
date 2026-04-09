@@ -126,7 +126,7 @@ For each selected concept:
 3. What is the most likely failure mode in the first 6 months?
 4. Which of the Phase 1 assumptions does this concept depend on most heavily?
 
-**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Master Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
+**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
 
 ### Step 7: Output synthesis
 

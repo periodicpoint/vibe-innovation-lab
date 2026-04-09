@@ -95,7 +95,7 @@ Challenge the framing:
 3. Is the "why now?" genuinely compelling, or are we rationalizing a pre-existing interest?
 4. Which of our assumptions about the landscape are most likely to be wrong?
 
-**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Master Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
+**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
 
 ### Step 8: Output synthesis
 

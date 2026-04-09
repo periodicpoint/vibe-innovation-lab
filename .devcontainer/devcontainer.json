@@ -21,7 +21,7 @@
       ]
     }
   },
-  "postCreateCommand": "pip install -r prototype/requirements.txt && mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/master_orchestrator.md into any LLM.')",
+  "postCreateCommand": "pip install -r prototype/requirements.txt && mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/orchestrator.md into any LLM.')",
   "postStartCommand": "mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml",
   "forwardPorts": [8501],
   "portsAttributes": {

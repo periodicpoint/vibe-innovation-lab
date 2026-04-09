@@ -2,6 +2,7 @@
 name: innovate-phase
 description: Run a specific phase of the Vibe Innovation Framework (0 through 5) in full mode.
 user-invocable: true
+argument-hint: "[phase-number]"
 ---
 
 **Phase requested:** $ARGUMENTS
@@ -10,7 +11,7 @@ Valid phase numbers: 0, 1, 2, 3, 4, 5.
 
 Read the following files:
 
-1. `framework/master_orchestrator.md` (for process context and phase contracts)
+1. `framework/orchestrator.md` (for process context and phase contracts)
 2. The phase-specific prompt file:
    1. Phase 0: `framework/phase_0_strategic_framing.md`
    2. Phase 1: `framework/phase_1_problem_discovery.md`

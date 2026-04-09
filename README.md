@@ -12,11 +12,11 @@ A prompt-based framework for human-AI, co-intelligence, co-creation, co-innovati
 
 ### With any LLM
 
-Paste the contents of `framework/master_orchestrator.md` into a new conversation.
+Paste the contents of `framework/orchestrator.md` into a new conversation.
 
 ### How it works
 
-The Master Orchestrator asks your starting point, time budget, and biggest uncertainty. It generates a session plan and guides you through the phases. Compressed phases (up to 20 min) run inline. Full phases (60 to 90 min) use the dedicated phase files. The LLM manages the ICD. Between sessions, copy the ICD output to preserve state.
+The Orchestrator asks your starting point, time budget, and biggest uncertainty. It generates a session plan and guides you through the phases. Compressed phases (up to 20 min) run inline. Full phases (60 to 90 min) use the dedicated phase files. The LLM manages the ICD. Between sessions, copy the ICD output to preserve state.
 
 ## Framework overview
 
@@ -54,7 +54,7 @@ Synthesizes classical (Stage-Gate, Double Diamond, Design Thinking, Business Mod
 ## Repository structure
 
 ```
-framework/          Innovation process (Master Orchestrator, ICD, TRL spec, 6 phases, principles)
+framework/          Innovation process (Orchestrator, ICD, TRL spec, 6 phases, principles)
 prototype/          Streamlit starter for rapid prototyping (Phase 4)
 .claude/skills/     Claude Code skill definitions (/innovate, /innovate-phase, /innovate-status)
 .devcontainer/      GitHub Codespaces configuration

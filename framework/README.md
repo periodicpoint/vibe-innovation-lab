@@ -4,7 +4,7 @@ A prompt-based framework for human-AI co-creation across the full innovation lif
 
 ## Overview
 
-This framework provides a master orchestrator prompt and six phase-specific sub-prompts that guide teams through a complete innovation process. Each phase produces structured output in a shared Innovation Canvas Document (ICD) that accumulates evidence and decisions across the entire lifecycle.
+This framework provides an orchestrator prompt and six phase-specific sub-prompts that guide teams through a complete innovation process. Each phase produces structured output in a shared Innovation Canvas Document (ICD) that accumulates evidence and decisions across the entire lifecycle.
 
 The framework synthesizes classical, battle-proven innovation methodologies (Stage-Gate, Double Diamond, Design Thinking, Business Model Canvas, JTBD) with modern and emerging approaches (effectuation, pretotyping, Wardley Mapping, speculative design, vibe coding, LLM-as-divergence-engine) in a roughly 50/50 blend, weighted per phase.
 
@@ -13,7 +13,7 @@ The framework synthesizes classical, battle-proven innovation methodologies (Sta
 | File | Purpose |
 |---|---|
 | `innovation_canvas_document.md` | Shared state document. Managed by the LLM, not edited manually. |
-| `master_orchestrator.md` | Process navigator. Start here. Routes to phases, runs gates. |
+| `orchestrator.md` | Process navigator. Start here. Routes to phases, runs gates. |
 | `trl_specification.md` | Extended TRL scale definition (TRL -2 to 4), advancement criteria, standard TRL mapping. |
 | `principles_and_antipatterns.md` | Guiding principles (8), cognitive bias watchlist (8), anti-patterns (6), ICD completeness checklist per phase. |
 | `phase_0_strategic_framing.md` | Strategic framing and situation mapping (Wardley Mapping, signals, stakeholders). |
@@ -50,17 +50,17 @@ Phase 5 (Decision) operates at TRL 4 and produces a terminal Go, Kill, Pivot, or
 
 ### With any LLM (ChatGPT, Gemini, and so on)
 
-Paste the contents of `master_orchestrator.md` into a new conversation and follow the entry protocol.
+Paste the contents of `orchestrator.md` into a new conversation and follow the entry protocol.
 
 ### How the process works (both methods)
 
-1. The Master Orchestrator runs the entry diagnostic (starting point, time budget, team, uncertainty).
+1. The Orchestrator runs the entry diagnostic (starting point, time budget, team, uncertainty).
 2. It generates a session plan: which phases, compressed or full, with time allocations.
-3. **Compressed phases** (up to 20 min each) run inline. The Master Orchestrator contains all compressed instructions. No additional files needed.
+3. **Compressed phases** (up to 20 min each) run inline. The Orchestrator contains all compressed instructions. No additional files needed.
 4. **Full phases** (60 to 90 min each) use the dedicated phase files (`phase_0` through `phase_5`). Load or paste the file when the phase starts.
 5. The LLM manages the ICD. Between sessions, copy the ICD output to preserve state.
 
-Solo innovators, teams, and workshops all use the same process. The Master Orchestrator adapts based on the entry diagnostic.
+Solo innovators, teams, and workshops all use the same process. The Orchestrator adapts based on the entry diagnostic.
 
 ## Design principles
 

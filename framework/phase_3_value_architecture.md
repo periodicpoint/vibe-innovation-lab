@@ -116,7 +116,7 @@ Challenge the business model:
 3. Are the key partnerships actually obtainable? Have we talked to potential partners?
 4. What is the minimum viable business model? If we stripped everything to the bone, would it still work?
 
-**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Master Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
+**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
 
 ### Step 8: Output synthesis
 

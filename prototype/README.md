@@ -39,7 +39,7 @@ streamlit run app.py
    - If the port **stopped working after a while**: Stop Streamlit with Ctrl+C, then restart with `streamlit run prototype/app.py`. The environment is pre-configured to bind to the correct address.
    - If restarting does not help, run this in the terminal: `mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml` and then restart Streamlit.
    - As a last resort: Stop the Codespace (Codespaces menu, top left, "Stop Codespace"), then restart it. Do **not** rebuild.
-3. **Claude Code not available:** Use the copy-paste workflow instead. Open `framework/master_orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).
+3. **Claude Code not available:** Use the copy-paste workflow instead. Open `framework/orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).
 4. **Codespace does not start:** Pair up with a working team. One Codespace, two screens.
 
 ## Installed libraries

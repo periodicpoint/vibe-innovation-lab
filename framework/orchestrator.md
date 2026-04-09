@@ -1,4 +1,4 @@
-# Master orchestrator: Vibe Innovation Framework
+# Orchestrator: Vibe Innovation Framework
 
 ## Goal
 
@@ -348,10 +348,10 @@ When re-entering a phase for a second (or third) pass:
 
 1. Maximum 2 intra-phase iterations before escalating.
 2. Maximum 2 inter-phase loop-backs to the same phase before escalating to a pivot or kill decision.
-3. If the total number of loop-backs across the entire process exceeds 5, the Master Orchestrator should raise a structural concern: the problem may be too ill-defined for this framework, the team may need different expertise, or the project may need to be killed.
+3. If the total number of loop-backs across the entire process exceeds 5, the Orchestrator should raise a structural concern: the problem may be too ill-defined for this framework, the team may need different expertise, or the project may need to be killed.
 4. **Kill threshold rule:** If any critical assumption has been falsified in two separate loop-back cycles (tested, falsified, revised, retested, falsified again), that assumption cannot be revived. A Kill or Pivot decision is mandatory for concepts that depend on it.
 
-**Escalation when limits are reached.** When iteration limits are hit and the phase exit TRL has not been achieved, the framework does **not** jump to Phase 5 (which requires TRL 4). Instead, escalate to the Master Orchestrator gate protocol and choose one of:
+**Escalation when limits are reached.** When iteration limits are hit and the phase exit TRL has not been achieved, the framework does **not** jump to Phase 5 (which requires TRL 4). Instead, escalate to the Orchestrator gate protocol and choose one of:
 
 1. **Accept lower TRL:** Proceed to the next phase with documented limitations. Phase 5 can operate at TRL 3 if the team acknowledges reduced confidence (see Phase 5 contract).
 2. **Extend time-box:** Grant one additional iteration if the team can articulate what specific evidence they expect to gain.
@@ -416,7 +416,7 @@ This framework synthesizes the following approaches. You should draw on any of t
 The framework consists of the following files:
 
 1. `innovation_canvas_document.md`: ICD template (shared state)
-2. `master_orchestrator.md`: This file (process navigator)
+2. `orchestrator.md`: This file (process navigator)
 3. `principles_and_antipatterns.md`: Cross-cutting principles, cognitive bias watchlist, anti-patterns catalog, and ICD completeness checklist
 4. `phase_0_strategic_framing.md`: Phase 0 prompt
 5. `phase_1_problem_discovery.md`: Phase 1 prompt

@@ -6,11 +6,11 @@ user-invocable: true
 
 Read the following files:
 
-1. `framework/master_orchestrator.md`
+1. `framework/orchestrator.md`
 2. `framework/innovation_canvas_document.md`
 3. `framework/trl_specification.md`
 
-Then execute the entry protocol from the Master Orchestrator:
+Then execute the entry protocol from the Orchestrator:
 
 1. **Language:** Ask for the preferred language first, before any other interaction. Present the question in multiple languages (English, German, French, Spanish) so non-native speakers understand. Switch to the chosen language for all further interaction.
 2. **Identity:** Ask for the team or solo name. Use the name naturally throughout the session.
