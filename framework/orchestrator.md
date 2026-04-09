@@ -185,7 +185,7 @@ PROGRESS
 
 If the team wants to adjust (skip a phase, spend more time on prototyping), revise and re-confirm. The plan is a contract: both sides know what to expect.
 
-**Between phases:** After each phase completes, run the phase closing orientation from the wayfinding protocol (see "Wayfinding protocol" section). Then run the gate assessment. If the team is behind, compress remaining phases or drop the lowest-priority phase (Phase 3 first, then Phase 5). Always wait for the user to confirm before starting the next phase.
+**Between phases:** After each phase completes, run the phase closing orientation from the wayfinding protocol (see "Wayfinding protocol" section). Then run the gate assessment. If the team is behind or ahead of schedule, proactively suggest a mode switch (see "Mode switching mid-session" in the Compressed mode section). Always wait for the user to confirm before starting the next phase.
 
 ### Step 8: ICD initialization
 
@@ -377,6 +377,28 @@ Compressed mode is activated automatically when the session plan (Step 7) alloca
 2. In compressed mode, reduce the ICD to essential fields only: problem statement, top 3 assumptions, selected concept, prototype specification, and decision.
 3. No compressed phase exceeds 20 minutes (Phase 5 compressed is 15 minutes). If 20 minutes is not enough, run the phase in full mode instead.
 4. Phase 4 compressed (20 min) exits at TRL 3 (spike only, one technical question answered). Full mode (90 min) targets TRL 4 (MVP with user validation). Phase 5 compressed is a 15-minute structured debrief.
+
+### Mode switching mid-session
+
+The session plan sets the initial mode per phase, but the user can switch modes at any between-phases checkpoint. The mode is not locked.
+
+**Compressed to full (expanding).** The user wants to spend more time on a phase than originally planned. This is always allowed. When the user requests it (or when you detect that a phase would benefit from full treatment):
+
+1. Confirm the time impact: "Switching Phase [N] from compressed to full adds roughly [minutes] min. This means [consequence: less time for later phases, or session runs longer]. OK?"
+2. If confirmed, load the full phase file and run from Step 1. Do not reuse compressed output. The full process produces richer results.
+3. Update the progress map: change `(c)` to `(f)` for that phase.
+4. Recalculate the remaining session plan. If total time now exceeds the budget, offer to compress a downstream phase (Phase 3 first, then Phase 5) or extend the session.
+
+**Full to compressed (contracting).** The user is running out of time or wants to move faster. This is always allowed but comes with trade-offs.
+
+1. State the trade-off: "Switching Phase [N] to compressed means [what gets skipped: fewer ideas, no red team, no experiment design, and so on]. The deliverable will be [minimum viable deliverable]. OK?"
+2. If already mid-phase in full mode, preserve any completed steps and switch to compressed for the remaining steps. Do not restart the phase.
+3. Update the progress map: change `(f)` to `(c)` for that phase.
+
+**Proactive mode suggestion.** At every between-phases checkpoint, if the session is running behind or ahead of schedule, proactively suggest a mode switch:
+
+1. Behind schedule: "[Name], we are [N] minutes behind. I suggest switching Phase [N] from full to compressed. We would skip [specifics] but keep [specifics]. Alternatively, we can drop Phase [N] entirely. What do you prefer?"
+2. Ahead of schedule: "[Name], we have [N] extra minutes. Want to run Phase [N] in full mode instead of compressed? That would give us [specifics]."
 
 ## Language and tone
 
