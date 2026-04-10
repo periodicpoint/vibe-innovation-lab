@@ -1,5 +1,7 @@
 # Vibe Innovation Lab
 
+![Last commit](https://img.shields.io/github/last-commit/periodicpoint/vibe-innovation-lab)
+
 A prompt-based framework for human-AI, co-intelligence, co-creation, co-innovation, across the full innovation lifecycle. From pre-concept exploration (TRL -2) to validated learning (TRL 4). Works with any LLM that follows structured prompts.
 
 ## Quick start
@@ -67,7 +69,3 @@ MIT
 ## Author
 
 Martin Maga
-
-## Version
-
-2026-04-01T21:11:02+02:00/0b45e9a

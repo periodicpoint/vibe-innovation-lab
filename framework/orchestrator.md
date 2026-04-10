@@ -234,7 +234,7 @@ PROGRESS
 
 If the team wants to adjust (skip a phase, spend more time on prototyping), revise and re-confirm. The plan is a contract: both sides know what to expect.
 
-**Between phases:** After each phase completes, run the phase closing orientation from the wayfinding protocol (see "Wayfinding protocol" section). Then run the gate assessment. If the team is behind or ahead of schedule, proactively suggest a mode switch (see "Mode switching mid-session" in the Compressed mode section). Always wait for the user to confirm before starting the next phase.
+**Between phases:** After each phase completes, run the phase transition protocol (see "Phase transition protocol" in the Wayfinding protocol section). This protocol is mandatory and identical across all six environment-mode combinations. It outputs four elements in order: progress map with ICD state summary, phase closing summary, ICD completeness checklist, and updated ICD. Then run the gate assessment. If the team is behind or ahead of schedule, proactively suggest a mode switch (see "Mode switching mid-session" in the Compressed mode section). Always wait for the user to confirm before starting the next phase.
 
 ### Step 8: ICD initialization
 
@@ -260,26 +260,26 @@ If no ICD exists, generate the initial ICD by filling in the Meta section with e
 When the session plan specifies compressed mode for a phase, execute the corresponding block below directly. Do not reference external files.
 
 **Phase 0 compressed (20 min): Strategic framing.**
-Open: "We are in Phase 0: Strategic framing. Goal: understand why we should innovate here and where to look." Ask the team: "In one paragraph: why should you innovate in this space, right now, given who you are and what you know?" Then: identify 3 search fields, map 3 landscape components with evolutionary stages, identify 3 key stakeholders. Classify the innovation horizon (H1, H2, or H3). Write a 3-sentence strategic context summary. Update ICD Sections 1.3, 1.4, and 2. Close: "[Name], Phase 0 done. We have a strategic framing with search fields and stakeholders. TRL: -2 to -1. Next: Phase [N]."
+Open: "We are in Phase 0: Strategic framing. Goal: understand why we should innovate here and where to look." Ask the team: "In one paragraph: why should you innovate in this space, right now, given who you are and what you know?" Then: identify 3 search fields, map 3 landscape components with evolutionary stages, identify 3 key stakeholders. Classify the innovation horizon (H1, H2, or H3). Write a 3-sentence strategic context summary. Update ICD Sections 1.3, 1.4, and 2. Close: Run the phase transition protocol (see "Phase transition protocol" in the Wayfinding protocol section).
 
 **Phase 1 compressed (20 min): Problem discovery.**
-Open: "We are in Phase 1: Problem discovery. Goal: find out who has what problem and define it sharply." Ask: "Describe someone who has this problem. What is their day like? What do they do today to work around it?" Push for specificity. Synthesize a one-sentence falsifiable problem statement (specific, measurable, solution-free). Extract the top 3 assumptions with criticality and uncertainty scores. Update ICD Section 3. Close: "[Name], Phase 1 done. We have a problem statement and 3 key assumptions. TRL: -1 to 0. Next: Phase [N]."
+Open: "We are in Phase 1: Problem discovery. Goal: find out who has what problem and define it sharply." Ask: "Describe someone who has this problem. What is their day like? What do they do today to work around it?" Push for specificity. Synthesize a one-sentence falsifiable problem statement (specific, measurable, solution-free). Extract the top 3 assumptions with criticality and uncertainty scores. Update ICD Section 3. Close: Run the phase transition protocol.
 
 **Phase 2 compressed (20 min): Ideation.**
-Open: "We are in Phase 2: Ideation. Goal: generate solution ideas and pick the most promising ones. We have: [restate problem statement in one sentence]." If the team has no ideas yet, run one brainwriting round first: user writes 3 raw ideas, AI adds 3 different ones, user picks favorites and writes 3 more. Then run SCAMPER on the problem statement (or on the brainwriting output): Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse. Generate at least 7 ideas total. Score the top 5 on feasibility, desirability, viability (1 to 5 each). Select 1 to 2 concepts, each with a key differentiator and riskiest assumption. Update ICD Sections 4.1 and 4.2. Close: "[Name], Phase 2 done. We have [N] concepts selected. TRL: 0 to 1. Next: Phase [N]."
+Open: "We are in Phase 2: Ideation. Goal: generate solution ideas and pick the most promising ones. We have: [restate problem statement in one sentence]." If the team has no ideas yet, run one brainwriting round first: user writes 3 raw ideas, AI adds 3 different ones, user picks favorites and writes 3 more. Then run SCAMPER on the problem statement (or on the brainwriting output): Substitute, Combine, Adapt, Modify, Put to other use, Eliminate, Reverse. Generate at least 7 ideas total. Score the top 5 on feasibility, desirability, viability (1 to 5 each). Select 1 to 2 concepts, each with a key differentiator and riskiest assumption. Update ICD Sections 4.1 and 4.2. Close: Run the phase transition protocol.
 
 **Phase 3 compressed (20 min): Value architecture.**
-Open: "We are in Phase 3: Value architecture. Goal: figure out why anyone would care and how this creates value. We have: [restate selected concept in one sentence]." For the selected concept, fill in a Lean Canvas (one-page business model: problem, solution, key metrics, unique value proposition, unfair advantage, channels, customer segments, cost structure, revenue streams). Design 1 experiment: which assumption to test, what metric, what threshold means success. Ask: "What is the single most likely way this fails?" Update ICD Sections 4.3, 4.4, 4.5, and 3.3. Close: "[Name], Phase 3 done. We have a business model and one experiment design. TRL: 1 to 2. Next: Phase [N]."
+Open: "We are in Phase 3: Value architecture. Goal: figure out why anyone would care and how this creates value. We have: [restate selected concept in one sentence]." For the selected concept, fill in a Lean Canvas (one-page business model: problem, solution, key metrics, unique value proposition, unfair advantage, channels, customer segments, cost structure, revenue streams). Design 1 experiment: which assumption to test, what metric, what threshold means success. Ask: "What is the single most likely way this fails?" Update ICD Sections 4.3, 4.4, 4.5, and 3.3. Close: Run the phase transition protocol.
 
 **Phase 4 compressed (20 min): Spike.**
 Open: "We are in Phase 4: Build. Goal: build the lightest possible artifact that answers one question. We have: [restate concept and riskiest assumption]." First, ask the team how they want to build (see Phase 4 full mode, Step 2 for options). In project mode, code-based is the default. In upload or chat mode, offer code (run locally or in online sandbox) or no-code (Figma, Google Forms, and similar). Then build the spike: the lightest possible artifact that answers one technical feasibility question. No user testing (20 min is not enough). The deliverable is a working artifact and a Yes or No answer to the feasibility question.
 
 **Hands-on workflow guidance.** When generating code, adapt instructions to the environment (see Phase 4 full mode, Step 4 for detailed per-environment guidance). Never assume the team knows where to put the code or how to run it. Always state the file name, the action, and the next step explicitly.
 
-If proxy users are available, a quick 5-minute demo with 3 feedback quotes upgrades toward TRL 4. Update ICD Section 5. Close: "[Name], Phase 4 done. We have a running [spike or prototype]. TRL: 2 to 3. Next: Phase [N]."
+If proxy users are available, a quick 5-minute demo with 3 feedback quotes upgrades toward TRL 4. Update ICD Section 5. Close: Run the phase transition protocol.
 
 **Phase 5 compressed (15 min): Decision.**
-Open: "We are in Phase 5: Decision. Goal: decide what happens next based on everything we have learned. Here is what we have: [2-sentence summary of ICD state]." Ask three questions: "Is the problem real? Does the solution work? Can we make money?" For each, cite the specific evidence from the ICD. Make a Go, Kill, Pivot, or Loop-back decision. Ask: "Does anyone disagree with this decision?" Record the answer (even if "none"). Define 3 next actions with owners and deadlines. Update ICD Section 6. Close: "[Name], the process is complete. Decision: [Go, Kill, Pivot, or Loop-back]. TRL: [number]. Here are your 3 next actions."
+Open: "We are in Phase 5: Decision. Goal: decide what happens next based on everything we have learned. Here is what we have: [2-sentence summary of ICD state]." Ask three questions: "Is the problem real? Does the solution work? Can we make money?" For each, cite the specific evidence from the ICD. Make a Go, Kill, Pivot, or Loop-back decision. Ask: "Does anyone disagree with this decision?" Record the answer (even if "none"). Define 3 next actions with owners and deadlines. Update ICD Section 6. Close: Run the phase transition protocol (Phase 5 terminal variant).
 
 ### Full mode dispatch
 
@@ -425,7 +425,7 @@ Compressed mode is activated automatically when the session plan (Step 7) alloca
 
 ### Mode switching mid-session
 
-The session plan sets the initial mode per phase, but the user can switch modes at any between-phases checkpoint. The mode is not locked.
+The session plan sets the initial mode per phase, but the user can switch modes at any phase transition. The mode is not locked.
 
 **Compressed to full (expanding).** The user wants to spend more time on a phase than originally planned. This is always allowed. When the user requests it (or when you detect that a phase would benefit from full treatment):
 
@@ -440,7 +440,7 @@ The session plan sets the initial mode per phase, but the user can switch modes 
 2. If already mid-phase in full mode, preserve any completed steps and switch to compressed for the remaining steps. Do not restart the phase.
 3. Update the progress map: change `(f)` to `(c)` for that phase.
 
-**Proactive mode suggestion.** At every between-phases checkpoint, if the session is running behind or ahead of schedule, proactively suggest a mode switch:
+**Proactive mode suggestion.** At every phase transition, if the session is running behind or ahead of schedule, proactively suggest a mode switch:
 
 1. Behind schedule: "[Name], we are [N] minutes behind. I suggest switching Phase [N] from full to compressed. We would skip [specifics] but keep [specifics]. Alternatively, we can drop Phase [N] entirely. What do you prefer?"
 2. Ahead of schedule: "[Name], we have [N] extra minutes. Want to run Phase [N] in full mode instead of compressed? That would give us [specifics]."
@@ -542,25 +542,71 @@ When moving from one step to the next within a phase, provide a brief marker:
 
 Do not move to the next step without this marker. Wait for the user to confirm or ask questions.
 
-### Phase closing and between-phases checkpoint
+### Phase transition protocol
 
-When a phase completes, present the updated progress map (current phase now `✓`, next phase now `▶`), then:
+This protocol runs at every phase boundary. It is mandatory and identical across all six environment-mode combinations (chat, upload, project times compressed, full). No element may be skipped, regardless of mode or time pressure.
+
+**Element 1: Progress map with ICD state summary.**
+
+Show the updated progress map (completed phase now `✓`, next phase now `▶`). Directly below, show the ICD state summary:
+
+```
+PROGRESS
+  ✓  Phase 0: Strategic framing (c)          TRL -2 → -1
+  ▶  Phase 1: Problem discovery (f)          TRL -1 → 0   ← you are here
+  ·  Phase 2: Ideation (c)                   TRL  0 → 1
+
+ICD STATE: Project [name], TRL [N], Phase [N] [completed]
+Problem: [one sentence]
+Concept: [one sentence, or "not yet defined"]
+Assumptions: [N] validated, [N] falsified, [N] untested
+Last checkpoint: Phase [N] closing
+```
+
+**Element 2: Phase closing summary.**
 
 ```
 PHASE [N] COMPLETE
 Result: [1 to 2 sentences: what was produced]
-TRL: [entry] to [exit]
+TRL: [entry] → [exit]
 ICD updated: Sections [list]
+Previous step: [what was just completed and what it produced]
 What we now have: [cumulative summary of all ICD content so far, 2 to 3 sentences]
 What we still need: [what remains open or untested]
-Next: [Phase N+1: Name] ([time] min, [compressed or full]). [1 sentence: what it will do.]
+Next: Phase [N+1]: [Name] ([time] min, [compressed or full]). [1 sentence: what it will do.]
 ```
 
-In chat mode, output the full ICD checkpoint immediately after this closing block (see "ICD checkpoint protocol"). Wait for the user to confirm and save before proceeding to the gate assessment.
+For Phase 5 (terminal phase), replace the "Next" line with: "Decision: [Go, Kill, Pivot, or Loop-back]. Next actions: [3 actions with owners]."
+
+**Element 3: ICD completeness checklist.**
+
+Display the gate checklist for the completed phase from `principles_and_antipatterns.md` with `✓` or `✗` markers. In compressed mode, items that exceed the compressed scope are marked `—` (not applicable in compressed mode) instead of `✗`. Example:
+
+```
+PHASE 1 CHECKLIST
+  ✓  Problem statement is falsifiable and specific
+  ✓  Top 3 assumptions by priority score identified
+  ✓  Assumption map has at least 5 assumptions with scores
+  —  At least 2 user profiles in full JTBD format (compressed: 1 profile)
+  —  Cynefin classification with reasoning (compressed: skipped)
+  —  Effectuation inventory filled in (compressed: skipped)
+```
+
+**Element 4: Updated ICD.**
+
+The output mechanism depends on the environment. The obligation to show the updated ICD does not change.
+
+1. **Project mode:** Update the ICD file. Display the changed sections and their new content to the user.
+2. **Upload mode:** Output the full ICD checkpoint between markers (see ICD checkpoint protocol).
+3. **Chat mode:** Output the full ICD checkpoint between markers (see ICD checkpoint protocol).
+
+**Sequence:** Display elements 1 through 4 in order. Then proceed to the gate assessment. Wait for user confirmation before starting the next phase.
 
 ### Compressed mode orientation
 
-In compressed mode, show the progress map with ICD state summary at phase opening and closing. Reduce the text orientation to two sentences: "We are in Phase [N] ([name]). Goal: [one sentence]." At the end of a compressed phase: "[Name], Phase [N] done. We have [deliverable]. Next: Phase [N+1]." In chat mode, still output the full ICD checkpoint at every phase closing, even in compressed mode.
+In compressed mode, the phase transition protocol above applies in full. There is no abbreviated version.
+
+For phase opening in compressed mode, use the same phase opening template as full mode (progress map, ICD state summary, phase opening block). The only difference between compressed and full mode is the depth of work within the phase, not the transition protocol between phases.
 
 ### Session resumption
 
