@@ -61,6 +61,76 @@ Wait for the user's input.
 
 **Output:** A pool of 15 to 20 raw seed ideas. Do not evaluate or cluster them yet. Carry them forward into Step 3 as input material.
 
+### Step 2.5: Divergent chaos (side protocol)
+
+*Hidden mode. Do not announce in the phase opening. Enter only through the triggers below.*
+
+**Triggers.** Enter this step only when one of the following holds:
+
+1. Step 2 (brainwriting) produced fewer than 6 usable seeds, or the user explicitly wrote "no ideas", "nothing", "blank", "stuck", or an equivalent refusal.
+2. The user has looped back into Phase 2 for a second intra-phase iteration and the structured methods in Step 3 have stopped producing novelty.
+3. The user types the literal string `/chaos` or asks for "the weird mode", "the easter egg", or "maximum divergence".
+
+If none of the triggers fire, skip this step silently and proceed to Step 3.
+
+**Purpose.** Break the user out of convergent thinking by flooding working memory with heterogeneous, cross-domain, cross-abstraction material until associative mode takes over. The point is not to be useful. The point is to dislodge.
+
+**Warning to the user.** Before emitting anything, say exactly:
+
+> This is an unusual mode. I am going to emit a stream of unrelated fragments: facts, physics, poetry, language shards, silence. Do not try to understand it. Do not connect it to the problem yet. Read it once. Then write the first raw associations that surface, without filtering. You can exit at any moment by writing `stop`, `exit`, `raus`, or `enough`. I will return to the standard methods without comment. Ready?
+
+Wait for confirmation. A single word is enough.
+
+**Exit.** If the user writes any of the exit tokens above at any point during the protocol, abort the current wave immediately, discard any unfinished emission, and resume at Step 3 Method 5 (speculative provocation) as a soft landing. Do not explain, do not summarize, do not ask the user to justify the exit. The only acknowledgment is one line: "Exiting chaos mode. Returning to standard divergence."
+
+**Protocol.**
+
+1. **First wave (chaos emission).** Emit 18 to 22 fragments as a numbered list, one fragment per line, no commentary, no transitions, no framing. The fragments must be heterogeneous along every axis: language, domain, scale, register, abstraction, mood. Include at least one item from each of the following classes: obscure empirical fact, multilingual shard in a non-English language, coherent physics or mathematics snippet, biology or chemistry snippet, poetry line or fragment, silence marker, cross-abstraction jump from concrete to abstract, deliberate non-sequitur, unlikely adjacency, historical micro-detail. Do not reuse an example from the template below verbatim. Generate fresh fragments at runtime. Never explain a fragment.
+
+2. **Ask for raw associations.** Say: "Write the first 5 to 10 things that surfaced. Single words, images, half-sentences, nonsense. Do not connect them to the problem. Do not justify." Wait for the user.
+
+3. **Second wave (mutation).** Take each of the user's associations and treat it as a seed. Emit 10 to 15 new fragments that mutate, invert, cross-breed, or collide with the user's seeds. Still no reference to the problem. Still no explanation.
+
+4. **Ask for wild candidate objects.** Say: "Now name 5 to 10 objects, creatures, devices, rituals, or situations that these fragments suggest. They do not need to exist. They do not need to make sense. One line each." Wait for the user.
+
+5. **Mapping back.** Only now return to the problem. For each wild candidate object the user named, ask one question: "If this existed, and it were somehow the answer, what would the answer be about?" Record the user's responses as raw seed ideas.
+
+6. **Handoff.** Pass the resulting seeds into Step 3 as input material for Methods 1 through 5, or, if the seeds already cluster naturally, jump directly to Step 4. Mark them in the pool with the tag `chaos-origin` for later auditing.
+
+**Fragment template (illustrative, never paste as is).** The runtime output should match this level of heterogeneity and strangeness, but the content must be freshly generated each time.
+
+1. The mean lifetime of a free neutron is roughly 879 seconds. Bound inside a nucleus it is stable indefinitely.
+2. Im Wald steht ein Haus, und im Haus ist ein Zimmer, und im Zimmer wartet niemand mehr.
+3. One mole of water is on the order of the number of stars in the observable universe, give or take.
+4. (thirty seconds of silence)
+5. Octopuses taste with their arms and have three hearts, two of which stop beating when they swim.
+6. The wavefunction does not collapse. The observer entangles.
+7. sable, vellum, foxglove, ozone
+8. In 1518 in Strasbourg, hundreds of people danced for weeks without stopping and some of them died of exhaustion.
+9. "I have measured out my life with coffee spoons."
+10. The determinant of a square matrix is the signed volume of the parallelepiped spanned by its column vectors.
+11. Koan: what is the sound of a hash collision.
+12. Medieval Icelandic law required a man who killed another man to announce the killing at the next farmhouse he passed, or be declared a murderer instead of a slayer.
+13. 無常 (mujou, impermanence)
+14. Vantablack absorbs more than 99.9 percent of visible light and makes three-dimensional objects look like two-dimensional holes.
+15. Coffee rings form because the edge of the droplet evaporates faster than the center and capillary flow drags particles outward.
+16. A group is a set with an associative binary operation, an identity element, and inverses. Nothing else. Everything symmetric in the universe is a group.
+17. "Le silence éternel de ces espaces infinis m'effraie." (Pascal)
+18. Slime mould, placed on a map of Tokyo with oat flakes at the locations of train stations, reconstructs the Tokyo rail network in about 26 hours.
+19. (a pause, long enough to notice the pause)
+20. Quicksilver was once prescribed for syphilis and the cure was frequently worse than the disease.
+21. Hilbert space is a vector space with an inner product and a notion of completeness. The word *infinite* is doing almost nothing there.
+22. What the cartographer leaves off the map is also the map.
+
+**Boundaries.**
+
+1. Do not enter this step for a team that already has momentum. It will feel insulting.
+2. Do not run it twice in the same session. The effect dulls.
+3. Do not treat the chaos fragments as ideas. They are solvents, not solutes.
+4. If the user disengages or becomes uncomfortable, exit immediately and return to Step 3 Method 5 (speculative provocation) as a softer landing.
+
+**Output.** A set of `chaos-origin` seed ideas (typically 5 to 12) added to the Step 2 pool, or, if Step 2 was skipped, forming the initial pool for Step 3. Do not evaluate these seeds here.
+
 ### Step 3: Divergent phase (idea generation)
 
 **Rule: No evaluation during this phase.** All ideas are welcome. Quantity over quality. Wild ideas encouraged. Criticism is forbidden until Step 5.
@@ -166,7 +236,7 @@ Consider a loop-back to Phase 1 if:
 Consider a loop-back within Phase 2 if:
 
 1. The red team moment reveals that all selected concepts share the same critical flaw.
-2. Fewer than 15 distinct ideas were generated across all methods combined (divergence was insufficient). If brainwriting ran in Step 2, this trigger applies only when the structured methods in Step 3 failed to add meaningful novelty beyond the brainwriting pool.
+2. Fewer than 15 distinct ideas were generated across all methods combined (divergence was insufficient). If brainwriting ran in Step 2, this trigger applies only when the structured methods in Step 3 failed to add meaningful novelty beyond the brainwriting pool. If this trigger fires for a second time within the same Phase 2 session, consider entering Step 2.5 (divergent chaos) before rerunning Step 3.
 
 **Re-entry from Phase 3:** If Phase 3 cannot build a viable business model for any selected concept and loops back to Phase 2, evaluate the parked ideas in Section 4.1 before generating new ideas. Parked ideas have already passed initial feasibility screening and may contain viable alternatives that were not selected in the first pass. Only run a fresh divergence round if no parked idea addresses the Phase 3 gap.
 
