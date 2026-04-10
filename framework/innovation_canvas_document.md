@@ -19,6 +19,8 @@ The template structure (headings, field names) is in English. The LLM fills in t
 
 Sections marked **[Phase N output]** indicate which phase is responsible for populating that section. Sections can be revised by later phases if new evidence warrants it. Document all revisions in the decision log.
 
+**Accumulating sections.** Section 5.2 (Technical specification) is the main accumulating section: it is populated incrementally during Phase 4 as technical decisions are made, then frozen at Phase 5 exit. Do not wait for Phase 5 to fill it in. The rationale for tech stack and architecture choices decays quickly when reconstructed retrospectively.
+
 ## 1. Meta
 
 ### 1.1 Project identity
@@ -186,19 +188,42 @@ For each selected concept:
 |---|---|---|---|---|
 | E1 | | Yes or No | | Proceed, Pivot, or Kill |
 
-### 5.2 Prototype specification
+### 5.2 Technical specification **[Phase 4 output, finalized by Phase 5]**
+
+This section accumulates during Phase 4 as technical decisions are made and is frozen at Phase 5 exit. It is the engineering-facing handoff artifact. TBD entries are permitted during Phase 4 for items that were not exercised. At Phase 5 exit, TBD entries must either be resolved or explicitly carried forward as open technical questions (item 10) and production readiness gaps (item 11). The goal is honest coverage for handoff, not engineering completeness.
 
 1. **Artifact type:** Spike, prototype, or MVP (see `trl_specification.md` for definitions)
-2. **Scope:** What is included and what is explicitly excluded?
-3. **Tech stack or prototyping tool:** (For code: Python, JavaScript, Streamlit, and similar. For no-code: Figma, Google Forms, Typeform, Webflow, and similar.)
-4. **Success criteria:** What must the prototype demonstrate?
+2. **Scope:** What is included and what is explicitly excluded
+3. **Functional requirements:** Falsifiable capability statements derived from the value map (§4.3) and the experiments that were actually validated (§5.1). Format: "The system must [verb] [object] under [condition]." Mark each requirement as Validated (evidenced by a Phase 4 experiment) or Assumed (carried forward without direct validation).
+4. **Non-functional requirements:** Constraints on how the system must behave. Derived from §1.2 (Constraints) and from observations during Phase 4 user sessions. Cover performance, security, privacy, accessibility, regulatory or policy compliance, and operational constraints. Mark each as Validated, Assumed, or Deferred. Unvalidated NFRs carried forward to the product team are flagged explicitly.
+5. **Technology stack and rationale:** Formal record of language, runtime, framework, data store, deployment target, and any other load-bearing technology choices. Each choice cross-references the Decision log entry (§8) where it was made. The tech stack for a prototype is not the tech stack for the product. If the stack is understood to be throwaway, say so here.
+6. **Architecture overview:** Minimum: component list, data flow sketch, and integration boundaries. A single paragraph plus a Mermaid diagram or a text sketch is acceptable at TRL 4. No premature detail. Identify what is custom, what is off-the-shelf, and where the load-bearing complexity sits.
+7. **Data model:** Core entities and their relationships as a short table or text-based entity-relationship sketch. TBD entries permitted where the model was not exercised in Phase 4.
+8. **External dependencies:** APIs, services, libraries, hosted infrastructure. For each: purpose, licensing, approximate cost, and lock-in risk. Note any dependency that blocks open-source release or has a single vendor.
+9. **Known limitations:** Explicit list of what the MVP does not yet do. Merged from the former Implementation log field. Be specific: "Does not handle concurrent edits," not "Some edge cases not covered."
+10. **Open technical questions:** Questions the product team will need to answer to reach TRL 5 and beyond. Distinct from assumptions (which belong in §3.3). These are engineering uncertainties surfaced but not resolved in Phase 4.
+11. **Production readiness checklist:** For each item, mark Validated (demonstrated in Phase 4), Deferred (known gap, must be addressed by the product team), or Out of scope (not applicable to this product).
+
+| Item | Status | Notes |
+|---|---|---|
+| Authentication and authorization | Validated, Deferred, or Out of scope | |
+| Input validation and error handling | | |
+| Observability (logs, metrics, traces) | | |
+| Monitoring and alerting | | |
+| Deployment pipeline (CI/CD) | | |
+| Backup and disaster recovery | | |
+| Data protection and privacy compliance | | |
+| Accessibility conformance | | |
+| Performance and load behaviour | | |
+| Documentation (user and operator) | | |
+
+12. **Success criteria:** What the prototype or MVP was required to demonstrate (retained from the original §5.2). Tied directly to experiment success thresholds in §4.5.
 
 ### 5.3 Implementation log
 
 1. **Repository:** [URL]
 2. **Key files:**
-3. **Known limitations:**
-4. **User feedback summary:**
+3. **User feedback summary:**
 
 ## 6. Decision space **[Phase 5 output]**
 
@@ -245,11 +270,11 @@ This section tracks all loop-backs and intra-phase iterations. Each entry record
 
 ## 8. Decision log
 
-This is the append-only record of all major decisions across all phases.
+This is the append-only record of all major decisions across all phases: strategic, product, and technical. Write entries at the moment a decision is made, not retrospectively. Technical entries recorded here are the source of record for the Technology stack and Architecture overview fields in §5.2. For strategic and product decisions, the Alternatives and Implications columns may be left terse when not load-bearing, but should always be filled in for technical decisions.
 
-| Date | Phase | Decision | Reasoning | Evidence |
-|---|---|---|---|---|
-| | | | | |
+| Date | Phase | Type | Decision | Alternatives considered | Rationale | Implications | Evidence |
+|---|---|---|---|---|---|---|---|
+| | | Strategic, Product, or Technical | | | | | |
 
 ## 9. Changelog
 

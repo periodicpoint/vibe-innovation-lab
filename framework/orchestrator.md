@@ -39,8 +39,8 @@ Each phase has a defined input contract (what it needs to start) and output cont
 | 1 | Sections 1, 2 (Section 2 may be empty if entering without Phase 0) | Section 3 (Problem space), update Section 1.3 | Falsifiable problem statement, assumption map, effectuation inventory |
 | 2 | Sections 1, 3 | Section 4.1 (Idea candidates), Section 4.2 (Selected concepts) | 2 to 3 selected concepts with riskiest assumption per concept |
 | 3 | Sections 1, 3, 4.2 | Sections 4.3, 4.4, 4.5, update Section 3.3 | Value proposition, business model, experiment designs with thresholds |
-| 4 | Sections 1, 3, 4.1 through 4.5 | Section 5 (Validation space), update Sections 3.2, 3.3, 4.3, 4.4 (confirm or revise) | Working artifact (spike, prototype, or MVP), experiment results, user feedback, upstream validation |
-| 5 | All sections | Section 6 (Decision space), Sections 7, 8, 9, consolidated assumption map | Go, Kill, Pivot, or Loop-back decision with evidence and next actions |
+| 4 | Sections 1, 3, 4.1 through 4.5 | Section 5 (Validation space) including populated Section 5.2 (Technical specification), update Sections 3.2, 3.3, 4.3, 4.4 (confirm or revise), at least one Technical entry in Section 8 | Working artifact (spike, prototype, or MVP), experiment results, user feedback, upstream validation, populated technical specification |
+| 5 | All sections | Section 6 (Decision space), Sections 7, 8, 9, consolidated assumption map, finalized Section 5.2, executive summary document | Go, Kill, Pivot, or Loop-back decision with evidence, finalized technical specification, and two-page executive summary |
 
 **Minimum viable deliverable per phase (compressed mode):**
 
@@ -49,7 +49,7 @@ Each phase has a defined input contract (what it needs to start) and output cont
 3. Phase 2: 1 to 2 selected concepts with key differentiator.
 4. Phase 3: Lean Canvas (one-page business model) and 1 experiment design with success threshold.
 5. Phase 4: Running spike (one technical question answered).
-6. Phase 5: Go, Kill, Pivot, or Loop-back decision with 3 next actions.
+6. Phase 5: Go, Kill, Pivot, or Loop-back decision with 3 next actions and a minimal executive summary (pitch, problem, solution, recommendation).
 
 ### Shared state
 
@@ -419,7 +419,7 @@ Compressed mode is activated automatically when the session plan (Step 7) alloca
 **Rules for compressed mode:**
 
 1. Each phase's compressed mode section defines the minimum viable deliverable. Do not skip below that minimum.
-2. In compressed mode, reduce the ICD to essential fields only: problem statement, top 3 assumptions, selected concept, prototype specification, and decision.
+2. In compressed mode, reduce the ICD to essential fields only: problem statement, top 3 assumptions, selected concept, technical specification (Section 5.2, minimal fields: artifact type, scope, tech stack, success criteria), and decision.
 3. No compressed phase exceeds 20 minutes (Phase 5 compressed is 15 minutes). If 20 minutes is not enough, run the phase in full mode instead.
 4. Phase 4 compressed (20 min) exits at TRL 3 (spike only, one technical question answered). Full mode (90 min) targets TRL 4 (MVP with user validation). Phase 5 compressed is a 15-minute structured debrief.
 

@@ -81,7 +81,15 @@ The framework stops at TRL 4 for three reasons:
 
 3. **Different team structures.** Innovation teams are small, cross-functional, and empowered to pivot. Product teams are larger, specialized, and optimized for delivery. The handoff from innovation to product is a distinct organizational event, not a gradual transition.
 
-A Go decision at TRL 4 is the handoff point. The ICD, the validated MVP, the experiment results, and the consolidated assumption map are the deliverables that the product team receives. What happens after TRL 4 is the product team's responsibility.
+A Go decision at TRL 4 is the handoff point. The deliverables that the product team and leadership receive are:
+
+1. The ICD with a finalized Technical specification (Section 5.2), including functional and non-functional requirements, tech stack with rationale, architecture overview, data model, external dependencies, known limitations, open technical questions, and a populated production readiness checklist.
+2. The validated MVP in a repository.
+3. The experiment results with threshold comparisons.
+4. The consolidated assumption map.
+5. A two-page executive summary (`executive_summary.md`) for leadership and external stakeholders.
+
+Kill and Pivot decisions at TRL 4 also produce an executive summary (documenting learnings, reusable assets, and rationale) but do not hand over the MVP repository for product development. The MVP is archived with the ICD. What happens after TRL 4 is the product team's responsibility.
 
 ## Advancement criteria
 
@@ -148,6 +156,7 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 3. At least 3 user feedback quotes are collected from observation (not self-report).
 4. The assumption map is updated with Validated or Falsified status per tested assumption.
 5. Sections 3.2, 4.3, and 4.4 are explicitly confirmed or revised based on evidence.
+6. ICD Section 5.2 (Technical specification) has all 12 fields populated (TBD permitted where not exercised), including at least one Technical Decision log entry in Section 8 recording the tech stack choice.
 
 **Artifact gate:** The MVP must have been used by at least 3 people who are not on the team. Internal demos do not count toward TRL 4.
 
@@ -160,8 +169,10 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 3. An unambiguous Go, Kill, Pivot, or Loop-back decision is documented with evidence-based reasoning.
 4. Next actions have named owners and deadlines.
 5. Dissenting views are recorded.
+6. ICD Section 5.2 (Technical specification) is finalized: TBDs resolved or explicitly carried forward as open questions, Production readiness checklist fully populated.
+7. An executive summary (`executive_summary.md`) is produced following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
 
-**Minimum viable (compressed):** Decision with 3 next actions.
+**Minimum viable (compressed):** Decision with 3 next actions and a minimal executive summary (pitch, problem, solution, recommendation).
 
 ## Relationship to standard TRL
 
