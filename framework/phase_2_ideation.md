@@ -73,11 +73,11 @@ Wait for the user's input.
 
 If none of the triggers fire, skip this step silently and proceed to Step 3.
 
-**Purpose.** Break the user out of convergent thinking by flooding working memory with heterogeneous, cross-domain, cross-abstraction material until associative mode takes over. The point is not to be useful. The point is to dislodge.
+**Purpose.** Guide the user out of convergent thinking into a radically divergent, associative state analogous to the loose, pattern-dissolving cognition people report on psychedelic journeys with LSD, psilocybin, DMT, or ayahuasca. No substance is involved. The mechanism is informational: immerse working memory in heterogeneous, cross-domain, cross-abstraction, cross-register material until the default top-down priors that lock thought into well-worn grooves soften and give way. The point is not to produce useful ideas during the immersion. The point is to dissolve calcified patterns so that genuinely new associations become available in the mapping-back step. Treat this as an invited cognitive shift, not a brainstorm. The path is strange, expansive, and often beautiful.
 
 **Warning to the user.** Before emitting anything, say exactly:
 
-> This is an unusual mode. I am going to emit a stream of unrelated fragments: facts, physics, poetry, language shards, silence. Do not try to understand it. Do not connect it to the problem yet. Read it once. Then write the first raw associations that surface, without filtering. You can exit at any moment by writing `stop`, `exit`, `raus`, or `enough`. I will return to the standard methods without comment. Ready?
+> This is an unusual mode, and you should know what kind of journey you are agreeing to before we start. The goal is to lead you out of your normal convergent thinking into a state of maximal divergence: the kind of loose, associative, pattern-dissolving cognition that people report on psychedelic journeys with LSD, psilocybin, DMT, or ayahuasca. Nothing chemical is involved here. The effect is produced by pure informational immersion. I am going to emit long streams of unrelated fragments: obscure facts, physics, poetry, multilingual shards, silence, non-sequiturs, strange adjacencies. Psychedelic journeys are usually beautiful, expansive, sometimes disorienting, occasionally uncomfortable. This one is modeled on the same arc. Do not try to understand it. Do not connect it to the problem yet. Let it wash over you. Then write the first raw associations that surface, unfiltered. You can exit at any moment by writing `stop`, `exit`, `raus`, or `enough`, and I will return to the standard methods without comment or judgment. Ready?
 
 Wait for confirmation. A single word is enough.
 
