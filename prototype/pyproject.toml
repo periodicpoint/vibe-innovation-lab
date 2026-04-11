@@ -1,0 +1,54 @@
+# Canonical dependency manifest for the Phase 4 prototype scaffold.
+#
+# This file is the single source of truth for the prototype's Python
+# dependencies. It pairs with two generated artifacts that must stay in sync:
+#
+#   1. uv.lock           -- transitive pinning, produced by `uv lock`
+#   2. requirements.txt  -- compatibility export, produced by `uv export`
+#
+# The requirements.txt export exists only because external hosting platforms
+# (Streamlit Community Cloud, Hugging Face Spaces, Replit) and the pip
+# fallback in the Codespaces devcontainer read it directly. Do not edit it by
+# hand. Edit this file instead, then run:
+#
+#   uv lock
+#   uv export --format requirements-txt --no-hashes --no-emit-project --output-file requirements.txt
+#
+# The dependency list below is deliberately broad even though most entries are
+# unused at startup. The prototype is a workshop scaffold for non-programmer
+# innovators. Pre-installing the common data and visualisation stack means
+# participants can immediately generate tables, charts, and PDFs without
+# adding dependencies mid-session. See the module docstring in app.py for the
+# pedagogical contract behind the unused pandas and numpy imports.
+
+[project]
+name = "vibe-innovation-lab-prototype"
+version = "0.1.0"
+description = "Streamlit starter scaffold for Phase 4 of the Vibe Innovation Framework."
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit",            # Websites and web apps, the heart of the scaffold
+    "pandas",               # Tables and data frames
+    "numpy",                # Numerical calculations
+    "openpyxl",             # Excel .xlsx support for pandas
+    "plotly",               # Interactive charts with zoom and hover
+    "altair",               # Declarative statistical charts
+    "matplotlib",           # Classic static charts
+    "seaborn",              # Prettier statistical visualisations
+    "Pillow",               # Image processing and uploads
+    "fpdf",                 # PDF report generation
+    "streamlit-extras",     # Additional widgets
+    "streamlit-option-menu", # Navigation bars
+    "graphviz",             # Process and flow diagrams
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint.per-file-ignores]
+# Workshop scaffolding: pandas and numpy are imported but not used on purpose so
+# that non-programmer participants can start using tables and calculations
+# immediately without adding imports themselves. See the module docstring in
+# app.py for the full rationale.
+"app.py" = ["F401"]

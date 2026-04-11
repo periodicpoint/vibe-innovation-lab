@@ -128,7 +128,7 @@ Build incrementally:
 
 1. After generating code, say: "Copy the code below and paste it into `prototype/app.py` in your Codespace. Replace everything that is in the file."
 2. After they paste, say: "Save the file (Ctrl+S). If a button 'Always rerun' appears in the Streamlit app, click it."
-3. If the app is not running yet, say: "Open the terminal and run: `streamlit run prototype/app.py`. Then open the PORTS tab, find port 8501, and click the globe icon to open the app in your browser."
+3. If the app is not running yet, say: "Open the terminal and run: `cd prototype && uv run streamlit run app.py`. If that command is not found (the devcontainer used the pip fallback instead of uv), run `streamlit run prototype/app.py` from the repository root. Then open the PORTS tab, find port 8501, and click the globe icon to open the app in your browser."
 4. If an error occurs, say: "Copy the error message from the terminal or the app and paste it here. I will fix it."
 5. When iterating, say: "Here is the updated code. Replace the entire content of `prototype/app.py` with this."
 

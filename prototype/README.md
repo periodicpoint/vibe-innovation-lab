@@ -11,17 +11,42 @@ Streamlit starter for Phase 4 (Build and validate) of the Vibe Innovation Framew
 5. Start the app in the terminal:
 
 ```bash
-streamlit run prototype/app.py
+cd prototype
+uv run streamlit run app.py
 ```
+
+If the devcontainer used the pip fallback instead of `uv` (see note below), the equivalent command is `streamlit run prototype/app.py` from the repo root.
 
 6. In the **PORTS** tab, click the globe icon next to port 8501 to open the app in the browser.
 
+The devcontainer installs `uv` and runs `uv sync` on creation. If the `uv` bootstrap fails for any reason (network, mirror outage), the `postCreateCommand` automatically falls back to `pip install -r prototype/requirements.txt` so the Codespace still comes up. Either path produces the same runnable environment.
+
 ## Local development
+
+Default path (uv, matches the framework tech stack):
+
+```bash
+cd prototype
+uv sync
+uv run streamlit run app.py
+```
+
+If you do not have `uv` installed, install it once with `curl -LsSf https://astral.sh/uv/install.sh | sh` and open a new shell.
+
+Fallback path (pip, works on any Python 3.10+ environment without uv):
 
 ```bash
 cd prototype
 pip install -r requirements.txt
 streamlit run app.py
+```
+
+The `requirements.txt` file is auto-generated from `pyproject.toml` via `uv export` and exists only for hosting-platform compatibility (Streamlit Community Cloud, Hugging Face Spaces, Replit) and for the pip fallback above. Do not edit it by hand. Edit `pyproject.toml` instead, then regenerate with:
+
+```bash
+cd prototype
+uv lock
+uv export --format requirements-txt --no-hashes --no-emit-project --output-file requirements.txt
 ```
 
 ## Workflow
@@ -36,7 +61,7 @@ streamlit run app.py
 1. **App does not start:** Run `pip install -r prototype/requirements.txt` manually, then retry.
 2. **Port not visible or stops working:** This is the most common Codespace issue. The fix depends on timing:
    - If the port **never appeared**: Open the PORTS tab in VS Code, right-click port 8501, set visibility to "Public".
-   - If the port **stopped working after a while**: Stop Streamlit with Ctrl+C, then restart with `streamlit run prototype/app.py`. The environment is pre-configured to bind to the correct address.
+   - If the port **stopped working after a while**: Stop Streamlit with Ctrl+C, then restart with `cd prototype && uv run streamlit run app.py`. If `uv` is not available (the devcontainer used the pip fallback on creation), run `streamlit run prototype/app.py` from the repository root instead. The environment is pre-configured to bind to the correct address either way.
    - If restarting does not help, run this in the terminal: `mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml` and then restart Streamlit.
    - As a last resort: Stop the Codespace (Codespaces menu, top left, "Stop Codespace"), then restart it. Do **not** rebuild.
 3. **Claude Code not available:** Use the copy-paste workflow instead. Open `framework/orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).

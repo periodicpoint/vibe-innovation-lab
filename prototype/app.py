@@ -1,3 +1,29 @@
+"""Streamlit starter scaffold for Phase 4 of the Vibe Innovation Framework.
+
+Intentionally minimal and intentionally over-commented. Workshop participants, who
+may not be programmers, open this file in a Codespace and immediately see a
+running Streamlit app. The dense German line-by-line comments are pedagogical
+scaffolding, not production documentation. They are expected to be overwritten as
+LLM-generated prototype code replaces the placeholder body under the Section 5
+marker.
+
+Why this scaffold exists at all: vibe coding (human steers intent, LLM writes
+code) needs a non-empty canvas. An empty file intimidates non-programmers. A file
+with one working widget, a visible title, and a clearly marked insertion point
+invites iteration and produces the shortest possible feedback loop from "idea in
+head" to "thing with a URL that a user can click". That feedback loop is what
+Phase 4 validation experiments depend on.
+
+The scaffolding itself (page config, title, info box, Section markers) is part of
+the teaching structure and is referenced from prototype/README.md. Do not remove
+it when adapting this file for a specific session. Only replace the body.
+
+Emojis in the user-facing strings are deliberate. This is a workshop tool for
+non-programmer innovators, not a scientific or enterprise artifact. They signal
+approachability. Strip them only if the downstream context requires a neutral
+register.
+"""
+
 # 1. Werkzeugkasten laden
 import streamlit as st  # Lädt "Streamlit" (das App-Framework) und nennt es kurz "st"
 import pandas as pd     # Lädt "Pandas" (für Tabellen/Daten) als "pd"
@@ -21,6 +47,6 @@ st.info("👈 Wähle links ein Tool oder beginne hier zu coden! Test!")
 
 # 5. Der Arbeitsbereich
 # Diese Zeilen sind nur Kommentare (starten mit #) und werden nicht ausgeführt.
-# Sie dienen der Srukturierung und Erklärung des Codes.
+# Sie dienen der Strukturierung und Erklärung des Codes.
 
 # ↓↓↓ Füge unter diesem Kommentar den KI-Code ein ↓↓↓
