@@ -26,6 +26,7 @@ See `framework/trl_specification.md` for the full extended TRL scale definition.
 | Problem defined, no solution idea | 0 | Phase 2: Ideation |
 | Solution concept exists, value unclear | 1 | Phase 3: Value architecture |
 | Value articulated, no prototype | 2 | Phase 4: Build and validate |
+| Prototype built, validation limited | 3 | Phase 5: Decision (early entry, reduced confidence) |
 | Prototype validated, decision pending | 4 | Phase 5: Decision |
 
 ## Repository structure
@@ -45,5 +46,5 @@ See `framework/trl_specification.md` for the full extended TRL scale definition.
 2. Phase 1: Problem discovery (TRL -1 to 0)
 3. Phase 2: Ideation (TRL 0 to 1)
 4. Phase 3: Value architecture (TRL 1 to 2)
-5. Phase 4: Build and validate (TRL 2 to 4)
-6. Phase 5: Decision (TRL 4)
+5. Phase 4: Build and validate (TRL 2 to 3 or 4)
+6. Phase 5: Decision (TRL 4, or TRL 3 with reduced confidence)

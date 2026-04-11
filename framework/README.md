@@ -38,7 +38,7 @@ The framework uses an extended Technology Readiness Level scale (TRL -2 to TRL 4
 | 3 | Prototype built | Spike or prototype | Phase 4 (build) | Can we build it? |
 | 4 | Validated MVP | MVP | Phase 4 (validate) | Does it work? |
 
-Phase 5 (Decision) operates at TRL 4 and produces a terminal Go, Kill, Pivot, or Loop-back decision. The framework stops at TRL 4 because everything beyond is product development, not innovation (see `trl_specification.md` for the full rationale). Loop-backs regress TRL to the target phase's entry level.
+Phase 5 (Decision) operates at TRL 4, or at TRL 3 with reduced confidence, and produces a terminal Go, Kill, Pivot, or Loop-back decision. The framework stops at TRL 4 because everything beyond is product development, not innovation (see `trl_specification.md` for the full rationale). Loop-backs regress TRL to the target phase's entry level.
 
 ## How to use
 
