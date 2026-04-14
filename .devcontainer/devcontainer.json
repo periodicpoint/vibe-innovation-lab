@@ -40,7 +40,17 @@
   // pip-fallback exit status does not abort stage 2. Stages 2 and 3 use `&&`
   // because stage 3 is optional but stage 2 is a hard prerequisite.
   "postCreateCommand": "((curl -LsSf https://astral.sh/uv/install.sh | sh) && export PATH=\"$HOME/.local/bin:$PATH\" && cd prototype && uv sync) || (echo 'uv install or sync failed, falling back to pip' && pip install -r prototype/requirements.txt) ; mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/orchestrator.md into any LLM.')",
-  "postStartCommand": "mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml",
+  // postStartCommand runs on every Codespace start.
+  //   1. Refresh the Streamlit config in the user profile so port 8501 stays
+  //      pinned even if the user tampered with ~/.streamlit/config.toml.
+  //   2. Append an idempotent banner to ~/.bashrc that prints the forwarded
+  //      app URL on every new interactive shell. The URL is built at shell
+  //      start time from the Codespace-provided environment variables
+  //      $CODESPACE_NAME and $GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN, so it
+  //      is always accurate for the current Codespace without hardcoding.
+  //      The VBI_APP_URL_BANNER marker makes the append idempotent across
+  //      restarts and rebuilds.
+  "postStartCommand": "mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (grep -q 'VBI_APP_URL_BANNER' ~/.bashrc || (echo '# VBI_APP_URL_BANNER' >> ~/.bashrc && echo 'echo \"App-URL (öffnet sich nach streamlit run automatisch im Browser): https://${CODESPACE_NAME}-8501.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}\"' >> ~/.bashrc))",
   "forwardPorts": [8501],
   "portsAttributes": {
     "8501": {

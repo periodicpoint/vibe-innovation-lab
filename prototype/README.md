@@ -17,7 +17,9 @@ uv run streamlit run app.py
 
 If the devcontainer used the pip fallback instead of `uv` (see note below), the equivalent command is `streamlit run prototype/app.py` from the repo root.
 
-6. In the **PORTS** tab, click the globe icon next to port 8501 to open the app in the browser.
+Every new interactive terminal inside the Codespace prints a banner with the forwarded app URL at the top, for example `App-URL (öffnet sich nach streamlit run automatisch im Browser): https://laughing-umbrella-abc-8501.app.github.dev`. The URL is dynamically constructed from the `$CODESPACE_NAME` and `$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` environment variables that GitHub Codespaces sets, so it is always correct for the current Codespace without any hardcoding. The banner is installed once by the `postStartCommand` in [.devcontainer/devcontainer.json](../.devcontainer/devcontainer.json) via an idempotent append to `~/.bashrc`.
+
+6. The app opens automatically in a new browser tab as soon as Streamlit binds to port 8501. The devcontainer sets `onAutoForward: openBrowser` for that port, so no manual action is required. If the auto-open is blocked by a pop-up blocker or does not trigger, either copy the URL from the terminal banner described above, or open the **PORTS** tab in VS Code and click the globe icon next to port 8501.
 
 The devcontainer installs `uv` and runs `uv sync` on creation. If the `uv` bootstrap fails for any reason (network, mirror outage), the `postCreateCommand` automatically falls back to `pip install -r prototype/requirements.txt` so the Codespace still comes up. Either path produces the same runnable environment.
 
