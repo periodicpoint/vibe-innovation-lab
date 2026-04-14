@@ -79,3 +79,9 @@ uv export --format requirements-txt --no-hashes --no-emit-project --output-file 
 6. `fpdf`: PDF generation
 7. `openpyxl`: Excel files
 8. `streamlit-extras`, `streamlit-option-menu`: additional widgets
+
+This list is the authoritative source of truth for what the AI assistant may use during Phase 4 code generation.
+
+## AI assistant constraints
+
+See [vibe_coding_constraints.md](vibe_coding_constraints.md) for the pinned tech stack, the blocklist of dependencies and services the AI assistant should not propose during vibe coding sessions in project mode, and the override clause. The Orchestrator loads that file automatically during environment detection, and Phase 4 references it as the authoritative constraint source.

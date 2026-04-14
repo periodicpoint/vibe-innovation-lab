@@ -103,6 +103,10 @@ Select the simplest tech stack that supports the prototype. Optimize for speed o
 
 The tech stack for a prototype is not the tech stack for the product.
 
+**Project mode constraint (pinned stack).** If the session runs in project mode and the file `prototype/vibe_coding_constraints.md` exists, the tech stack recommendations above are overridden by the constraints defined in that file. Read it before proceeding. It pins the target file to `prototype/app.py`, the runtime to Streamlit, and the library surface to the pre-installed set documented in `prototype/README.md`. It also maintains a blocklist covering new Python dependencies, system packages, local LLM runners, heavy ML frameworks beyond the pre-installed set, database servers, container tools, background daemons, external APIs requiring unavailable credentials, shell reconfiguration that forces a restart, and large file downloads. The file defines an override clause: if the team explicitly requests a blocklisted item, accept the override, warn about consequences, proceed on confirmation, and record the override in the Decision log. If the dominant assumption genuinely cannot be tested under the pinned stack and no single override resolves it, treat it as a scoping problem and follow the Escape hatch section of the constraints file rather than working around the environment piecemeal.
+
+**Upload and chat mode fallback.** If the session runs in upload or chat mode and no constraints file is available, the same constraints are embedded inline in the Orchestrator under the section *Vibe coding constraints (inline reference)* (see `orchestrator.md`). Apply those constraints with equal force whenever the user confirmed the vibe coding context question during Step 2 of the entry protocol. The inline copy and the file copy are kept in sync.
+
 **Record the decision in ICD Section 8 (Decision log) at the moment of choice, not retrospectively.** Use Type "Technical." Fill in Alternatives considered (at least one rejected option), Rationale (one sentence on why this fits the dominant uncertainty and the time budget), and Implications (what this forecloses, for example lock-in, lack of production features, or expected throwaway status). This entry is the source of record for field 5 (Technology stack and rationale) in Section 5.2.
 
 ### Step 4: Build (vibe coding mode)
@@ -126,11 +130,11 @@ Build incrementally:
 
 **In project mode** (Codespace, IDE):
 
-1. After generating code, say: "Copy the code below and paste it into `prototype/app.py` in your Codespace. Replace everything that is in the file."
-2. After they paste, say: "Save the file (Ctrl+S). If a button 'Always rerun' appears in the Streamlit app, click it."
-3. If the app is not running yet, say: "Open the terminal and run: `cd prototype && uv run streamlit run app.py`. If that command is not found (the devcontainer used the pip fallback instead of uv), run `streamlit run prototype/app.py` from the repository root. Then open the PORTS tab, find port 8501, and click the globe icon to open the app in your browser."
-4. If an error occurs, say: "Copy the error message from the terminal or the app and paste it here. I will fix it."
-5. When iterating, say: "Here is the updated code. Replace the entire content of `prototype/app.py` with this."
+1. After generating code, say: "Copy the code below and paste it into `prototype/app.py` in your Codespace. Replace everything that is in the file. You do not need to save manually, the Codespace has auto-save enabled and writes the file to disk about one second after you stop typing."
+2. If this is the team's first iteration and the app tab has not opened yet, say: "The Streamlit app starts automatically when the Codespace finishes loading, via a pre-configured VS Code task. It opens in a new browser tab by itself. If you do not see it yet, wait a few more seconds, or check the task terminal labeled *Task - Start Streamlit app* for progress and errors. The forwarded URL is also printed at the top of every new terminal you open."
+3. When iterating, say: "Here is the updated code. Replace the entire content of `prototype/app.py` with this. Streamlit will detect the change and hot-reload the app, so no restart is needed. If a button *Always rerun* appears in the Streamlit app on the first hot reload, click it once so future edits reload without asking."
+4. If an error occurs, say: "Copy the error message from the task terminal or from the Streamlit app and paste it here. I will fix it."
+5. If the Streamlit process died and the task did not restart it, say: "Open a fresh terminal (the plus icon in the terminal panel, not the task terminal) and run: `cd prototype && uv run streamlit run app.py`. If `uv` is not available (the devcontainer used the pip fallback on creation), run `streamlit run prototype/app.py` from the repository root instead."
 
 **In upload or chat mode** (local run):
 
