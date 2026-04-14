@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Runs on every Codespace start via devcontainer.json postStartCommand.
 #
-# Output lands in $REPO/.vbi_logs/start.log via an `exec` redirect. We do
+# Output lands in $REPO/logs/start.log via an `exec` redirect. We do
 # not also tee to stdout because postStartCommand runs non-interactively
 # and its stdout is not shown anywhere prominent. The banner in stage 3
 # makes up for this by auto-catting bootstrap.log and start.log on the
@@ -27,11 +27,11 @@
 #      and silently kill Streamlit right after launch. `nohup` ignores
 #      SIGHUP, `&` puts it in the background, `disown` removes it from
 #      the shell's job table, and `</dev/null` frees the controlling
-#      terminal. Streamlit output goes to .vbi_logs/streamlit.log.
+#      terminal. Streamlit output goes to logs/streamlit.log.
 
 cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
-mkdir -p .vbi_logs
-exec > .vbi_logs/start.log 2>&1
+mkdir -p logs
+exec > logs/start.log 2>&1
 set -x
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
@@ -43,7 +43,7 @@ echo "PATH: $PATH"
 
 # Stage 1: clear the "logs already shown" flag so the next interactive
 # shell cats bootstrap.log and start.log.
-rm -f ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
+rm -f ~/.vbi_bootstrap_shown ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
 
 # Stage 2: self-heal. If no streamlit binary exists, re-run the full
 # bootstrap. Last line of defence for a broken postCreateCommand.
@@ -111,7 +111,7 @@ echo " App URL:         \${_vbi_url}"
 echo ""
 echo " Logs (in the workspace folder, visible in the VS Code file tree)"
 echo " ----------------------------------------------------------------"
-for f in .vbi_logs/bootstrap.log .vbi_logs/start.log .vbi_logs/streamlit.log; do
+for f in logs/bootstrap.log logs/start.log logs/streamlit.log; do
     _abs="\${_vbi_repo}/\${f}"
     if [ -f "\$_abs" ]; then
         printf "   %-28s  last modified: %s\n" "\$f" "\$(stat -c '%y' "\$_abs" 2>/dev/null | cut -d. -f1)"
@@ -123,9 +123,9 @@ done
 echo ""
 echo " Quick commands"
 echo " --------------"
-echo "   cat .vbi_logs/bootstrap.log             # install-time log"
-echo "   cat .vbi_logs/start.log                 # start-time log"
-echo "   tail -f .vbi_logs/streamlit.log         # live app log"
+echo "   cat logs/bootstrap.log             # install-time log"
+echo "   cat logs/start.log                 # start-time log"
+echo "   tail -f logs/streamlit.log         # live app log"
 echo "   bash .devcontainer/post_create.sh       # re-run install"
 echo "   bash .devcontainer/post_start.sh        # re-run start"
 echo "   pkill -f 'streamlit run'                # stop the app"
@@ -136,29 +136,29 @@ echo "========================================================================"
 # bootstrap and start logs inline so the user actually sees what happened
 # during install. The flag file is cleared by post_start.sh stage 1 on
 # every container start, so a restart gives a fresh dump once.
-if [ ! -f ~/.vbi_logs_shown ]; then
+if [ ! -f ~/.vbi_bootstrap_shown ]; then
     echo ""
     echo " ======================================================================"
-    echo "   BOOTSTRAP LOG (.vbi_logs/bootstrap.log)"
+    echo "   BOOTSTRAP LOG (logs/bootstrap.log)"
     echo " ======================================================================"
-    if [ -f "\${_vbi_repo}/.vbi_logs/bootstrap.log" ]; then
-        cat "\${_vbi_repo}/.vbi_logs/bootstrap.log"
+    if [ -f "\${_vbi_repo}/logs/bootstrap.log" ]; then
+        cat "\${_vbi_repo}/logs/bootstrap.log"
     else
         echo "   (file missing — post_create.sh did not run or could not write)"
     fi
     echo ""
     echo " ======================================================================"
-    echo "   START LOG (.vbi_logs/start.log)"
+    echo "   START LOG (logs/start.log)"
     echo " ======================================================================"
-    if [ -f "\${_vbi_repo}/.vbi_logs/start.log" ]; then
-        cat "\${_vbi_repo}/.vbi_logs/start.log"
+    if [ -f "\${_vbi_repo}/logs/start.log" ]; then
+        cat "\${_vbi_repo}/logs/start.log"
     else
         echo "   (file missing — post_start.sh did not run or could not write)"
     fi
     echo " ======================================================================"
     echo "   END OF LOG DUMP. Further terminals will show only the status header."
     echo " ======================================================================"
-    touch ~/.vbi_logs_shown
+    touch ~/.vbi_bootstrap_shown
 fi
 
 unset _vbi_url _abs
@@ -172,20 +172,20 @@ fi
 grep -q 'source ~/.vbi_banner.sh' ~/.bashrc 2>/dev/null || echo 'source ~/.vbi_banner.sh' >> ~/.bashrc
 
 # Stage 6: launch Streamlit as a fully detached background process.
-echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > .vbi_logs/streamlit.log
+echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > logs/streamlit.log
 if [ -x prototype/.venv/bin/streamlit ]; then
-    echo "launching via prototype/.venv/bin/streamlit" >> .vbi_logs/streamlit.log
+    echo "launching via prototype/.venv/bin/streamlit" >> logs/streamlit.log
     nohup bash -c "cd '$VBI_REPO/prototype' && exec .venv/bin/streamlit run app.py" \
-        >> .vbi_logs/streamlit.log 2>&1 </dev/null &
+        >> logs/streamlit.log 2>&1 </dev/null &
     disown
 elif command -v streamlit >/dev/null 2>&1; then
-    echo "launching via system streamlit on PATH" >> .vbi_logs/streamlit.log
+    echo "launching via system streamlit on PATH" >> logs/streamlit.log
     nohup bash -c "cd '$VBI_REPO/prototype' && exec streamlit run app.py" \
-        >> .vbi_logs/streamlit.log 2>&1 </dev/null &
+        >> logs/streamlit.log 2>&1 </dev/null &
     disown
 else
-    echo "no streamlit binary available, app will not start" >> .vbi_logs/streamlit.log
-    echo "run: bash .devcontainer/post_create.sh" >> .vbi_logs/streamlit.log
+    echo "no streamlit binary available, app will not start" >> logs/streamlit.log
+    echo "run: bash .devcontainer/post_create.sh" >> logs/streamlit.log
 fi
 
 sleep 1

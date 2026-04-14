@@ -9,7 +9,7 @@
 # post_start.sh can self-heal on first start.
 #
 # Output mirroring: every line written to stdout or stderr is also written
-# to $REPO/.vbi_logs/bootstrap.log via `tee` in a process substitution.
+# to $REPO/logs/bootstrap.log via `tee` in a process substitution.
 # Logs live in the workspace folder, not in /tmp, so they are visible in
 # the VS Code file explorer and survive the container's tmpfs quirks.
 # The banner in post_start.sh points users at these files and auto-cats
@@ -28,13 +28,13 @@
 # Jump to repo root regardless of caller cwd. Do this before the exec
 # redirect so the log path below is resolved relative to the workspace.
 cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
-mkdir -p .vbi_logs
+mkdir -p logs
 
-# Mirror everything to .vbi_logs/bootstrap.log. `tee` in a process
+# Mirror everything to logs/bootstrap.log. `tee` in a process
 # substitution means the VS Code creation log panel still sees the output
 # and a manual re-run in a terminal shows output live, while we also get
 # a persistent file to cat on demand.
-exec > >(tee .vbi_logs/bootstrap.log) 2>&1
+exec > >(tee logs/bootstrap.log) 2>&1
 
 # Trace every command for the debug phase. Remove once the autorun is
 # stable. This turns the log into a forensic record of exactly what ran.
@@ -42,7 +42,7 @@ set -x
 
 # Clear the "logs already shown" flag so the banner cats the fresh logs
 # on the next interactive shell. Also clear any legacy /tmp flag.
-rm -f ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
+rm -f ~/.vbi_bootstrap_shown ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
 
 echo "=== post_create.sh starting at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 
@@ -125,6 +125,6 @@ else
 fi
 
 echo "=== post_create.sh finished at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
-echo "=== full log: .vbi_logs/bootstrap.log ==="
-ls -la .vbi_logs/ 2>&1 || true
+echo "=== full log: logs/bootstrap.log ==="
+ls -la logs/ 2>&1 || true
 exit 0
