@@ -19,7 +19,16 @@
         // Pre-authorize the folderOpen task in .vscode/tasks.json so Streamlit
         // starts automatically when the Codespace attaches, without the usual
         // "Allow automatic tasks" consent prompt.
-        "task.allowAutomaticTasks": "on"
+        "task.allowAutomaticTasks": "on",
+        // Auto-save every edit after a 1-second idle window. Browser-embedded
+        // VS Code sometimes loses the Ctrl+S shortcut to the host browser,
+        // which silently blocks the save. Auto-save eliminates that failure
+        // mode entirely and also removes one manual step from the workshop
+        // push flow (the previous "save all tabs" step becomes unnecessary).
+        // afterDelay plays well with Streamlit hot reload: edits trigger a
+        // hot reload roughly a second later without any user action.
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000
       },
       "extensions": [
         "ms-python.python"

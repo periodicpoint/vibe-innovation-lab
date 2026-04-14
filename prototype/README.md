@@ -54,8 +54,8 @@ uv export --format requirements-txt --no-hashes --no-emit-project --output-file 
 ## Workflow
 
 1. Describe to the LLM what the prototype should do.
-2. Copy the generated code into `app.py`.
-3. Save (Ctrl+S). Click "Always rerun" in the app.
+2. Copy the generated code into `app.py`. Auto-save writes the file after a 1-second idle window, so no Ctrl+S needed.
+3. Click "Always rerun" in the app so Streamlit picks up subsequent edits without asking.
 4. Repeat.
 
 ## Troubleshooting
