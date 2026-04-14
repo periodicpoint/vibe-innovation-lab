@@ -7,25 +7,39 @@
 # Codespace creation log is the only place a non-programmer workshop user
 # will see a failure. Soft because exit 1 here marks the entire Codespace
 # creation as failed in the VS Code UI, which is worse than a partial
-# success that post_start.sh can retry. Every stage ends with `|| true`
-# or an explicit status check that does not propagate the failure, and
-# the script always ends with `exit 0`.
+# success that post_start.sh can retry. The script always ends with
+# `exit 0`.
+#
+# Output mirroring: every line written to stdout or stderr is also written
+# to /tmp/vbi_bootstrap.log via `tee` in a process substitution. That file
+# survives until the next container rebuild and is the single source of
+# truth for what happened during install, independent of whether the VS
+# Code creation log panel is open or not. The banner in post_start.sh
+# points users at this file.
 #
 # Stage order:
-#   1. Print environment diagnostics so log readers can see cwd, PATH,
-#      python, pip, npm availability before any install runs.
-#   2. Install uv (astral.sh). Fall through on failure.
-#   3. Install Python dependencies: try `uv sync`, fall back to
-#      `pip install -r requirements.txt`, fall back to `python -m pip
-#      install streamlit` as a last resort so the app can at least boot
-#      even when the full requirements file cannot resolve.
-#   4. Report whether a streamlit binary is now reachable. No hard exit.
-#   5. Pin the Streamlit server config in ~/.streamlit.
-#   6. Install the Claude Code CLI via npm. Optional.
+#   0. Print environment diagnostics (cwd, PATH, python, pip, npm).
+#   1. Install uv (astral.sh). Fall through on failure.
+#   2. Install Python dependencies: try `uv sync`, fall back to
+#      `pip install -r requirements.txt`, fall back to
+#      `pip install streamlit pandas` as a last resort so the app can at
+#      least boot even when the full requirements file cannot resolve.
+#   3. Report whether a streamlit binary is now reachable. No hard exit.
+#   4. Pin the Streamlit server config in ~/.streamlit.
+#   5. Install the Claude Code CLI via npm. Optional.
+
+exec > >(tee /tmp/vbi_bootstrap.log) 2>&1
+
+# Trace every command for the debug phase. This makes the bootstrap log
+# extremely verbose but also makes every failure obvious. Remove once the
+# autorun is stable.
+set -x
 
 cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
 
-echo "=== [0/6] Environment diagnostics ==="
+echo "=== post_create.sh starting at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+
+echo "=== [0/5] Environment diagnostics ==="
 echo "cwd:      $(pwd)"
 echo "user:     $(whoami)"
 echo "HOME:     $HOME"
@@ -34,10 +48,10 @@ echo "python:   $(command -v python || echo none)"
 echo "python3:  $(command -v python3 || echo none)"
 echo "pip:      $(command -v pip || echo none)"
 echo "npm:      $(command -v npm || echo none)"
-echo "prototype dir:"
+echo "prototype dir contents:"
 ls -la prototype/ 2>&1 || echo "  prototype/ not found"
 
-echo "=== [1/6] Installing uv ==="
+echo "=== [1/5] Installing uv ==="
 if command -v uv >/dev/null 2>&1; then
     echo "uv already present: $(uv --version)"
 else
@@ -46,55 +60,56 @@ fi
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 echo "uv after install: $(command -v uv || echo none)"
 
-echo "=== [2/6] Installing Python dependencies via uv sync ==="
+echo "=== [2/5] Installing Python dependencies ==="
 uv_ok=0
 if command -v uv >/dev/null 2>&1; then
     if (cd prototype && uv sync); then
         uv_ok=1
         echo "uv sync: OK"
     else
-        echo "uv sync: FAILED"
+        echo "uv sync: FAILED (exit $?)"
     fi
 else
     echo "uv not on PATH, skipping uv sync"
 fi
 
 if [ "$uv_ok" -eq 0 ]; then
-    echo "=== [3/6] Fallback: pip install -r prototype/requirements.txt ==="
+    echo "Fallback: pip install -r prototype/requirements.txt"
     pip install -r prototype/requirements.txt || \
         python3 -m pip install -r prototype/requirements.txt || \
-        echo "pip requirements install failed, will try single-package fallback"
+        echo "pip requirements install failed, trying last-resort single-package install"
 
     if ! command -v streamlit >/dev/null 2>&1; then
-        echo "=== Last-resort fallback: pip install streamlit ==="
+        echo "Last-resort: pip install streamlit pandas"
         pip install streamlit pandas || \
             python3 -m pip install streamlit pandas || \
             echo "last-resort pip install failed"
     fi
 fi
 
-echo "=== [4/6] Streamlit availability report ==="
+echo "=== [3/5] Streamlit availability report ==="
+ls -la prototype/.venv/bin/ 2>&1 | head -30 || true
 if [ -x prototype/.venv/bin/streamlit ]; then
     echo "OK: prototype/.venv/bin/streamlit"
     prototype/.venv/bin/streamlit --version || true
 elif command -v streamlit >/dev/null 2>&1; then
-    echo "OK: system streamlit on PATH at $(command -v streamlit)"
+    echo "OK: system streamlit at $(command -v streamlit)"
     streamlit --version || true
 else
     echo "WARN: no streamlit binary found after all install attempts"
     echo "WARN: post_start.sh self-heal will retry on first Codespace start"
-    echo "WARN: if this persists, inspect the log above for the first error"
 fi
 
-echo "=== [5/6] Pinning Streamlit server config ==="
+echo "=== [4/5] Pinning Streamlit server config ==="
 mkdir -p ~/.streamlit
 cp prototype/.streamlit/config.toml ~/.streamlit/config.toml || \
     echo "WARN: could not copy prototype/.streamlit/config.toml"
+ls -la ~/.streamlit/ 2>&1 || true
 
-echo "=== [6/6] Installing Claude Code CLI ==="
+echo "=== [5/5] Installing Claude Code CLI ==="
 if command -v npm >/dev/null 2>&1; then
     if npm install -g @anthropic-ai/claude-code; then
-        echo "Claude Code CLI installed."
+        echo "Claude Code CLI installed at $(command -v claude || echo 'unknown')"
     else
         echo "Claude Code CLI not installed. Fallback: paste framework/orchestrator.md into any LLM."
     fi
@@ -102,5 +117,7 @@ else
     echo "npm not available, skipping Claude Code CLI."
 fi
 
-echo "=== Bootstrap complete (exit 0 unconditionally) ==="
+echo "=== post_create.sh finished at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
+echo "=== full log: /tmp/vbi_bootstrap.log ==="
+ls -la /tmp/vbi_*.log 2>&1 || true
 exit 0
