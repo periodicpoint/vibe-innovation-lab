@@ -31,38 +31,32 @@
       ]
     }
   },
-  // postCreateCommand runs a three-stage bootstrap. Stage order matters.
-  //
-  //   1. Python environment: try uv first (official framework tech stack),
-  //      fall back to pip automatically if uv install or sync fails. The
-  //      fallback is a safety net for workshop Codespaces: astral.sh being
-  //      briefly unreachable must not block a non-programmer workshop. Both
-  //      paths produce an equivalent environment because requirements.txt is
-  //      auto-exported from pyproject.toml and carries the same dependency
-  //      closure as the uv.lock file.
-  //   2. Streamlit config: copy the pre-baked headless config into the user
-  //      profile so port 8501 binds correctly on first `streamlit run`.
-  //   3. Claude Code: install via npm if possible, otherwise print the
-  //      fallback instruction so users can still paste the framework into any
-  //      browser-based LLM.
-  //
-  // The stages are chained with `;` between stage 1 and stage 2 so that a
-  // pip-fallback exit status does not abort stage 2. Stages 2 and 3 use `&&`
-  // because stage 3 is optional but stage 2 is a hard prerequisite.
-  "postCreateCommand": "((curl -LsSf https://astral.sh/uv/install.sh | sh) && export PATH=\"$HOME/.local/bin:$PATH\" && cd prototype && uv sync) || (echo 'uv install or sync failed, falling back to pip' && pip install -r prototype/requirements.txt) ; mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/orchestrator.md into any LLM.')",
+  // postCreateCommand runs once on container creation and delegates the
+  // entire bootstrap to .devcontainer/post_create.sh. The script installs
+  // uv, syncs Python dependencies into prototype/.venv (with a pip fallback),
+  // verifies that a streamlit binary is reachable, pins the Streamlit server
+  // config, and installs the Claude Code CLI. See the script header for the
+  // full stage list and failure semantics.
+  "postCreateCommand": "bash .devcontainer/post_create.sh",
   // postStartCommand runs on every Codespace start and delegates all logic
   // to .devcontainer/post_start.sh for readability. The script refreshes
-  // the Streamlit config, writes a verbose terminal banner file sourced
-  // by .bashrc on every new interactive shell, cleans up legacy banner
-  // lines from earlier devcontainer versions, and launches Streamlit as
-  // an orphaned background process with output captured in
-  // /tmp/streamlit.log. See the script header for the full stage list.
+  // the Streamlit config, writes a terminal banner file sourced by .bashrc
+  // on every new interactive shell, cleans up legacy banner lines from
+  // earlier devcontainer versions, and launches Streamlit as a detached
+  // background process via `nohup` so it survives the postStartCommand
+  // shell exit. Output is captured in /tmp/streamlit.log.
   "postStartCommand": "bash .devcontainer/post_start.sh",
   "forwardPorts": [8501],
   "portsAttributes": {
     "8501": {
       "label": "Streamlit App",
-      "onAutoForward": "openPreview",
+      // `notify` shows a toast with the forwarded URL but does not open
+      // the VS Code Simple Browser. The preview pane was removed on user
+      // request because its auto-open was conflated with the autorun
+      // working: if Streamlit failed to bind, the preview never opened
+      // and the failure was invisible. Users now click the forwarded URL
+      // in the PORTS panel (or the toast) to open the app in a real tab.
+      "onAutoForward": "notify",
       "visibility": "public"
     }
   }
