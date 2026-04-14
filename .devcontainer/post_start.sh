@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Runs on every Codespace start via devcontainer.json postStartCommand.
 #
-# Output lands in $REPO/.devcontainer/logs/start.log via an `exec` redirect. We do
-# not also tee to stdout because postStartCommand runs non-interactively
-# and its stdout is not shown anywhere prominent. The banner in stage 3
-# makes up for this by auto-catting bootstrap.log and start.log on the
-# first interactive shell after each container start.
+# Output lands in $REPO/.devcontainer/logs/start.log via an `exec`
+# redirect. We do not also tee to stdout because postStartCommand runs
+# non-interactively and its stdout is not shown anywhere prominent.
+# The banner in stage 4 makes up for this by auto-catting bootstrap.log
+# and start.log on the first interactive shell after each container
+# start. Output is explicit echoes only, no `set -x`, so the dump
+# stays inside the VS Code terminal scrollback budget.
 #
 # Six stages, each idempotent:
 #   1. Clear the "logs already shown" flag so the next interactive shell
@@ -32,7 +34,6 @@
 cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
 mkdir -p .devcontainer/logs
 exec > .devcontainer/logs/start.log 2>&1
-set -x
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 VBI_REPO="$(pwd)"

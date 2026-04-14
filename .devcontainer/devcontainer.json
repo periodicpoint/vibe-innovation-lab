@@ -24,7 +24,15 @@
         // afterDelay plays well with Streamlit hot reload: edits trigger a
         // hot reload roughly a second later without any user action.
         "files.autoSave": "afterDelay",
-        "files.autoSaveDelay": 1000
+        "files.autoSaveDelay": 1000,
+        // Bump the terminal scrollback buffer from the 1000-line default
+        // to 10000. The first interactive shell after each container
+        // start dumps the full bootstrap and start logs inline via the
+        // ~/.vbi_banner.sh hook; with only 1000 lines of scrollback, the
+        // earliest lines of the dump get evicted before the user can
+        // scroll to them. 10000 is enough headroom for our current log
+        // size plus any commands the user types afterwards.
+        "terminal.integrated.scrollback": 10000
       },
       "extensions": [
         "ms-python.python"

@@ -3,17 +3,23 @@
 # Runs once on container creation via devcontainer.json postCreateCommand.
 # Idempotent: safe to re-run after a manual rebuild.
 #
-# This script is deliberately loud and deliberately soft. Loud so the user
-# gets a complete trace of what happened. Soft so a partial failure does
-# not mark the entire Codespace creation as failed in the VS Code UI —
-# post_start.sh can self-heal on first start.
+# This script is deliberately soft: a partial failure never marks the
+# entire Codespace creation as failed in the VS Code UI, because
+# post_start.sh can self-heal on first start. The script always ends
+# with `exit 0`.
 #
-# Output mirroring: every line written to stdout or stderr is also written
-# to $REPO/.devcontainer/logs/bootstrap.log via `tee` in a process substitution.
-# Logs live in the workspace folder, not in /tmp, so they are visible in
-# the VS Code file explorer and survive the container's tmpfs quirks.
-# The banner in post_start.sh points users at these files and auto-cats
-# them on the first interactive shell after each container start.
+# Output mirroring: every line written to stdout or stderr is also
+# written to $REPO/.devcontainer/logs/bootstrap.log via `tee` in a
+# process substitution. Logs live in the workspace folder, not in
+# /tmp, so they are visible in the VS Code file explorer and survive
+# the container's tmpfs quirks. The banner in post_start.sh points
+# users at these files and auto-cats them on the first interactive
+# shell after each container start.
+#
+# Output shape: explicit echoes only, no `set -x`. A traced bootstrap
+# ran 1000+ lines on `set -x`, which overflowed the VS Code terminal
+# scrollback buffer (default 1000 lines) and broke the on-first-shell
+# log dump. Keep the output short enough to fit in the scrollback.
 #
 # Stage order:
 #   0. Print environment diagnostics (cwd, PATH, python, pip, npm).
@@ -35,10 +41,6 @@ mkdir -p .devcontainer/logs
 # and a manual re-run in a terminal shows output live, while we also get
 # a persistent file to cat on demand.
 exec > >(tee .devcontainer/logs/bootstrap.log) 2>&1
-
-# Trace every command for the debug phase. Remove once the autorun is
-# stable. This turns the log into a forensic record of exactly what ran.
-set -x
 
 # Clear the "logs already shown" flag so the banner cats the fresh logs
 # on the next interactive shell. Also clear any legacy /tmp flag.

@@ -16,8 +16,8 @@ Streamlit starter for Phase 4 (Build and validate) of the Vibe Innovation Framew
 
 8. All logs live in the workspace under [.devcontainer/logs/](../.devcontainer/logs/), which is gitignored, co-located with the scripts that write them, and visible in the VS Code file explorer. Three files:
 
-    1. `bootstrap.log`: every command run by `post_create.sh` during container creation (with `set -x` tracing).
-    2. `start.log`: every command run by `post_start.sh` on the latest container start.
+    1. `bootstrap.log`: every stage of `post_create.sh` during container creation (explicit echoes only, no shell tracing, so the dump fits inside the VS Code terminal scrollback buffer).
+    2. `start.log`: every stage of `post_start.sh` on the latest container start.
     3. `streamlit.log`: Streamlit runtime output, timestamped at each auto-start so stale and fresh data are distinguishable.
 
     If the app does not come up, open any of these files directly or run `tail -f .devcontainer/logs/streamlit.log` in a terminal. To restart Streamlit manually:
