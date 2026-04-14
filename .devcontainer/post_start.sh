@@ -1,68 +1,70 @@
 #!/usr/bin/env bash
 # Runs on every Codespace start via devcontainer.json postStartCommand.
 #
-# Output mirroring: all stdout and stderr go to /tmp/vbi_start.log via an
-# `exec` redirect. We do not also tee to stdout because postStartCommand
-# runs non-interactively and its stdout is not shown anywhere prominent.
-# The banner written in stage 3 points users at this file.
+# Output lands in $REPO/.vbi_logs/start.log via an `exec` redirect. We do
+# not also tee to stdout because postStartCommand runs non-interactively
+# and its stdout is not shown anywhere prominent. The banner in stage 3
+# makes up for this by auto-catting bootstrap.log and start.log on the
+# first interactive shell after each container start.
 #
-# Five stages, each idempotent:
-#   1. Self-heal: if neither prototype/.venv/bin/streamlit nor a system
-#      streamlit on PATH exists, re-run .devcontainer/post_create.sh. This
-#      covers the edge case where postCreateCommand was skipped or half
-#      succeeded on a previous rebuild.
-#   2. Refresh the Streamlit config in the user profile so port 8501 stays
-#      pinned even if the user tampered with ~/.streamlit/config.toml.
-#   3. Write a terminal banner script to ~/.vbi_banner.sh. The banner is
-#      re-generated on every start so content changes propagate without
-#      touching the user's .bashrc. It prints a dynamic component status
-#      report on every new interactive shell, so any new terminal is
-#      self-describing even if something is broken.
-#   4. Ensure ~/.bashrc sources the banner file exactly once, and clean up
-#      any legacy VBI_APP_URL_BANNER lines from earlier devcontainer
-#      versions so users do not see stacked banners after an update.
-#   5. Launch Streamlit as a fully detached background process via `nohup`.
-#      `( ... ) &` was not enough on its own: the postStartCommand shell
-#      could send SIGHUP to its children on exit and silently kill
-#      Streamlit right after launch. `nohup` ignores SIGHUP, `&` puts it
-#      in the background, `disown` removes it from the shell's job table,
-#      and `</dev/null` frees the controlling terminal. Output is
-#      redirected to /tmp/streamlit.log with a UTC timestamp marker at
-#      each start so stale and fresh log data are distinguishable.
+# Six stages, each idempotent:
+#   1. Clear the "logs already shown" flag so the next interactive shell
+#      sees the fresh bootstrap and start logs.
+#   2. Self-heal: if neither prototype/.venv/bin/streamlit nor a system
+#      streamlit on PATH exists, re-run .devcontainer/post_create.sh.
+#   3. Refresh the Streamlit config in the user profile so port 8501
+#      stays pinned even if the user tampered with ~/.streamlit/config.toml.
+#   4. Write a terminal banner script to ~/.vbi_banner.sh. The banner
+#      prints a dynamic component status report on every new interactive
+#      shell and cats the full bootstrap and start logs on the first
+#      shell after each container start.
+#   5. Ensure ~/.bashrc sources the banner file exactly once, and clean
+#      up any legacy VBI_APP_URL_BANNER lines from earlier devcontainer
+#      versions.
+#   6. Launch Streamlit as a fully detached background process via
+#      `nohup`. `( ... ) &` was not enough on its own: the
+#      postStartCommand shell could send SIGHUP to its children on exit
+#      and silently kill Streamlit right after launch. `nohup` ignores
+#      SIGHUP, `&` puts it in the background, `disown` removes it from
+#      the shell's job table, and `</dev/null` frees the controlling
+#      terminal. Streamlit output goes to .vbi_logs/streamlit.log.
 
-exec > /tmp/vbi_start.log 2>&1
+cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
+mkdir -p .vbi_logs
+exec > .vbi_logs/start.log 2>&1
 set -x
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+VBI_REPO="$(pwd)"
 
 echo "=== post_start.sh starting at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
-echo "cwd: $(pwd)"
+echo "cwd:  $VBI_REPO"
 echo "PATH: $PATH"
 
-# Stage 1: self-heal. If no streamlit binary exists, re-run the full
+# Stage 1: clear the "logs already shown" flag so the next interactive
+# shell cats bootstrap.log and start.log.
+rm -f ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
+
+# Stage 2: self-heal. If no streamlit binary exists, re-run the full
 # bootstrap. Last line of defence for a broken postCreateCommand.
 if [ ! -x prototype/.venv/bin/streamlit ] && ! command -v streamlit >/dev/null 2>&1; then
     echo "post_start: no streamlit binary found, re-running post_create.sh"
     bash .devcontainer/post_create.sh || echo "post_start: post_create.sh failed, continuing anyway"
 fi
 
-# Stage 2: refresh Streamlit config.
+# Stage 3: refresh Streamlit config.
 mkdir -p ~/.streamlit
 cp prototype/.streamlit/config.toml ~/.streamlit/config.toml || \
     echo "WARN: could not copy prototype/.streamlit/config.toml"
 
-# Stage 3: write the banner file, rewritten on every start so content
-# updates from future commits propagate without editing .bashrc by hand.
-# We use an unquoted heredoc so that _vbi_repo is interpolated at write
-# time, baking the absolute workspace path into the banner. All other
+# Stage 4: write the banner file. Unquoted heredoc so _vbi_repo is
+# interpolated at write time and baked into the banner. All other
 # $-expressions are escaped with a backslash so they evaluate at shell
-# source time, giving the banner a fresh component status on every new
-# interactive shell.
-_vbi_repo="${CODESPACE_VSCODE_FOLDER:-$(pwd)}"
+# source time, giving fresh state on every new interactive shell.
 cat > ~/.vbi_banner.sh << BANNEREOF
-# Auto-generated by devcontainer/post_start.sh. Do not edit by hand.
-# Re-generated on every Codespace start. Baked workspace path: ${_vbi_repo}
-_vbi_repo="${_vbi_repo}"
+# Auto-generated by .devcontainer/post_start.sh. Do not edit by hand.
+# Re-generated on every Codespace start. Baked workspace path: ${VBI_REPO}
+_vbi_repo="${VBI_REPO}"
 _vbi_url="https://\${CODESPACE_NAME}-8501.\${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
 
 echo "========================================================================"
@@ -101,58 +103,89 @@ fi
 if timeout 1 bash -c "</dev/tcp/localhost/8501" 2>/dev/null; then
     printf "   port 8501:       OPEN (app running)\n"
 else
-    printf "   port 8501:       closed (app not running, check /tmp/streamlit.log)\n"
+    printf "   port 8501:       closed (app not running, see streamlit.log)\n"
 fi
 
 echo ""
 echo " App URL:         \${_vbi_url}"
 echo ""
-echo " Logs (cat any of these to see what actually happened)"
-echo " -----------------------------------------------------"
-for f in /tmp/vbi_bootstrap.log /tmp/vbi_start.log /tmp/streamlit.log; do
-    if [ -f "\$f" ]; then
-        printf "   %-26s  last modified: %s\n" "\$f" "\$(stat -c '%y' "\$f" 2>/dev/null | cut -d. -f1)"
+echo " Logs (in the workspace folder, visible in the VS Code file tree)"
+echo " ----------------------------------------------------------------"
+for f in .vbi_logs/bootstrap.log .vbi_logs/start.log .vbi_logs/streamlit.log; do
+    _abs="\${_vbi_repo}/\${f}"
+    if [ -f "\$_abs" ]; then
+        printf "   %-28s  last modified: %s\n" "\$f" "\$(stat -c '%y' "\$_abs" 2>/dev/null | cut -d. -f1)"
     else
-        printf "   %-26s  (missing)\n" "\$f"
+        printf "   %-28s  (missing)\n" "\$f"
     fi
 done
 
 echo ""
 echo " Quick commands"
 echo " --------------"
-echo "   cat /tmp/vbi_bootstrap.log              # install-time log"
-echo "   cat /tmp/vbi_start.log                  # start-time log"
-echo "   tail -f /tmp/streamlit.log              # live app log"
+echo "   cat .vbi_logs/bootstrap.log             # install-time log"
+echo "   cat .vbi_logs/start.log                 # start-time log"
+echo "   tail -f .vbi_logs/streamlit.log         # live app log"
 echo "   bash .devcontainer/post_create.sh       # re-run install"
 echo "   bash .devcontainer/post_start.sh        # re-run start"
 echo "   pkill -f 'streamlit run'                # stop the app"
 echo "   cd prototype && .venv/bin/streamlit run app.py  # manual start"
 echo "========================================================================"
-unset _vbi_url
+
+# On the first interactive shell after each container start, dump both
+# bootstrap and start logs inline so the user actually sees what happened
+# during install. The flag file is cleared by post_start.sh stage 1 on
+# every container start, so a restart gives a fresh dump once.
+if [ ! -f ~/.vbi_logs_shown ]; then
+    echo ""
+    echo " ======================================================================"
+    echo "   BOOTSTRAP LOG (.vbi_logs/bootstrap.log)"
+    echo " ======================================================================"
+    if [ -f "\${_vbi_repo}/.vbi_logs/bootstrap.log" ]; then
+        cat "\${_vbi_repo}/.vbi_logs/bootstrap.log"
+    else
+        echo "   (file missing — post_create.sh did not run or could not write)"
+    fi
+    echo ""
+    echo " ======================================================================"
+    echo "   START LOG (.vbi_logs/start.log)"
+    echo " ======================================================================"
+    if [ -f "\${_vbi_repo}/.vbi_logs/start.log" ]; then
+        cat "\${_vbi_repo}/.vbi_logs/start.log"
+    else
+        echo "   (file missing — post_start.sh did not run or could not write)"
+    fi
+    echo " ======================================================================"
+    echo "   END OF LOG DUMP. Further terminals will show only the status header."
+    echo " ======================================================================"
+    touch ~/.vbi_logs_shown
+fi
+
+unset _vbi_url _abs
 BANNEREOF
 
-# Stage 4: ensure .bashrc sources the banner exactly once, and clean up
+# Stage 5: ensure .bashrc sources the banner exactly once, and clean up
 # any legacy single-line banner from earlier devcontainer versions.
 if [ -f ~/.bashrc ]; then
     sed -i '/# VBI_APP_URL_BANNER/,+1d' ~/.bashrc
 fi
 grep -q 'source ~/.vbi_banner.sh' ~/.bashrc 2>/dev/null || echo 'source ~/.vbi_banner.sh' >> ~/.bashrc
 
-# Stage 5: launch Streamlit as a fully detached background process.
-echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > /tmp/streamlit.log
+# Stage 6: launch Streamlit as a fully detached background process.
+echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > .vbi_logs/streamlit.log
 if [ -x prototype/.venv/bin/streamlit ]; then
-    echo "launching via prototype/.venv/bin/streamlit" >> /tmp/streamlit.log
-    nohup bash -c 'cd prototype && exec .venv/bin/streamlit run app.py' \
-        >> /tmp/streamlit.log 2>&1 </dev/null &
+    echo "launching via prototype/.venv/bin/streamlit" >> .vbi_logs/streamlit.log
+    nohup bash -c "cd '$VBI_REPO/prototype' && exec .venv/bin/streamlit run app.py" \
+        >> .vbi_logs/streamlit.log 2>&1 </dev/null &
     disown
 elif command -v streamlit >/dev/null 2>&1; then
-    echo "launching via system streamlit on PATH" >> /tmp/streamlit.log
-    nohup bash -c 'cd prototype && exec streamlit run app.py' \
-        >> /tmp/streamlit.log 2>&1 </dev/null &
+    echo "launching via system streamlit on PATH" >> .vbi_logs/streamlit.log
+    nohup bash -c "cd '$VBI_REPO/prototype' && exec streamlit run app.py" \
+        >> .vbi_logs/streamlit.log 2>&1 </dev/null &
     disown
 else
-    echo "no streamlit binary available, app will not start" >> /tmp/streamlit.log
-    echo "run: bash .devcontainer/post_create.sh" >> /tmp/streamlit.log
+    echo "no streamlit binary available, app will not start" >> .vbi_logs/streamlit.log
+    echo "run: bash .devcontainer/post_create.sh" >> .vbi_logs/streamlit.log
 fi
 
 sleep 1

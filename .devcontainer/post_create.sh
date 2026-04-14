@@ -3,39 +3,46 @@
 # Runs once on container creation via devcontainer.json postCreateCommand.
 # Idempotent: safe to re-run after a manual rebuild.
 #
-# This script is deliberately loud and deliberately soft. Loud because the
-# Codespace creation log is the only place a non-programmer workshop user
-# will see a failure. Soft because exit 1 here marks the entire Codespace
-# creation as failed in the VS Code UI, which is worse than a partial
-# success that post_start.sh can retry. The script always ends with
-# `exit 0`.
+# This script is deliberately loud and deliberately soft. Loud so the user
+# gets a complete trace of what happened. Soft so a partial failure does
+# not mark the entire Codespace creation as failed in the VS Code UI —
+# post_start.sh can self-heal on first start.
 #
 # Output mirroring: every line written to stdout or stderr is also written
-# to /tmp/vbi_bootstrap.log via `tee` in a process substitution. That file
-# survives until the next container rebuild and is the single source of
-# truth for what happened during install, independent of whether the VS
-# Code creation log panel is open or not. The banner in post_start.sh
-# points users at this file.
+# to $REPO/.vbi_logs/bootstrap.log via `tee` in a process substitution.
+# Logs live in the workspace folder, not in /tmp, so they are visible in
+# the VS Code file explorer and survive the container's tmpfs quirks.
+# The banner in post_start.sh points users at these files and auto-cats
+# them on the first interactive shell after each container start.
 #
 # Stage order:
 #   0. Print environment diagnostics (cwd, PATH, python, pip, npm).
 #   1. Install uv (astral.sh). Fall through on failure.
 #   2. Install Python dependencies: try `uv sync`, fall back to
 #      `pip install -r requirements.txt`, fall back to
-#      `pip install streamlit pandas` as a last resort so the app can at
-#      least boot even when the full requirements file cannot resolve.
+#      `pip install streamlit pandas` as a last resort.
 #   3. Report whether a streamlit binary is now reachable. No hard exit.
 #   4. Pin the Streamlit server config in ~/.streamlit.
 #   5. Install the Claude Code CLI via npm. Optional.
 
-exec > >(tee /tmp/vbi_bootstrap.log) 2>&1
+# Jump to repo root regardless of caller cwd. Do this before the exec
+# redirect so the log path below is resolved relative to the workspace.
+cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
+mkdir -p .vbi_logs
 
-# Trace every command for the debug phase. This makes the bootstrap log
-# extremely verbose but also makes every failure obvious. Remove once the
-# autorun is stable.
+# Mirror everything to .vbi_logs/bootstrap.log. `tee` in a process
+# substitution means the VS Code creation log panel still sees the output
+# and a manual re-run in a terminal shows output live, while we also get
+# a persistent file to cat on demand.
+exec > >(tee .vbi_logs/bootstrap.log) 2>&1
+
+# Trace every command for the debug phase. Remove once the autorun is
+# stable. This turns the log into a forensic record of exactly what ran.
 set -x
 
-cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
+# Clear the "logs already shown" flag so the banner cats the fresh logs
+# on the next interactive shell. Also clear any legacy /tmp flag.
+rm -f ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
 
 echo "=== post_create.sh starting at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 
@@ -118,6 +125,6 @@ else
 fi
 
 echo "=== post_create.sh finished at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
-echo "=== full log: /tmp/vbi_bootstrap.log ==="
-ls -la /tmp/vbi_*.log 2>&1 || true
+echo "=== full log: .vbi_logs/bootstrap.log ==="
+ls -la .vbi_logs/ 2>&1 || true
 exit 0
