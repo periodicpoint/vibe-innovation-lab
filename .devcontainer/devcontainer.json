@@ -52,7 +52,7 @@
   // on every new interactive shell, cleans up legacy banner lines from
   // earlier devcontainer versions, and launches Streamlit as a detached
   // background process via `nohup` so it survives the postStartCommand
-  // shell exit. Output is captured in /tmp/streamlit.log.
+  // shell exit. Output is captured in .devcontainer/logs/streamlit.log.
   "postStartCommand": "bash .devcontainer/post_start.sh",
   "forwardPorts": [8501],
   "portsAttributes": {
