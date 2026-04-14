@@ -16,16 +16,6 @@
   "customizations": {
     "vscode": {
       "settings": {
-        // Pre-authorize the folderOpen task in .vscode/tasks.json so Streamlit
-        // starts automatically when the Codespace attaches. In Codespaces this
-        // setting is best-effort: VS Code for the Web currently still shows
-        // the "Allow automatic tasks" consent prompt on the first workspace
-        // open, regardless of the workspace-level value. The setting does pin
-        // the right default for variants of VS Code where it takes effect,
-        // and it does not hurt where it does not. See prototype/README.md
-        // for the one-time user click required in the current Codespaces
-        // build.
-        "task.allowAutomaticTasks": "on",
         // Auto-save every edit after a 1-second idle window. Browser-embedded
         // VS Code sometimes loses the Ctrl+S shortcut to the host browser,
         // which silently blocks the save. Auto-save eliminates that failure
@@ -60,7 +50,8 @@
   // pip-fallback exit status does not abort stage 2. Stages 2 and 3 use `&&`
   // because stage 3 is optional but stage 2 is a hard prerequisite.
   "postCreateCommand": "((curl -LsSf https://astral.sh/uv/install.sh | sh) && export PATH=\"$HOME/.local/bin:$PATH\" && cd prototype && uv sync) || (echo 'uv install or sync failed, falling back to pip' && pip install -r prototype/requirements.txt) ; mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (npm install -g @anthropic-ai/claude-code || echo 'Claude Code not installed. Use the copy-paste workflow: paste framework/orchestrator.md into any LLM.')",
-  // postStartCommand runs on every Codespace start.
+  // postStartCommand runs on every Codespace start. Four stages, chained with
+  // && because each one must succeed before the next can make sense:
   //   1. Refresh the Streamlit config in the user profile so port 8501 stays
   //      pinned even if the user tampered with ~/.streamlit/config.toml.
   //   2. Append an idempotent banner to ~/.bashrc that prints the forwarded
@@ -70,7 +61,21 @@
   //      is always accurate for the current Codespace without hardcoding.
   //      The VBI_APP_URL_BANNER marker makes the append idempotent across
   //      restarts and rebuilds.
-  "postStartCommand": "mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (grep -q 'VBI_APP_URL_BANNER' ~/.bashrc || (echo '# VBI_APP_URL_BANNER' >> ~/.bashrc && echo 'echo \"App-URL (öffnet sich nach streamlit run automatisch im Browser): https://${CODESPACE_NAME}-8501.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}\"' >> ~/.bashrc))",
+  //   3. Launch Streamlit in the background inside a subshell, with output
+  //      redirected to /tmp/streamlit.log for debugging. The `(... &)` outer
+  //      subshell pattern orphans the child immediately so postStartCommand
+  //      returns in milliseconds and VS Code considers the start phase done.
+  //      The inner if/else picks uv run when uv is available and falls back
+  //      to plain streamlit run when the pip bootstrap path was used during
+  //      container creation. No port check is needed because postStartCommand
+  //      runs exactly once per container start, when no previous Streamlit
+  //      process from the same container can exist. This replaces the earlier
+  //      .vscode/tasks.json approach, which required a one-time consent
+  //      popup from the user and had a pgrep self-match bug in the
+  //      idempotency check.
+  //   4. Record a startup marker in /tmp/streamlit.log so the user can
+  //      distinguish a fresh start from a stale log file.
+  "postStartCommand": "mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml && (grep -q 'VBI_APP_URL_BANNER' ~/.bashrc || (echo '# VBI_APP_URL_BANNER' >> ~/.bashrc && echo 'echo \"App-URL (öffnet sich nach streamlit run automatisch im Browser): https://${CODESPACE_NAME}-8501.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}\"' >> ~/.bashrc)) && (echo \"--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---\" > /tmp/streamlit.log; cd prototype && (if command -v uv >/dev/null 2>&1; then uv run streamlit run app.py; else streamlit run app.py; fi) >> /tmp/streamlit.log 2>&1 &)",
   "forwardPorts": [8501],
   "portsAttributes": {
     "8501": {
