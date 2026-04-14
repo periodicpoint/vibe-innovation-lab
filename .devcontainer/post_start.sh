@@ -68,12 +68,36 @@ grep -q 'source ~/.vbi_banner.sh' ~/.bashrc 2>/dev/null || echo 'source ~/.vbi_b
 # backgrounded from this parent script via the trailing &, which lets
 # post_start.sh return in milliseconds while Streamlit continues to run
 # as an orphaned process with its output captured in /tmp/streamlit.log.
+#
+# Binary resolution is ordered by decreasing reliability:
+#   1. prototype/.venv/bin/streamlit: the uv-managed venv binary, present
+#      when postCreateCommand successfully ran `uv sync`. This bypasses
+#      `uv run` entirely and avoids the "Failed to spawn streamlit" error
+#      we hit when `uv run` skipped the implicit sync.
+#   2. system streamlit on PATH: the pip-fallback case where the
+#      postCreateCommand OR fell back to `pip install -r requirements.txt`
+#      into the image's system Python.
+#   3. `uv sync` then venv binary: bootstrap path if neither exists. A
+#      fresh sync guarantees the venv is populated before invocation.
 (
+    export PATH="$HOME/.local/bin:$PATH"
     echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > /tmp/streamlit.log
     cd prototype || exit 1
-    if command -v uv >/dev/null 2>&1; then
-        uv run streamlit run app.py >> /tmp/streamlit.log 2>&1
-    else
+    if [ -x .venv/bin/streamlit ]; then
+        echo "launching via prototype/.venv/bin/streamlit" >> /tmp/streamlit.log
+        .venv/bin/streamlit run app.py >> /tmp/streamlit.log 2>&1
+    elif command -v streamlit >/dev/null 2>&1; then
+        echo "launching via system streamlit on PATH" >> /tmp/streamlit.log
         streamlit run app.py >> /tmp/streamlit.log 2>&1
+    elif command -v uv >/dev/null 2>&1; then
+        echo "no streamlit binary found, running uv sync then launching" >> /tmp/streamlit.log
+        uv sync >> /tmp/streamlit.log 2>&1
+        if [ -x .venv/bin/streamlit ]; then
+            .venv/bin/streamlit run app.py >> /tmp/streamlit.log 2>&1
+        else
+            echo "uv sync finished but .venv/bin/streamlit still missing" >> /tmp/streamlit.log
+        fi
+    else
+        echo "no streamlit and no uv available" >> /tmp/streamlit.log
     fi
 ) &
