@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Runs on every Codespace start via devcontainer.json postStartCommand.
 #
-# Output lands in $REPO/logs/start.log via an `exec` redirect. We do
+# Output lands in $REPO/.devcontainer/logs/start.log via an `exec` redirect. We do
 # not also tee to stdout because postStartCommand runs non-interactively
 # and its stdout is not shown anywhere prominent. The banner in stage 3
 # makes up for this by auto-catting bootstrap.log and start.log on the
@@ -27,11 +27,11 @@
 #      and silently kill Streamlit right after launch. `nohup` ignores
 #      SIGHUP, `&` puts it in the background, `disown` removes it from
 #      the shell's job table, and `</dev/null` frees the controlling
-#      terminal. Streamlit output goes to logs/streamlit.log.
+#      terminal. Streamlit output goes to .devcontainer/logs/streamlit.log.
 
 cd "$(dirname "$0")/.." || cd "${CODESPACE_VSCODE_FOLDER:-/workspaces/vibe-innovation-lab}"
-mkdir -p logs
-exec > logs/start.log 2>&1
+mkdir -p .devcontainer/logs
+exec > .devcontainer/logs/start.log 2>&1
 set -x
 
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
@@ -111,7 +111,7 @@ echo " App URL:         \${_vbi_url}"
 echo ""
 echo " Logs (in the workspace folder, visible in the VS Code file tree)"
 echo " ----------------------------------------------------------------"
-for f in logs/bootstrap.log logs/start.log logs/streamlit.log; do
+for f in .devcontainer/logs/bootstrap.log .devcontainer/logs/start.log .devcontainer/logs/streamlit.log; do
     _abs="\${_vbi_repo}/\${f}"
     if [ -f "\$_abs" ]; then
         printf "   %-28s  last modified: %s\n" "\$f" "\$(stat -c '%y' "\$_abs" 2>/dev/null | cut -d. -f1)"
@@ -123,9 +123,9 @@ done
 echo ""
 echo " Quick commands"
 echo " --------------"
-echo "   cat logs/bootstrap.log             # install-time log"
-echo "   cat logs/start.log                 # start-time log"
-echo "   tail -f logs/streamlit.log         # live app log"
+echo "   cat .devcontainer/logs/bootstrap.log             # install-time log"
+echo "   cat .devcontainer/logs/start.log                 # start-time log"
+echo "   tail -f .devcontainer/logs/streamlit.log         # live app log"
 echo "   bash .devcontainer/post_create.sh       # re-run install"
 echo "   bash .devcontainer/post_start.sh        # re-run start"
 echo "   pkill -f 'streamlit run'                # stop the app"
@@ -139,19 +139,19 @@ echo "========================================================================"
 if [ ! -f ~/.vbi_bootstrap_shown ]; then
     echo ""
     echo " ======================================================================"
-    echo "   BOOTSTRAP LOG (logs/bootstrap.log)"
+    echo "   BOOTSTRAP LOG (.devcontainer/logs/bootstrap.log)"
     echo " ======================================================================"
-    if [ -f "\${_vbi_repo}/logs/bootstrap.log" ]; then
-        cat "\${_vbi_repo}/logs/bootstrap.log"
+    if [ -f "\${_vbi_repo}/.devcontainer/logs/bootstrap.log" ]; then
+        cat "\${_vbi_repo}/.devcontainer/logs/bootstrap.log"
     else
         echo "   (file missing — post_create.sh did not run or could not write)"
     fi
     echo ""
     echo " ======================================================================"
-    echo "   START LOG (logs/start.log)"
+    echo "   START LOG (.devcontainer/logs/start.log)"
     echo " ======================================================================"
-    if [ -f "\${_vbi_repo}/logs/start.log" ]; then
-        cat "\${_vbi_repo}/logs/start.log"
+    if [ -f "\${_vbi_repo}/.devcontainer/logs/start.log" ]; then
+        cat "\${_vbi_repo}/.devcontainer/logs/start.log"
     else
         echo "   (file missing — post_start.sh did not run or could not write)"
     fi
@@ -172,20 +172,20 @@ fi
 grep -q 'source ~/.vbi_banner.sh' ~/.bashrc 2>/dev/null || echo 'source ~/.vbi_banner.sh' >> ~/.bashrc
 
 # Stage 6: launch Streamlit as a fully detached background process.
-echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > logs/streamlit.log
+echo "--- Streamlit auto-start at $(date -u +%Y-%m-%dT%H:%M:%SZ) ---" > .devcontainer/logs/streamlit.log
 if [ -x prototype/.venv/bin/streamlit ]; then
-    echo "launching via prototype/.venv/bin/streamlit" >> logs/streamlit.log
+    echo "launching via prototype/.venv/bin/streamlit" >> .devcontainer/logs/streamlit.log
     nohup bash -c "cd '$VBI_REPO/prototype' && exec .venv/bin/streamlit run app.py" \
-        >> logs/streamlit.log 2>&1 </dev/null &
+        >> .devcontainer/logs/streamlit.log 2>&1 </dev/null &
     disown
 elif command -v streamlit >/dev/null 2>&1; then
-    echo "launching via system streamlit on PATH" >> logs/streamlit.log
+    echo "launching via system streamlit on PATH" >> .devcontainer/logs/streamlit.log
     nohup bash -c "cd '$VBI_REPO/prototype' && exec streamlit run app.py" \
-        >> logs/streamlit.log 2>&1 </dev/null &
+        >> .devcontainer/logs/streamlit.log 2>&1 </dev/null &
     disown
 else
-    echo "no streamlit binary available, app will not start" >> logs/streamlit.log
-    echo "run: bash .devcontainer/post_create.sh" >> logs/streamlit.log
+    echo "no streamlit binary available, app will not start" >> .devcontainer/logs/streamlit.log
+    echo "run: bash .devcontainer/post_create.sh" >> .devcontainer/logs/streamlit.log
 fi
 
 sleep 1
