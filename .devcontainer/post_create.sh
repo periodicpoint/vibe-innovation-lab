@@ -42,10 +42,6 @@ mkdir -p .devcontainer/logs
 # a persistent file to cat on demand.
 exec > >(tee .devcontainer/logs/bootstrap.log) 2>&1
 
-# Clear the "logs already shown" flag so the banner cats the fresh logs
-# on the next interactive shell. Also clear any legacy /tmp flag.
-rm -f ~/.vbi_bootstrap_shown ~/.vbi_logs_shown /tmp/vbi_logs_shown 2>/dev/null || true
-
 echo "=== post_create.sh starting at $(date -u +%Y-%m-%dT%H:%M:%SZ) ==="
 
 echo "=== [0/5] Environment diagnostics ==="
