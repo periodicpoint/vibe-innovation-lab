@@ -8,14 +8,14 @@ Streamlit starter for Phase 4 (Build and validate) of the Vibe Innovation Framew
 2. Select the **Codespaces** tab.
 3. Click **Create codespace on main**.
 4. Wait 1 to 2 minutes for the environment to set up.
-5. Start the app in the terminal:
+5. The Streamlit app starts automatically as soon as the Codespace finishes loading, via the `Start Streamlit app` task defined in [.vscode/tasks.json](../.vscode/tasks.json). It runs with `runOn: folderOpen` in a dedicated VS Code terminal labeled *Task - Start Streamlit app*, where you can watch the live logs. The task auto-selects `uv run streamlit run app.py` when `uv` is available and falls back to plain `streamlit run app.py` when the pip path was used during container creation. The `task.allowAutomaticTasks: "on"` setting in the devcontainer pre-authorizes this, so VS Code does not prompt for consent. If you ever need to restart Streamlit manually (for example after stopping it with Ctrl+C), open a fresh terminal and run:
 
 ```bash
 cd prototype
 uv run streamlit run app.py
 ```
 
-If the devcontainer used the pip fallback instead of `uv` (see note below), the equivalent command is `streamlit run prototype/app.py` from the repo root.
+If the devcontainer used the pip fallback instead of `uv` (see note below), the equivalent manual command is `streamlit run prototype/app.py` from the repo root.
 
 Every new interactive terminal inside the Codespace prints a banner with the forwarded app URL at the top, for example `App-URL (öffnet sich nach streamlit run automatisch im Browser): https://laughing-umbrella-abc-8501.app.github.dev`. The URL is dynamically constructed from the `$CODESPACE_NAME` and `$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN` environment variables that GitHub Codespaces sets, so it is always correct for the current Codespace without any hardcoding. The banner is installed once by the `postStartCommand` in [.devcontainer/devcontainer.json](../.devcontainer/devcontainer.json) via an idempotent append to `~/.bashrc`.
 

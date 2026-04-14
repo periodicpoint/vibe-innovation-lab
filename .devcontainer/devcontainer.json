@@ -15,7 +15,12 @@
   },
   "customizations": {
     "vscode": {
-      "settings": {},
+      "settings": {
+        // Pre-authorize the folderOpen task in .vscode/tasks.json so Streamlit
+        // starts automatically when the Codespace attaches, without the usual
+        // "Allow automatic tasks" consent prompt.
+        "task.allowAutomaticTasks": "on"
+      },
       "extensions": [
         "ms-python.python"
       ]
