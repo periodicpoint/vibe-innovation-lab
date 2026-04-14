@@ -17,8 +17,14 @@
     "vscode": {
       "settings": {
         // Pre-authorize the folderOpen task in .vscode/tasks.json so Streamlit
-        // starts automatically when the Codespace attaches, without the usual
-        // "Allow automatic tasks" consent prompt.
+        // starts automatically when the Codespace attaches. In Codespaces this
+        // setting is best-effort: VS Code for the Web currently still shows
+        // the "Allow automatic tasks" consent prompt on the first workspace
+        // open, regardless of the workspace-level value. The setting does pin
+        // the right default for variants of VS Code where it takes effect,
+        // and it does not hurt where it does not. See prototype/README.md
+        // for the one-time user click required in the current Codespaces
+        // build.
         "task.allowAutomaticTasks": "on",
         // Auto-save every edit after a 1-second idle window. Browser-embedded
         // VS Code sometimes loses the Ctrl+S shortcut to the host browser,
