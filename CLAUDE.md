@@ -1,6 +1,6 @@
 # Vibe Innovation Lab
 
-General-purpose innovation framework for human-AI co-creation. Covers TRL -2 (pre-concept exploration) through TRL 4 (validated learning). See `framework/trl_specification.md` for the full extended TRL scale.
+General-purpose innovation framework for human-AI co-creation. Covers TRL -2 (pre-concept exploration) through TRL 4 (validated learning). Applies to technical innovations (software, hardware, data products) and non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes). Phases 0 through 3 and Phase 5 are domain-agnostic. Phase 4 has a code branch and an institutional-drafting branch; both produce a spike, prototype, or MVP at the same TRL level. See `framework/trl_specification.md` for the full extended TRL scale.
 
 ## Default behavior
 

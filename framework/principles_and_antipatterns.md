@@ -183,10 +183,10 @@ Use this checklist at every gate assessment to verify the deliverable is genuine
 1. [ ] Experiment results documented with actual data
 2. [ ] Each experiment result explicitly states whether the threshold was met
 3. [ ] Key learnings are specific and actionable
-4. [ ] Technical specification (Section 5.2) has all 12 fields populated, including functional requirements, non-functional requirements, architecture overview, data model, external dependencies, known limitations, open technical questions, and production readiness checklist (TBD permitted for fields not exercised)
-5. [ ] At least one Technical entry in the Decision log (Section 8) records the tech stack choice with alternatives, rationale, and implications
-6. [ ] Implementation log exists with repository link
-7. [ ] At least 3 pieces of user feedback collected and documented
+4. [ ] Artifact specification (Section 5.2) has all 12 fields populated, including functional requirements, non-functional requirements, architecture overview (or process architecture for institutional artifacts), data model (or artefact and record model), external dependencies, known limitations, open technical or design questions, and production or deployment readiness checklist (TBD permitted for fields not exercised)
+5. [ ] At least one Technical or Institutional entry in the Decision log (Section 8) records the tech stack choice (or method and medium stack choice) with alternatives, rationale, and implications
+6. [ ] Implementation log exists with repository link or institutional artifact store reference
+7. [ ] At least 3 pieces of user or stakeholder feedback collected and documented
 
 ### Phase 5 gate checklist
 
@@ -195,5 +195,5 @@ Use this checklist at every gate assessment to verify the deliverable is genuine
 3. [ ] Dissenting views are recorded (even if there are none, state "none raised")
 4. [ ] Next actions table has owners and deadlines
 5. [ ] If pivoting, the pivot record documents what is preserved and what changes
-6. [ ] Technical specification (Section 5.2) is finalized: TBDs resolved or explicitly carried forward, Production readiness checklist fully populated
+6. [ ] Artifact specification (Section 5.2) is finalized: TBDs resolved or explicitly carried forward, Production or deployment readiness checklist fully populated
 7. [ ] Executive summary (`executive_summary.md`) is produced following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot)

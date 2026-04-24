@@ -1,6 +1,6 @@
 # Vibe Innovation Framework
 
-A prompt-based framework for human-AI co-creation across the full innovation lifecycle, from strategic framing to working prototype.
+A prompt-based framework for human-AI co-creation across the full innovation lifecycle, from strategic framing to working prototype. The framework covers technical innovations (software, hardware, data products) and non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes) with the same phase structure and the same validation discipline.
 
 ## Overview
 
@@ -35,8 +35,8 @@ The framework uses an extended Technology Readiness Level scale (TRL -2 to TRL 4
 | 0 | Problem defined | Problem statement | Phase 1 exit | Who has what problem? |
 | 1 | Solution concept | Idea (concept sketch) | Phase 2 exit | What could we build? |
 | 2 | Value articulated | Proof of concept (on paper) | Phase 3 exit | Why would anyone care? |
-| 3 | Prototype built | Spike or prototype | Phase 4 (build) | Can we build it? |
-| 4 | Validated MVP | MVP | Phase 4 (validate) | Does it work? |
+| 3 | Prototype built | Spike or prototype (technical or institutional) | Phase 4 (build) | Can we build it? |
+| 4 | Validated MVP | MVP (technical or institutional) | Phase 4 (validate) | Does it work? |
 
 Phase 5 (Decision) operates at TRL 4, or at TRL 3 with reduced confidence, and produces a terminal Go, Kill, Pivot, or Loop-back decision. The framework stops at TRL 4 because everything beyond is product development, not innovation (see `trl_specification.md` for the full rationale). Loop-backs regress TRL to the target phase's entry level.
 
@@ -106,11 +106,15 @@ Solo innovators, teams, and workshops all use the same process. The Orchestrator
 
 ## Default tech stack for prototyping
 
+For technical innovations, the default stack is:
+
 1. Python with uv (backend, data, scripting)
 2. TypeScript with Bun (frontend, interaction)
 3. Git (version control)
 4. Streamlit (rapid web prototypes)
 5. Vue.js with Vite (complex interactive frontends)
+
+For non-technical innovations, the default medium stack is Pandoc Markdown for protocol drafts, pilot designs, and service blueprints, with Mermaid for process diagrams and swimlane sketches. Git is used for version control of institutional artifacts as well. Phase 4 Step 3 (Method and medium selection) records the full stack for a given pilot.
 
 ## License
 

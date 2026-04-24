@@ -235,7 +235,7 @@ What you produced:
   - Re-prioritized assumption map including BMC assumptions (Section 3.3)
   - Pre-mortem top 5 failure scenarios with mitigation for the top 3
 What remains open: Assumptions remain Untested; no artifact built yet.
-Next phase: Phase 4 (Build and validate). Goal: can we build it, and does it work? It will read Sections 1, 3, and 4.1 through 4.5 and produce Section 5 (Validation space) with a working artifact, experiment results against thresholds, user feedback, and a populated Section 5.2 (Technical specification).
+Next phase: Phase 4 (Build and validate). Goal: can we build it, and does it work? It will read Sections 1, 3, and 4.1 through 4.5 and produce Section 5 (Validation space) with a working artifact (technical or institutional), experiment results against thresholds, user or stakeholder feedback, and a populated Section 5.2 (Artifact specification).
 ```
 
 Then run the Orchestrator's phase transition protocol (progress map, ICD completeness checklist, updated ICD, gate assessment) before dispatching to Phase 4.

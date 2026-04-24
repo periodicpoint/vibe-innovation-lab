@@ -19,17 +19,20 @@ The extended TRL serves three functions in this framework:
 | 0 | Problem defined | Who has what problem? | Problem statement | A falsifiable problem statement exists. Target users are profiled. Assumptions are mapped. The team knows the problem but has no solution. |
 | 1 | Solution concept | What could we build? | Idea (concept sketch) | At least one solution concept exists with a key differentiator and identified riskiest assumption. The concept is untested. No working artifact. |
 | 2 | Value articulated | Why would anyone care? | Proof of concept (on paper) | Value proposition and business model are articulated. Experiments are designed with success thresholds. The model is unvalidated. The "proof" is analytical, not empirical. |
-| 3 | Prototype built | Can we build it? | Spike or prototype | A working artifact exists. A **spike** tests a single technical risk (can this work at all?). A **prototype** demonstrates the core user interaction. Neither is production-ready. Experiments have been executed. Results are measured but not yet synthesized. |
-| 4 | Validated MVP | Does it work? | MVP (minimum viable product) | The artifact is an **MVP**: the smallest product that delivers the core value proposition to real users. Experiment results meet or fail thresholds. User feedback is collected. The evidence base is sufficient for a Go, Kill, Pivot, or Loop-back decision. |
+| 3 | Prototype built | Can we build it? | Spike or prototype | A working artifact exists. A **spike** tests a single feasibility risk (can this work at all?), technical or institutional. A **prototype** demonstrates the core user or participant interaction. Neither is production-ready. Experiments have been executed. Results are measured but not yet synthesized. |
+| 4 | Validated MVP | Does it work? | MVP (minimum viable product) | The artifact is an **MVP**: the smallest product, service, or process that delivers the core value proposition to real users or stakeholders. Experiment results meet or fail thresholds. User or stakeholder feedback is collected. The evidence base is sufficient for a Go, Kill, Pivot, or Loop-back decision. |
 
 ## Artifact maturity progression
 
 The framework defines four artifact types at increasing levels of maturity. Each requires the previous level's learnings but not its code. Teams may skip levels (for example, build an MVP directly without a separate spike) if confidence is high enough.
 
+The artifact types apply to technical and to non-technical innovations. For technical innovations, the artifact is typically software (or a data product, or a hardware sketch). For non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes), the artifact is a structured document, a diagram, a role-play script, or a live pilot run. The labels and the TRL levels are the same; only the medium changes.
+
 ```
 Idea ─────> Proof of Concept ─────> Spike / Prototype ─────> MVP
 TRL 1       TRL 2                   TRL 3                    TRL 4
-concept     analytical proof        working code             user-facing product
+concept     analytical proof        working code or          user-facing product
+                                    institutional draft      or institutional pilot
 no code     no code                 not production-ready     delivers core value
 ```
 
@@ -37,13 +40,13 @@ no code     no code                 not production-ready     delivers core value
 
 2. **Proof of concept** (TRL 2). An analytical proof that the concept could work: value proposition canvas, business model canvas, experiment designs with success thresholds. Still no code. The "proof" is on paper. Output of Phase 3 (Value architecture).
 
-3. **Spike** (TRL 3). The lightest possible working code that answers a single technical question: "Can this work at all?" A spike tests feasibility, not usability. It may be ugly, hardcoded, and throwaway. Example: a 20-line script that calls an API to verify the data format is usable.
+3. **Spike** (TRL 3). The lightest possible working artifact that answers a single feasibility question: "Can this work at all?" A spike tests feasibility, not usability. It may be ugly, hardcoded, and throwaway. For technical innovations: the lightest working code (for example, a 20-line script that calls an API to verify the data format is usable). For non-technical innovations: the lightest mechanism sketch or tabletop walkthrough that answers one design-feasibility question (for example, a one-page protocol draft walked through once with two role-players to confirm the decision logic holds).
 
-4. **Prototype** (TRL 3). A working artifact that demonstrates the core user interaction. More complete than a spike but still not production-ready. No authentication, no error handling, no edge cases. Example: a Streamlit app with one screen, one input, one output.
+4. **Prototype** (TRL 3). A working artifact that demonstrates the core user or participant interaction. More complete than a spike but still not production-ready. No authentication, no error handling, no edge cases; for non-technical artifacts, no full rollout, no staff training, no permanent infrastructure. For technical innovations, for example: a Streamlit app with one screen, one input, one output. For non-technical innovations, for example: a Wizard-of-Oz service run, a single pilot session of a new classroom protocol, a role-played walkthrough of a new handoff procedure.
 
-5. **MVP** (TRL 4). The minimum viable product: the smallest artifact that delivers the core value proposition to a real user and generates measurable feedback. An MVP is not a prototype with polish. It is the thing that answers "would anyone actually use this?" Example: a deployed Streamlit app that 3 to 5 users interact with, producing feedback quotes and usage metrics.
+5. **MVP** (TRL 4). The minimum viable product: the smallest artifact that delivers the core value proposition to a real user or stakeholder and generates measurable feedback. An MVP is not a prototype with polish. It is the thing that answers "would anyone actually use this?" For technical innovations, for example: a deployed Streamlit app that 3 to 5 users interact with, producing feedback quotes and usage metrics. For non-technical innovations, for example: a single-ward rollout of a new handoff protocol run for two weeks with structured observation and debrief, or a classroom pilot of a new assessment method run across one unit with measured outcomes.
 
-The distinction between spike and prototype is scope, not quality. A spike answers one technical question. A prototype answers one user interaction question. Both live at TRL 3.
+The distinction between spike and prototype is scope, not quality. A spike answers one feasibility question (technical or institutional). A prototype answers one user or participant interaction question. Both live at TRL 3.
 
 ## Phase-to-TRL mapping
 
@@ -83,8 +86,8 @@ The framework stops at TRL 4 for three reasons:
 
 A Go decision at TRL 4 is the handoff point. The deliverables that the product team and leadership receive are:
 
-1. The ICD with a finalized Technical specification (Section 5.2), including functional and non-functional requirements, tech stack with rationale, architecture overview, data model, external dependencies, known limitations, open technical questions, and a populated production readiness checklist.
-2. The validated MVP in a repository.
+1. The ICD with a finalized Artifact specification (Section 5.2), including functional and non-functional requirements, tech stack (or method and medium stack) with rationale, architecture (or process architecture) overview, data model (or artefact and record model), external dependencies, known limitations, open technical or design questions, and a populated production or deployment readiness checklist.
+2. The validated MVP in a repository (or the validated institutional artifact in a structured document store).
 3. The experiment results with threshold comparisons.
 4. The consolidated assumption map.
 5. A two-page executive summary (`executive_summary.md`) for leadership and external stakeholders.
@@ -133,22 +136,22 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 
 ### TRL 2 to 3 (Phase 4: Build)
 
-1. A working artifact exists (spike or prototype) that runs without errors and demonstrates the core interaction or answers the core technical question.
+1. A working artifact exists (spike or prototype, technical or institutional) that runs without errors and demonstrates the core interaction or answers the core feasibility question.
 2. The prototype scope is documented (in-scope, out-of-scope, success criteria).
 3. At least one experiment has been executed with measured results.
 
-**Artifact gate:** The artifact must be runnable. Screenshots, mockups, and wireframes are not TRL 3. Working code is.
+**Artifact gate:** The artifact must be runnable. Screenshots, mockups, and wireframes alone are not TRL 3. For technical artifacts this means working code. For institutional artifacts this means an exercised protocol or pilot (at least one walk-through with participants or proxies producing observable behaviour), not a document that has never been used.
 
-**Spike vs. prototype:** A spike is sufficient for TRL 3 if the dominant uncertainty is technical ("can this work?"). A prototype is needed if the dominant uncertainty is user-facing ("will anyone use this?").
+**Spike vs. prototype:** A spike is sufficient for TRL 3 if the dominant uncertainty is feasibility ("can this work?"), technical or institutional. A prototype is needed if the dominant uncertainty is user-facing or participant-facing ("will anyone engage with this?").
 
 ### TRL 3 to 4 (Phase 4: Validate)
 
-1. The artifact is an MVP: it delivers the core value proposition, not just a demo.
+1. The artifact is an MVP (technical or institutional): it delivers the core value proposition, not just a demo.
 2. Experiment results are compared against success thresholds with clear Yes or No assessment.
-3. At least 3 user feedback quotes are collected from observation (not self-report).
+3. At least 3 user or stakeholder feedback quotes are collected from observation (not self-report).
 4. The assumption map is updated with Validated or Falsified status per tested assumption.
 5. Sections 3.2, 4.3, and 4.4 are explicitly confirmed or revised based on evidence.
-6. ICD Section 5.2 (Technical specification) has all 12 fields populated (TBD permitted where not exercised), including at least one Technical Decision log entry in Section 8 recording the tech stack choice.
+6. ICD Section 5.2 (Artifact specification) has all 12 fields populated (TBD permitted where not exercised), including at least one Decision log entry in Section 8 recording the tech stack choice or the method and medium stack choice.
 
 **Artifact gate:** The MVP must have been used by at least 3 people who are not on the team. Internal demos do not count toward TRL 4.
 
@@ -159,7 +162,7 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 3. An unambiguous Go, Kill, Pivot, or Loop-back decision is documented with evidence-based reasoning.
 4. Next actions have named owners and deadlines.
 5. Dissenting views are recorded.
-6. ICD Section 5.2 (Technical specification) is finalized: TBDs resolved or explicitly carried forward as open questions, Production readiness checklist fully populated.
+6. ICD Section 5.2 (Artifact specification) is finalized: TBDs resolved or explicitly carried forward as open questions, Production (or deployment) readiness checklist fully populated.
 7. An executive summary (`executive_summary.md`) is produced following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
 
 ## Relationship to standard TRL
