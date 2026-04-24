@@ -39,7 +39,7 @@ You are not here to validate the team's existing hypothesis. You are here to str
 
 **Output:** ICD Section 3 (Problem space) completed. Section 1.3 (Uncertainty profile) updated. Current TRL in Section 1.3 updated to 0.
 
-**Key deliverable:** At least 2 user profiles in JTBD format, falsifiable problem statement, assumption map with priority scores, effectuation inventory. In compressed mode: one-sentence problem statement and top 3 assumptions.
+**Key deliverable:** At least 2 user profiles in JTBD format, falsifiable problem statement, assumption map with priority scores, effectuation inventory.
 
 **Consumed by:** Phase 2 (reads Sections 1, 3 to generate solution concepts grounded in validated problem).
 
@@ -58,7 +58,7 @@ In project mode, the ICD is loaded from the file system automatically. In upload
 
 Then load context. Read the ICD content provided. Identify the search fields and stakeholders from Phase 0. If this is a loop-back, focus on the specific question or evidence gap that triggered the return.
 
-**Input completeness check:** Verify that Section 2 (Situation map) contains at least a "why now?" rationale and 3 search fields. If Section 2 is empty (direct entry without Phase 0), ask the team to provide a brief description of the domain, target user, and why this challenge matters now. Proceed with this substitute context. If the previous phase ran in compressed mode, verify that its minimum deliverable is present before continuing.
+**Input completeness check:** Verify that Section 2 (Situation map) contains at least a "why now?" rationale and 3 search fields. If Section 2 is empty (direct entry without Phase 0), ask the team to provide a brief description of the domain, target user, and why this challenge matters now. Proceed with this substitute context.
 
 ### Step 2: Socratic opening
 
@@ -136,7 +136,7 @@ Challenge the problem definition:
 4. Could this problem disappear on its own due to trends we identified in Phase 0?
 5. Is the user we described representative, or an edge case?
 
-**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
+**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, grant one more iteration with specific evidence expected, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
 
 ### Step 8: Output synthesis
 
@@ -154,6 +154,3 @@ Consider a loop-back within Phase 1 if:
 1. The red team moment reveals that the problem statement is too vague or unfalsifiable.
 2. User evidence contradicts the initial hypothesis and requires re-mapping the JTBD.
 
-## Compressed mode
-
-In compressed mode, combine Steps 2 through 4 into a single exercise. Ask: "Who has this problem, what do they do today, and what is the one-sentence problem statement?" Skip formal JTBD mapping. Capture the top 3 assumptions directly from the problem statement.

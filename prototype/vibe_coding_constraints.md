@@ -1,6 +1,6 @@
 # Vibe coding constraints: prototype environment
 
-This file defines the hard constraints for LLM-generated code and LLM suggestions when a session runs in project mode against this repository. It is the authoritative source consulted by the Orchestrator during environment detection and by Phase 4 during tech stack selection. The constraints apply to every phase that produces code, in both compressed mode and full mode.
+This file defines the hard constraints for LLM-generated code and LLM suggestions when a session runs in project mode against this repository. It is the authoritative source consulted by the Orchestrator during environment detection and by Phase 4 during tech stack selection. The constraints apply to every phase that produces code.
 
 **Mirror copy for chat and upload mode.** A verbatim-equivalent inline copy of the pinned stack, the blocklist, the override clause, and the escape hatch also lives in [framework/orchestrator.md](../framework/orchestrator.md), in the section *Vibe coding constraints (inline reference)*. That mirror is the fallback source for users who paste the Orchestrator into a chat-only LLM without attaching this file. Any change to the constraints here must be replicated in the Orchestrator inline section in the same commit. Out-of-sync copies will silently diverge between workshop delivery modes.
 
@@ -12,7 +12,7 @@ These constraints activate when all of the following are true:
 
 1. The session runs in project mode as defined in [framework/orchestrator.md](../framework/orchestrator.md), Step 2 (Environment detection).
 2. The working directory is this repository or a fork of it.
-3. The current phase is Phase 4 (Build and validate), including its compressed-mode inline variant.
+3. The current phase is Phase 4 (Build and validate).
 
 Outside these conditions the constraints are advisory only. In upload mode and chat mode the LLM cannot detect the environment reliably and should fall back to the general tech stack guidance in the Phase 4 prompt.
 
@@ -33,7 +33,7 @@ Do not propose, generate, or include any of the following in project mode. Each 
 
 1. **New Python dependencies.** Do not run or suggest `pip install`, `uv add`, `uv pip install`, `poetry add`, `pipenv install`, or any equivalent. Do not edit `pyproject.toml`, `requirements.txt`, or `uv.lock`.
 2. **System packages.** Do not run or suggest `apt`, `apt-get`, `brew`, `dnf`, `pacman`, `sudo`, or any other operating system package manager.
-3. **Local LLM runners.** Do not install or run `ollama`, `llama.cpp`, `llamafile`, `lm-studio`, `text-generation-webui`, `vllm`, or any similar local model server. In a 20 to 90 minute workshop these take longer to download and configure than the entire phase budget.
+3. **Local LLM runners.** Do not install or run `ollama`, `llama.cpp`, `llamafile`, `lm-studio`, `text-generation-webui`, `vllm`, or any similar local model server. Downloading and configuring a local model in a workshop setting consumes more time than any reasonable Phase 4 attempt can recover.
 4. **Heavy ML frameworks beyond the pre-installed set.** Do not introduce `tensorflow`, `pytorch`, `transformers`, `jax`, `keras`, `xgboost`, `lightgbm`, `scikit-learn`, or any model-download helper such as `huggingface_hub.snapshot_download` or `torch.hub.load`, unless the library is already present in the README library list. If the experiment genuinely needs an ML model, prefer a hosted API call over a local model.
 5. **Database servers.** Do not propose `postgres`, `mysql`, `mariadb`, `mongodb`, `redis`, `elasticsearch`, or anything that runs as a long-lived daemon and needs configuration. The standard library `sqlite3` module is permitted for ephemeral local storage.
 6. **Container tools.** Do not propose `docker`, `podman`, `docker-compose`, `kubernetes`, `kind`, or any containerization layer on top of the Codespace. The Codespace is already the runtime container.
@@ -63,5 +63,5 @@ If the dominant Phase 4 assumption genuinely cannot be tested under the pinned s
 ## File references
 
 1. [prototype/README.md](README.md): authoritative list of installed libraries, Codespace startup behavior, and Streamlit auto-start task.
-2. [framework/orchestrator.md](../framework/orchestrator.md): Step 2 (Environment detection) loads this file in project mode and Phase 4 compressed references it during spike generation.
+2. [framework/orchestrator.md](../framework/orchestrator.md): Step 2 (Environment detection) loads this file in project mode.
 3. [framework/phase_4_build_and_validate.md](../framework/phase_4_build_and_validate.md): Step 3 (Tech stack selection) references this file as the authoritative source in project mode.

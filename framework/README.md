@@ -55,11 +55,10 @@ Paste the contents of `orchestrator.md` into a new conversation and follow the e
 
 ### How the process works (both methods)
 
-1. The Orchestrator runs the entry diagnostic (starting point, time budget, team, uncertainty).
-2. It generates a session plan: which phases, compressed or full, with time allocations.
-3. **Compressed phases** (up to 20 min each) run inline. The Orchestrator contains all compressed instructions. No additional files needed.
-4. **Full phases** (60 to 90 min each) use the dedicated phase files (`phase_0` through `phase_5`). Load or paste the file when the phase starts.
-5. The LLM manages the ICD. Between sessions, copy the ICD output to preserve state.
+1. The Orchestrator runs the entry diagnostic (starting point, team, prior knowledge, success criteria, biggest uncertainty).
+2. It assembles a session plan: which phases to run, based on the entry TRL and target exit TRL.
+3. Each phase runs from its dedicated prompt file (`phase_0` through `phase_5`) and closes only when its output contract is satisfied. There is no abbreviated variant.
+4. The LLM manages the ICD. Between sessions, copy the ICD output to preserve state.
 
 Solo innovators, teams, and workshops all use the same process. The Orchestrator adapts based on the entry diagnostic.
 
@@ -71,10 +70,9 @@ Solo innovators, teams, and workshops all use the same process. The Orchestrator
 4. **Loop-back at any point.** Any phase can trigger a return to any earlier phase via a mini-gate assessment. Intra-phase iteration is also supported. Iteration counters prevent infinite loops.
 5. **Diverge before converge.** Every phase that generates options separates idea generation from idea evaluation. Phase 2 includes a human-AI brainwriting warm-up for teams that start without ideas.
 6. **Red team everything.** Every phase ends with a structured challenge to its own output.
-7. **Compressed mode available.** Every phase has a time-constrained version for rapid workshops.
-8. **Bricolage escape hatch.** If the full process is too heavy, every phase offers a minimal version.
-9. **Introduce, do not assume.** Every technical term and acronym is explained at first use. Concise by default, verbose on demand.
-10. **Each phase has a distinct persona.** The six phases are delivered by six named archetypes (Navigator for the Orchestrator, Cartographer for Phase 0, Midwife for Phase 1, Improviser for Phase 2, Architect for Phase 3, Maker for Phase 4, Judge for Phase 5), each with its own voice, tone, and signature moves. Continuity of process does not mean continuity of register. Different uncertainties demand different kinds of attention, and the persona layer makes the shift explicit so that users feel the phase change, not only read about it.
+7. **Quality-gated advancement.** A phase closes only when its output contract is satisfied. The framework does not manage time, because the LLM is not a reliable timekeeper. What matters is that each phase hands the next one robust, evidence-grounded input.
+8. **Introduce, do not assume.** Every technical term and acronym is explained at first use. Concise by default, verbose on demand.
+9. **Each phase has a distinct persona.** The six phases are delivered by six named archetypes (Navigator for the Orchestrator, Cartographer for Phase 0, Midwife for Phase 1, Improviser for Phase 2, Architect for Phase 3, Maker for Phase 4, Judge for Phase 5), each with its own voice, tone, and signature moves. Continuity of process does not mean continuity of register. Different uncertainties demand different kinds of attention, and the persona layer makes the shift explicit so that users feel the phase change, not only read about it.
 
 ## Methodological foundations
 

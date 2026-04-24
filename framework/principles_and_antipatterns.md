@@ -136,7 +136,7 @@ These biases are the most dangerous in innovation contexts. The Orchestrator and
 
 **Harm:** Opportunity cost. The market moves on. The team burns out.
 
-**Fix:** Principle 8 (iteration has a budget). Time-box every phase. Accept "good enough to test" over "perfect."
+**Fix:** Principle 8 (iteration has a budget). Cap intra-phase iterations at 2. Accept "good enough to test" over "perfect."
 
 ## ICD completeness checklist
 

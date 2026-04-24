@@ -17,8 +17,6 @@ You do not need to write code or have technical skills to use this framework. Yo
 | **TRL** (Technology Readiness Level) | A scale from -2 to 4 that measures how mature your innovation is. -2 means "we do not even know what to build yet." 4 means "we built it, tested it, and know it works." |
 | **ICD** (Innovation Canvas Document) | A shared document that the AI fills in as you work through the phases. It accumulates all your findings, decisions, and evidence in one place. |
 | **MVP** (Minimum Viable Product) | The simplest possible version of your product that lets you test whether people actually want it. |
-| **Compressed mode** | A shorter version (about 20 minutes) of each phase, designed for workshops and time-constrained sessions. |
-| **Full mode** | The thorough version (60 to 90 minutes) of each phase, for deep work outside workshops. |
 
 ## Getting started: step by step
 
@@ -29,7 +27,7 @@ You do not need to write code or have technical skills to use this framework. Yo
 3. Open the terminal in VS Code.
 4. Type `claude` and press Enter to start Claude Code.
 5. Type `/innovate` and press Enter.
-6. Claude loads the framework automatically, asks your starting point, time budget, team size, and biggest uncertainty, then guides you through the process.
+6. Claude loads the framework automatically, asks your starting point, team, prior knowledge, success criteria, and biggest uncertainty, then guides you through the process.
 
 ### Option B: with any other LLM (ChatGPT, Copilot, Gemini, Mistral, and so on)
 
@@ -41,9 +39,9 @@ You do not need to write code or have technical skills to use this framework. Yo
 
 ### What happens next (both options)
 
-1. The Orchestrator asks about your starting point, time budget, team, and biggest uncertainty.
-2. It maps your situation to a phase and generates a session plan.
-3. You work through the phases. The AI asks questions, you answer. The AI fills in the ICD.
+1. The Orchestrator asks about your starting point, team, prior knowledge, success criteria, and biggest uncertainty.
+2. It maps your situation to a phase and assembles a session plan (which phases to run).
+3. You work through the phases. The AI asks questions, you answer. The AI fills in the ICD. Each phase closes only when its output contract is met.
 4. In Phase 4 (Build), the AI generates Streamlit code. You copy it into `prototype/app.py`, and the app updates automatically in your browser.
 5. Between sessions: copy the ICD output and save it. Paste it back when you resume.
 
@@ -53,7 +51,7 @@ You do not need to write code or have technical skills to use this framework. Yo
 |---|---|---|
 | Setup | Type `/innovate` in terminal | Copy `framework/orchestrator.md` into LLM chat |
 | Framework loading | Automatic (reads all files) | Manual (paste the orchestrator text) |
-| Phase transitions | Automatic dispatch | Say "Bitte weiter mit Phase N compressed" |
+| Phase transitions | Automatic dispatch | Say "Bitte weiter mit Phase N" |
 | ICD management | Saved as file in the project | Copy-paste between sessions |
 | Prototyping (Phase 4) | AI writes directly to `prototype/app.py` | AI generates code, you copy it into the file |
 | State between sessions | Preserved in project files | You must save and re-paste the ICD |
@@ -100,8 +98,7 @@ TRL 4 produces a validated MVP and a Go, Kill, Pivot, or Loop-back decision. Eve
 3. **Diverge before converge.** Separate idea generation from evaluation.
 4. **Red team everything.** Every phase ends with a structured challenge to its own output.
 5. **Iteration has a budget.** Max 2 intra-phase, max 2 inter-phase to same target, max 5 total.
-6. **Compressed mode available.** Every phase has a time-constrained version for workshops.
-7. **Bricolage escape hatch.** Minimal viable process when the full version is too heavy.
+6. **Quality-gated advancement.** A phase closes only when its output contract is satisfied. The framework does not manage time; what matters is that each phase hands the next one robust, evidence-grounded input.
 
 ### Methodological foundations
 

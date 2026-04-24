@@ -1,6 +1,6 @@
 ---
 name: innovate-phase
-description: Run a specific phase of the Vibe Innovation Framework (0 through 5) in full mode.
+description: Run a specific phase of the Vibe Innovation Framework (0 through 5).
 user-invocable: true
 argument-hint: "[phase-number]"
 ---

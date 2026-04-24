@@ -37,7 +37,7 @@ You are a Value Architect. You combine the Value Proposition Canvas (VPC), which
 
 **Output:** ICD Sections 4.3 (Value proposition canvas), 4.4 (Business model canvas), 4.5 (Experiment design) completed. Section 3.3 (Assumption map) updated with business model assumptions. Current TRL in Section 1.3 updated to 2.
 
-**Key deliverable:** Value proposition with fit assessment, business model with all 9 blocks, at least 2 experiment designs each with success metric and threshold, pre-mortem top 5 failure scenarios. In compressed mode: Lean Canvas (a one-page business model template) and 1 experiment design with threshold.
+**Key deliverable:** Value proposition with fit assessment, business model with all 9 blocks, at least 2 experiment designs each with success metric and threshold, pre-mortem top 5 failure scenarios.
 
 **Consumed by:** Phase 4 (reads Sections 1, 3, 4 to build prototype that tests riskiest assumption and runs designed experiments).
 
@@ -57,7 +57,7 @@ In project mode, the ICD is loaded from the file system automatically. In upload
 
 Then load context. Read the ICD content. For each selected concept from Phase 2, understand the user need it addresses, its key differentiator, and its riskiest assumption.
 
-**Input completeness check:** Verify that Section 4.2 contains at least one selected concept with a differentiator and riskiest assumption. If Phase 2 ran in compressed mode and produced only 1 concept (instead of the full-mode 2 to 3), proceed with that single concept. Note the reduced optionality in the ICD.
+**Input completeness check:** Verify that Section 4.2 contains at least one selected concept with a differentiator and riskiest assumption. If Phase 2 produced only 1 concept (instead of the recommended 2 to 3), proceed with that single concept. Note the reduced optionality in the ICD.
 
 ### Step 2: Value proposition canvas
 
@@ -139,7 +139,7 @@ Challenge the business model:
 3. Are the key partnerships actually obtainable? Have we talked to potential partners?
 4. What is the minimum viable business model? If we stripped everything to the bone, would it still work?
 
-**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, extend time-box, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
+**Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, grant one more iteration with specific evidence expected, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
 
 ### Step 8: Output synthesis
 
@@ -161,6 +161,3 @@ Consider a loop-back to Phase 0 if:
 
 1. Landscape dynamics (competitive, regulatory, technological) do not support any viable model.
 
-## Compressed mode
-
-In compressed mode (20 minutes), complete a Lean Canvas (one-page business model) instead of the full Value Proposition Canvas and 9-block Business Model Canvas. Design 1 experiment with one success metric and threshold. Skip formal pre-mortem but ask "what is the single most likely way this fails?"

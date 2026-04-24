@@ -58,7 +58,7 @@ Each phase has an entry TRL (minimum required to start) and an exit TRL (what it
 | 4 | Build and validate | 2 | 3 or 4 | Spike, prototype, or MVP | Value becomes tested artifact |
 | 5 | Decision | 4 | Terminal | Go, Kill, Pivot, or Loop-back | Evidence becomes decision |
 
-Phase 4 spans two TRL levels (2 to 3 to 4) because it combines building and validating. In compressed mode, Phase 4 may exit at TRL 3 (spike or prototype built, limited validation). Full mode targets TRL 4 (MVP with user feedback).
+Phase 4 spans two TRL levels (2 to 3 to 4) because it combines building and validating. Phase 4 may exit at TRL 3 when a working artifact exists but user validation is missing, or at TRL 4 when an MVP has generated real user feedback against success thresholds. The exit TRL is determined by the evidence produced, not by time.
 
 ## Scope boundary: why this framework stops at TRL 4
 
@@ -104,8 +104,6 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 5. A strategic context summary (3 to 5 sentences) is documented.
 6. Innovation horizon (H1, H2, or H3) is classified with rationale.
 
-**Minimum viable (compressed):** Items 1, 2, and 4 present.
-
 ### TRL -1 to 0 (Phase 1: Problem discovery)
 
 1. At least 2 user profiles exist in JTBD format with functional, emotional, and social jobs.
@@ -113,8 +111,6 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 3. The problem is classified using Cynefin (simple, complicated, complex, or chaotic).
 4. An assumption map exists with at least 5 assumptions scored by criticality and uncertainty.
 5. An effectuation inventory (who we are, what we know, whom we know) is documented.
-
-**Minimum viable (compressed):** Items 2 and 4 present (problem statement and top 3 assumptions).
 
 ### TRL 0 to 1 (Phase 2: Ideation)
 
@@ -125,8 +121,6 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 
 **Artifact gate:** Each selected concept must be describable in one paragraph (what it does, for whom, why it is different). If a concept cannot be stated this concisely, it is not yet at TRL 1.
 
-**Minimum viable (compressed):** 1 to 2 concepts selected with differentiator and riskiest assumption.
-
 ### TRL 1 to 2 (Phase 3: Value architecture)
 
 1. A Value Proposition Canvas is complete with fit assessment.
@@ -136,8 +130,6 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 5. The assumption map is updated with business model assumptions.
 
 **Artifact gate:** The proof of concept is analytical. No code exists yet. If the team built something already, they are past TRL 2 and should verify TRL 3 criteria instead.
-
-**Minimum viable (compressed):** Lean Canvas and 1 experiment design with threshold.
 
 ### TRL 2 to 3 (Phase 4: Build)
 
@@ -160,8 +152,6 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 
 **Artifact gate:** The MVP must have been used by at least 3 people who are not on the team. Internal demos do not count toward TRL 4.
 
-**Minimum viable (compressed, 20 min):** Running spike that answers one technical feasibility question. No user validation. Exits at TRL 3.
-
 ### TRL 4 (Phase 5: Decision)
 
 1. A consolidated assumption map exists (merging Phase 1, 3, and 4 versions).
@@ -171,8 +161,6 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 5. Dissenting views are recorded.
 6. ICD Section 5.2 (Technical specification) is finalized: TBDs resolved or explicitly carried forward as open questions, Production readiness checklist fully populated.
 7. An executive summary (`executive_summary.md`) is produced following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
-
-**Minimum viable (compressed):** Decision with 3 next actions and a minimal executive summary (pitch, problem, solution, recommendation).
 
 ## Relationship to standard TRL
 

@@ -37,7 +37,7 @@ You are a Decision Facilitator. You combine Stage-Gate decision discipline (Coop
 
 **Output:** ICD Section 6 (Decision space) completed with TRL assessment. Sections 7 (Iteration log), 8 (Decision log), and 9 (Changelog) updated. ICD Section 5.2 (Technical specification) finalized: TBD entries resolved or explicitly carried forward as open technical questions, Production readiness checklist fully populated. **Executive summary** produced as a derived standalone document (`executive_summary.md`) following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
 
-**Key deliverable:** Unambiguous Go, Kill, Pivot, or Loop-back decision with evidence-based reasoning, dissent record, affordable loss assessment, next actions with owners and deadlines, a finalized technical specification (ICD Section 5.2), and a two-page executive summary for leadership and external stakeholders. In compressed mode: decision with 3 next actions and a minimal executive summary (sections 1, 2, 3, 8 only).
+**Key deliverable:** Unambiguous Go, Kill, Pivot, or Loop-back decision with evidence-based reasoning, dissent record, affordable loss assessment, next actions with owners and deadlines, a finalized technical specification (ICD Section 5.2), and a two-page executive summary for leadership and external stakeholders.
 
 **Consumed by:** If Go: external execution. If Loop-back: the target phase (re-entry with new evidence). If Pivot: Phase 1 or 2 (with pivot record preserving learnings).
 
@@ -236,6 +236,3 @@ The MVP repository is not handed over to a product team but should be archived w
 
 Phase 5 is the terminal phase. It does not loop back to itself. It routes to earlier phases or terminates the process.
 
-## Compressed mode
-
-In compressed mode, skip formal evidence synthesis. Ask three questions: "Is the problem real? Does the solution work? Can we make money?" Make the decision. Define 3 next actions maximum. Produce a minimal executive summary containing only sections 1 (pitch), 2 (problem), 3 (solution), and 8 (recommendation) from the executive summary template. The technical specification (Section 5.2) remains at whatever level of completeness Phase 4 compressed mode reached; carry TBDs forward explicitly.
