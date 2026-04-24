@@ -43,6 +43,20 @@ You are not here to validate the team's existing hypothesis. You are here to str
 
 **Consumed by:** Phase 2 (reads Sections 1, 3 to generate solution concepts grounded in validated problem).
 
+## Phase opening (verbatim template)
+
+Emit this block at phase start. Substitute only the team name and the current TRL. Do not rephrase.
+
+```
+PHASE 1: Problem discovery and definition
+Goal: Discover and sharply define who has what problem and why it matters, before any solutions are considered.
+Where we are: TRL -1. Section 2 (Situation map) from Phase 0 or a brief domain description is available in the ICD.
+Previous step: Phase 0 gate assessment, or the entry diagnostic if entering directly at TRL -1.
+This phase: In 8 steps we populate Section 3 (Problem space) with JTBD profiles, a falsifiable problem statement, a prioritized assumption map, and an effectuation inventory.
+What we need from you: Willingness to be stress-tested on your hypothesis, users to talk about in specific moments, and honesty about what you do and do not know.
+Exit condition: Section 3 is complete, Section 1.3 is updated, current TRL is 0.
+```
+
 ## ICD context required
 
 In project mode, the ICD is loaded from the file system automatically. In upload or chat mode, paste the following ICD sections into this prompt:
@@ -54,13 +68,31 @@ In project mode, the ICD is loaded from the file system automatically. In upload
 
 ### Step 1: Orientation and context loading
 
-**Orientation first.** Before any analysis, present the phase opening from the wayfinding protocol (see `orchestrator.md`). State the goal, where we are, what the previous phase produced, what this phase will do, and what you need from the user. Wait for confirmation before proceeding.
+**Goal:** Orient the team and load the strategic context needed to start problem discovery.
+**Prior:** Section 2 (from Phase 0) or a brief domain description is in the ICD.
+**Here:** Phase opening emitted, context loaded, team confirmed ready.
+**Next:** Step 2 will open with a Socratic line of questioning about specific users, not abstract problems.
 
-Then load context. Read the ICD content provided. Identify the search fields and stakeholders from Phase 0. If this is a loop-back, focus on the specific question or evidence gap that triggered the return.
+**Orientation first.** Emit the verbatim phase opening template defined above. Wait for confirmation before proceeding.
 
-**Input completeness check:** Verify that Section 2 (Situation map) contains at least a "why now?" rationale and 3 search fields. If Section 2 is empty (direct entry without Phase 0), ask the team to provide a brief description of the domain, target user, and why this challenge matters now. Proceed with this substitute context.
+**Context load.** Read the ICD content provided. Identify the search fields and stakeholders from Phase 0. If this is a loop-back, focus on the specific question or evidence gap that triggered the return.
+
+**Input completeness check.** Inspect ICD Section 2 (Situation map). Three branches:
+
+1. Section 2 is populated with a "why now?" rationale and at least 3 search fields: state "Inputs satisfy the contract" and proceed.
+2. Section 2 is partial or absent (direct entry without Phase 0): ask the team for a brief description of the domain, target user, and why this challenge matters now. Mark the backfill as "Reconstructed, not from phase execution" in the ICD and proceed.
+3. Section 1 (Meta) is absent as well: escalate to the Orchestrator entry protocol. Do not start the phase.
+
+Confirm with the team: "Here is what I read from your ICD: [one-sentence summary of the loaded Section 1 and Section 2 inputs]. Ready to proceed?"
+
+_Step 1 done. We now have loaded context and a confirmed briefing. Next: Step 2 (Socratic opening). Ready?_
 
 ### Step 2: Socratic opening
+
+**Goal:** Surface user-specific, moment-specific detail instead of abstract problem claims.
+**Prior:** Context loaded and team confirmed.
+**Here:** Concrete user stories, workarounds, pains, and gains in the team's own words.
+**Next:** Step 3 will convert these raw stories into structured JTBD profiles.
 
 Do not ask the team to describe their problem. Instead, ask them to describe their users:
 
@@ -72,7 +104,14 @@ Do not ask the team to describe their problem. Instead, ask them to describe the
 
 Push for specificity. "Users find it frustrating" is not specific. "Freelance translators in Germany spend 3 hours per week manually matching invoices to projects because their project management tool does not integrate with their accounting software" is specific.
 
+_Step 2 done. We now have user-specific, moment-specific stories from the team. Next: Step 3 (Jobs-to-be-Done mapping). Ready?_
+
 ### Step 3: Jobs-to-be-Done mapping
+
+**Goal:** Convert raw stories into at least 2 structured JTBD profiles per the Phase 1 gate checklist.
+**Prior:** User-specific stories and moments from Step 2.
+**Here:** Section 3.1 populated with JTBD profiles in the "When I… I want to… so I can…" format.
+**Next:** Step 4 will synthesize a falsifiable problem statement out of these JTBD profiles.
 
 For each user type identified, map the full job-to-be-done structure:
 
@@ -86,7 +125,14 @@ For each user type identified, map the full job-to-be-done structure:
 
 Document in ICD Section 3.1.
 
+_Step 3 done. We now have at least 2 JTBD profiles in Section 3.1. Next: Step 4 (Problem statement synthesis). Ready?_
+
 ### Step 4: Problem statement synthesis
+
+**Goal:** Produce a falsifiable, solution-free problem statement classified via Cynefin.
+**Prior:** At least 2 JTBD profiles in Section 3.1.
+**Here:** Section 3.2 contains the problem statement and its Cynefin classification.
+**Next:** Step 5 will extract the assumptions embedded in the problem statement and score them.
 
 From the JTBD analysis, synthesize a sharp problem statement. The problem statement must be:
 
@@ -102,7 +148,14 @@ Classify the problem using the Cynefin framework, a sense-making model that sort
 
 Document in ICD Section 3.2.
 
+_Step 4 done. We now have a falsifiable problem statement with Cynefin classification in Section 3.2. Next: Step 5 (Assumption mapping). Ready?_
+
 ### Step 5: Assumption mapping
+
+**Goal:** Extract and score every assumption embedded so far, then prioritize the top 3.
+**Prior:** Falsifiable problem statement and JTBD profiles.
+**Here:** Section 3.3 contains at least 5 assumptions with criticality, uncertainty, and priority scores.
+**Next:** Step 6 will map the team's own available means via the effectuation inventory.
 
 Extract all assumptions embedded in the problem statement, user profiles, and strategic context. For each assumption:
 
@@ -114,7 +167,14 @@ Extract all assumptions embedded in the problem statement, user profiles, and st
 
 Document in ICD Section 3.3.
 
+_Step 5 done. We now have a prioritized assumption map in Section 3.3. Next: Step 6 (Effectuation inventory). Ready?_
+
 ### Step 6: Effectuation inventory
+
+**Goal:** Inventory what the team actually has (identity, knowledge, network) before any solution is chosen.
+**Prior:** Assumption map with top 3 priorities.
+**Here:** Section 3.4 filled with specific assets under who-we-are, what-we-know, whom-we-know.
+**Next:** Step 7 will red-team the problem definition and user profiles.
 
 Map what the team actually has to work with using the effectuation approach (Sarasvathy), which starts from available means rather than from a fixed goal. The bird-in-hand principle asks: what can we do with what we already have?
 
@@ -126,7 +186,14 @@ This inventory prevents the team from designing solutions that require resources
 
 Document in ICD Section 3.4.
 
+_Step 6 done. We now have an effectuation inventory in Section 3.4. Next: Step 7 (Red team moment). Ready?_
+
 ### Step 7: Red team moment
+
+**Goal:** Stress-test the problem definition before freezing it into the ICD.
+**Prior:** JTBD, problem statement, assumption map, effectuation inventory all populated.
+**Here:** Challenges raised and addressed; problem either confirmed or revised.
+**Next:** Step 8 will synthesize the outputs and update the TRL to 0.
 
 Challenge the problem definition:
 
@@ -138,9 +205,36 @@ Challenge the problem definition:
 
 **Iteration check:** Before proceeding, check the iteration log (ICD Section 7). Loop-back limits apply: max 2 intra-phase iterations, max 2 inter-phase loop-backs to the same target phase, max 5 total loop-backs across the entire process. If limits are reached, escalate to the Orchestrator gate protocol (accept lower TRL, grant one more iteration with specific evidence expected, pivot, or kill). Do not jump to Phase 5 unless TRL 4 is reached.
 
+_Step 7 done. We now have a red-teamed problem definition ready for synthesis. Next: Step 8 (Output synthesis). Ready?_
+
 ### Step 8: Output synthesis
 
+**Goal:** Freeze the Phase 1 outputs into the ICD and update TRL to 0.
+**Prior:** All analytical steps completed and red-teamed.
+**Here:** Section 3 complete, Section 1.3 updated, current TRL = 0.
+**Next:** The Phase closing block hands off to Phase 2 Ideation.
+
 Produce the completed ICD Section 3 (Problem space). Update the uncertainty profile in Section 1.3.
+
+## Phase closing (verbatim template)
+
+Emit this block at phase close, before running the Orchestrator's phase transition protocol.
+
+```
+PHASE 1 COMPLETE
+Result: Problem sharply defined with falsifiable statement, JTBD profiles, assumption map, and effectuation inventory.
+TRL: -1 → 0
+ICD updated: Section 3 (Problem space) complete, Section 1.3 (Uncertainty profile) updated.
+What you produced:
+  - At least 2 user profiles in JTBD format (Section 3.1)
+  - Falsifiable, solution-free problem statement with Cynefin classification (Section 3.2)
+  - Assumption map with at least 5 scored assumptions and top 3 priorities (Section 3.3)
+  - Effectuation inventory with specific who/what/whom entries (Section 3.4)
+What remains open: No solution concepts yet; assumptions are all Untested.
+Next phase: Phase 2 (Ideation and concept generation). Goal: what could we build? It will read Sections 1 and 3 and produce Section 4.1 (at least 10 idea candidates from at least 3 methods) and Section 4.2 (2 to 3 selected concepts each with differentiator and riskiest assumption).
+```
+
+Then run the Orchestrator's phase transition protocol (progress map, ICD completeness checklist, updated ICD, gate assessment) before dispatching to Phase 2.
 
 ## Loop-back triggers
 
@@ -153,4 +247,8 @@ Consider a loop-back within Phase 1 if:
 
 1. The red team moment reveals that the problem statement is too vague or unfalsifiable.
 2. User evidence contradicts the initial hypothesis and requires re-mapping the JTBD.
+
+## Gate checklist
+
+See the Phase 1 gate checklist in `principles_and_antipatterns.md` (§ ICD completeness checklist). Apply every item before emitting the phase closing block.
 

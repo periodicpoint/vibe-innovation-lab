@@ -57,11 +57,11 @@ Each phase has a defined input contract (what it needs to start) and output cont
 | Phase | Input (ICD sections required) | Output (ICD sections produced) | Key deliverable |
 |---|---|---|---|
 | 0 | Section 1 (Meta) | Section 2 (Situation map), update Sections 1.3 and 1.4 | Strategic framing with search fields, landscape, stakeholders, innovation horizon, strategic context summary |
-| 1 | Sections 1, 2 (Section 2 may be empty if entering without Phase 0) | Section 3 (Problem space), update Section 1.3 | Falsifiable problem statement, assumption map, effectuation inventory |
-| 2 | Sections 1, 3 | Section 4.1 (Idea candidates), Section 4.2 (Selected concepts) | 2 to 3 selected concepts with riskiest assumption per concept |
-| 3 | Sections 1, 3, 4.2 | Sections 4.3, 4.4, 4.5, update Section 3.3 | Value proposition, business model, experiment designs with thresholds |
+| 1 | Sections 1, 2 (Section 2 may be empty if entering without Phase 0) | Section 3 (Problem space), update Section 1.3 | At least 2 user profiles in JTBD format, falsifiable problem statement, assumption map, effectuation inventory |
+| 2 | Sections 1, 3 | Section 4.1 (Idea candidates), Section 4.2 (Selected concepts) | At least 10 idea candidates from at least 3 methods, 2 to 3 selected concepts with key differentiator and riskiest assumption per concept |
+| 3 | Sections 1, 3, 4.2 | Sections 4.3, 4.4, 4.5, update Section 3.3 | Value proposition, business model, experiment designs with thresholds, pre-mortem top 5 failure scenarios |
 | 4 | Sections 1, 3, 4.1 through 4.5 | Section 5 (Validation space) including populated Section 5.2 (Technical specification), update Sections 3.2, 3.3, 4.3, 4.4 (confirm or revise), at least one Technical entry in Section 8 | Working artifact (spike, prototype, or MVP), experiment results, user feedback, upstream validation, populated technical specification |
-| 5 | All sections | Section 6 (Decision space), Sections 7, 8, 9, consolidated assumption map, finalized Section 5.2, executive summary document | Go, Kill, Pivot, or Loop-back decision with evidence, finalized technical specification, and two-page executive summary |
+| 5 | All sections | Section 6 (Decision space), Sections 7, 8, 9, consolidated assumption map, finalized Section 5.2, executive summary document | Unambiguous Go, Kill, Pivot, or Loop-back decision with evidence, finalized technical specification, and two-page executive summary document (`executive_summary.md`) |
 
 Phase transitions are quality-gated, not time-gated. A phase closes when its output contract is satisfied, not when a timer expires. The LLM is not a reliable timekeeper, so the framework does not rely on time budgets. What matters is that each phase hands the next phase a robust, evidence-grounded input.
 
@@ -186,6 +186,7 @@ Based on the diagnostic answers from Step 5, classify the project's uncertainty 
 | Problem defined, no solution idea | 0 | Solution | Phase 2: Ideation |
 | Solution concept exists, value unclear | 1 | Market | Phase 3: Value architecture |
 | Value articulated, no prototype | 2 | Technical | Phase 4: Build and validate |
+| Prototype built, user validation limited | 3 | Execution or solution | Phase 5: Decision (early entry, reduced confidence) |
 | Prototype validated, decision pending | 4 | Execution | Phase 5: Decision |
 
 Communicate your TRL assessment and routing recommendation with reasoning. Let the user override if they have a good reason.
@@ -203,6 +204,7 @@ Based on the entry TRL (Step 6) and the target exit TRL, assemble the sequence o
 | **0** (problem defined) | 2, 3, 4, 5 | 4 | Optionally prepend Phase 1 as a backward-sharpening step if the problem statement is weak. |
 | **1** (concept exists) | 3, 4, 5 | 4 | Prepend Phase 1 if the underlying problem was never validated. |
 | **2** (value articulated) | 4, 5 | 4 | Prepend Phase 3 if experiments were never designed. |
+| **3** (prototype built, validation limited) | 5 | 3 or 4 | Phase 5 runs at reduced confidence, marking User fit and Solution fit as Low. Prefer iterating within Phase 4 before taking this route. |
 | **4** (validated) | 5 | 4 | Decision only. |
 
 **Routing logic:**
@@ -479,15 +481,33 @@ Where we are: TRL [number]. [What exists so far in 1 sentence.]
 Previous step: [What was just completed and what it produced, or "Entry diagnostic" if this is the first phase.]
 This phase: [What we will do and what it produces, in 1 to 2 sentences.]
 What we need from you: [What input or participation the phase requires from the user.]
+Exit condition: [What must be true in the ICD before the phase can close.]
 ```
 
-### Step transition (within a phase)
+Each phase file (`phase_0_*.md` through `phase_5_*.md`) ships a pre-filled verbatim copy of this block under its `## Phase opening (verbatim template)` section. The LLM emits that copy as-is, substituting only the team name and the current TRL, so phrasing does not drift across runs or phases. The template above is the shape authority: if a field is added or renamed here, propagate the change into all six phase files.
 
-When moving from one step to the next within a phase, provide a brief marker:
+### Step preamble (start of step)
 
-"Step [N] done. We now have [concrete output]. Next: Step [N+1], [name], where we [what happens]. Ready?"
+Within a phase, every `### Step N` block opens with a four-line scaffold:
 
-Do not move to the next step without this marker. Wait for the user to confirm or ask questions.
+```
+**Goal:** one sentence, goal of this step.
+**Prior:** one sentence, what already exists in the ICD.
+**Here:** one sentence, what this step produces.
+**Next:** one sentence, what step N+1 will do with it.
+```
+
+The scaffold exists so that the user always knows the local answer to "why this step, and what does it produce?" without reading ahead. It makes the inter-step contract visible inline, which is the step-level analogue of the phase contract defined per phase. The phase files own the content of this scaffold; the orchestrator owns the shape. If the scaffold labels are renamed here, propagate the change into all six phase files.
+
+### Step transition (end of step)
+
+When closing a step within a phase, emit this one-line marker in italic:
+
+```
+_Step [N] done. We now have [concrete output]. Next: Step [N+1] ([name]). Ready?_
+```
+
+The final synthesis step of each phase does not emit this marker; the phase closing block (see Phase transition protocol below) takes its place. Do not move to the next step without this marker. Wait for the user to confirm or ask questions.
 
 ### Phase transition protocol
 
@@ -524,6 +544,8 @@ Next: Phase [N+1]: [Name]. [1 sentence: what it will do.]
 ```
 
 For Phase 5 (terminal phase), replace the "Next" line with: "Decision: [Go, Kill, Pivot, or Loop-back]. Next actions: [3 actions with owners]."
+
+Each phase file ships a pre-filled verbatim copy of this element under its `## Phase closing (verbatim template)` section, with concrete bullet lists for "What you produced" and an explicit named handoff to the next phase. Emit the phase-file copy as-is; this orchestrator template is the shape authority and must stay in sync if fields change.
 
 **Element 3: ICD completeness checklist.**
 
