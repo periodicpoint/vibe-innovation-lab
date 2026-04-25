@@ -25,18 +25,9 @@ extract_prose_clean() {
 while IFS= read -r -d '' f; do
   rel="${f#./}"
 
-  fm_end=$(awk 'NR>1 && /^---$/ { print NR; exit }' "${f}")
-
-  if [ -n "${fm_end}" ]; then
-    if awk -v start="$((fm_end + 1))" 'NR>=start && /^---$/' "${f}" | grep -q .; then
-      echo "ERROR: ${rel} contains horizontal separator outside frontmatter (forbidden #3)"
-      errors=$((errors + 1))
-    fi
-  else
-    if grep -q '^---$' "${f}"; then
-      echo "ERROR: ${rel} contains horizontal separator (forbidden #3)"
-      errors=$((errors + 1))
-    fi
+  if extract_prose "${f}" | grep -q '^---$'; then
+    echo "ERROR: ${rel} contains horizontal separator outside frontmatter or code block (forbidden #3)"
+    errors=$((errors + 1))
   fi
 
   if extract_prose_clean "${f}" | grep -Pn '&(?!amp;|lt;|gt;|nbsp;|quot;|#[0-9])' | grep -Pvq '^[0-9]+:[|]'; then

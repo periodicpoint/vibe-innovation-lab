@@ -667,3 +667,34 @@ The framework consists of the following files:
 8. `phase_4_build_and_validate.md`: Phase 4 prompt
 9. `phase_5_decision.md`: Phase 5 prompt
 10. `../prototype/vibe_coding_constraints.md`: Authoritative source for the vibe coding constraints mirrored in the inline reference section above. Loaded directly in project mode. Fallback inline copy applies in upload and chat mode when the context question is answered yes.
+
+### Auxiliary protocols and references
+
+These files are loaded on demand by the corresponding skills. The Orchestrator does not need them for the entry diagnostic but should know they exist.
+
+1. `chaos_protocol.md`: Standalone divergent chaos protocol. Backs `/chaos`. Originally Phase 2 Step 2.5.
+2. `red_team_protocol.md`: Standalone adversarial challenge protocol with lens catalog and per-phase question sets. Backs `/innovate-redteam`. Canonical implementation of every phase Step 7.
+3. `loop_back_protocol.md`: Eight-step mini-gate runbook. Backs `/innovate-loopback`. Theoretical basis remains in this orchestrator file (section *Loop-back and iteration protocol*).
+4. `validation_methods.md`: Catalog of pretotypes (Fake Door, Mechanical Turk, Concierge, Pinocchio, Wizard of Oz, Smoke test, Infiltrator, Spike) and institutional analogues (Tabletop walkthrough, Roleplay, Read-aloud rehearsal, Pilot cohort, Mock process run, Multi-cycle pilot). Used by `/innovate-experiment` and Phase 3 Step 5.
+5. `personas.md`: Consolidated reference for the seven framework personas. Used when a skill outside the canonical phase needs to adopt the right voice.
+6. `glossary.md`: Term index across the framework with phase pointers and source pointers.
+7. `institutional_templates.md`: Skeletal templates for institutional Phase 4 artifacts (protocol, pilot design, service blueprint, policy draft, training program). Counterpart to the technical `prototype/` directory.
+8. `bias_field_guide.md`: Detection-oriented companion to `principles_and_antipatterns.md`. Symptoms, trigger phrases, fast checks, responses.
+9. `executive_summary_template.md`: Two-page template for the Phase 5 exit deliverable. Rendered by `/innovate-export summary`.
+10. `example_icd_technical.md` and `example_icd_institutional.md`: Worked end-to-end examples of an ICD for a technical and an institutional innovation. Teaching material.
+
+### Skill surface (Claude Code project mode)
+
+In project mode, the framework exposes the following slash commands.
+
+1. `/innovate`: Entry diagnostic and phase dispatch.
+2. `/innovate-phase N`: Run phase N (0 through 5).
+3. `/innovate-status`: TRL, phase, open assumptions, next steps.
+4. `/innovate-icd [init|validate|show|diff|save]`: ICD lifecycle.
+5. `/innovate-redteam [target]`: Standalone red team challenge.
+6. `/innovate-experiment [assumption]`: One assumption, one experiment, one threshold.
+7. `/innovate-loopback [trigger]`: Mini-gate assessment.
+8. `/innovate-export [summary|decision-log|artifact-spec|status]`: Render derived artifacts.
+9. `/chaos`: Divergent chaos protocol on demand.
+
+In upload and chat mode, the same protocols are available by pasting the corresponding doc and following its process specification.

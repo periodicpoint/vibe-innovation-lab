@@ -14,8 +14,6 @@
 
 Fill in the fields below. Delete the guidance text in italics before saving.
 
----
-
 # [Project name]: executive summary
 
 **Date:** YYYY-MM-DD

@@ -154,6 +154,8 @@ _Step 4 done. We now have an updated assumption map in Section 3.3 including BMC
 **Here:** Section 4.5 with experiment designs, success metrics, and decision rules.
 **Next:** Step 6 will run a pre-mortem on the concept.
 
+For each experiment, the canonical method catalog is `validation_methods.md` (technical pretotypes and institutional analogues with cost, signal quality, and failure modes). For a single experiment between phases or after this step, the `/innovate-experiment` skill walks through the eight-step design process.
+
 For the top 3 to 5 assumptions (highest priority score), design a specific experiment to test each one. Use pretotyping where possible:
 
 1. **Fake Door:** Create a landing page or signup form for the concept. Measure how many people sign up or click.

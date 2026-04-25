@@ -107,8 +107,12 @@ Synthesizes classical (Stage-Gate, Double Diamond, Design Thinking, Business Mod
 ## Repository structure
 
 ```
-.claude/docs/       Innovation process (Orchestrator, ICD, TRL spec, 6 phases, principles, chaos protocol)
-.claude/skills/     Claude Code skill definitions (/innovate, /innovate-phase, /innovate-status, /chaos)
+.claude/docs/       Innovation process (Orchestrator, ICD, TRL spec, 6 phases, principles,
+                    chaos, red team, loop-back, validation methods, personas, glossary,
+                    institutional templates, bias field guide, two worked example ICDs)
+.claude/skills/     Claude Code skill definitions (/innovate, /innovate-phase,
+                    /innovate-status, /innovate-icd, /innovate-redteam, /innovate-experiment,
+                    /innovate-loopback, /innovate-export, /chaos)
 .claude/agents/     Phase orchestrator agent (thin skill sequencer)
 .claude/commands/   Slash command discovery layer
 .claude/rules/      Glob-bound editing rules (python, markdown, streamlit)

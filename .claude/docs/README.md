@@ -24,6 +24,15 @@ The framework synthesizes classical, battle-proven innovation methodologies (Sta
 | `phase_5_decision.md` | Decision and iteration (go, kill, pivot, loop back, affordable loss assessment). |
 | `chaos_protocol.md` | Standalone divergent chaos protocol. Originally Step 2.5 of Phase 2, now also exposed as the `/chaos` skill for invocation in any phase or outside any phase. |
 | `executive_summary_template.md` | Two-page template for the executive summary produced at Phase 5 exit for leadership and external stakeholders. |
+| `red_team_protocol.md` | Standalone red team protocol with adversarial lens catalog and per-phase question sets. Backs the `/innovate-redteam` skill. |
+| `loop_back_protocol.md` | Eight-step mini-gate runbook for triggering and executing intra-phase iterations and inter-phase loop-backs. Backs the `/innovate-loopback` skill. Theory remains in `orchestrator.md`. |
+| `personas.md` | Consolidated reference for the seven framework personas (Navigator, Cartographer, Midwife, Improviser, Architect, Maker, Judge), with voice samples and signature moves. Cross-phase invocation guidance. |
+| `validation_methods.md` | Catalog of pretotypes (Fake Door, Mechanical Turk, Concierge, Pinocchio, Wizard of Oz, Smoke test, Infiltrator, Spike) and institutional analogues (Tabletop walkthrough, Roleplay, Read-aloud rehearsal, Pilot cohort, Mock process run, Multi-cycle pilot). Backs the `/innovate-experiment` skill. |
+| `glossary.md` | Index of all terms used across the framework with phase pointers and source pointers. The first-use introductions remain in `orchestrator.md`. |
+| `institutional_templates.md` | Skeletal templates for institutional Phase 4 artifacts (protocol, pilot design, service blueprint, policy draft, training program). Counterpart to the technical `prototype/` directory. |
+| `bias_field_guide.md` | Detection-oriented companion to the bias watchlist in `principles_and_antipatterns.md`. Symptoms, trigger phrases, fast checks, responses. |
+| `example_icd_technical.md` | Worked technical ICD, end-to-end TRL -1 to TRL 3 with a Pivot outcome. Teaching material and framework stress test. |
+| `example_icd_institutional.md` | Worked institutional ICD for a hospital discharge protocol, end-to-end TRL -1 to TRL 4 with a Go outcome. |
 
 ## Extended TRL scale
 
@@ -46,9 +55,15 @@ Phase 5 (Decision) operates at TRL 4, or at TRL 3 with reduced confidence, and p
 ### With Claude Code
 
 ```
-/innovate
-/innovate-phase N    (0 through 5)
-/chaos               (divergent chaos protocol, on demand)
+/innovate                            (entry diagnostic and dispatch)
+/innovate-phase N                    (0 through 5)
+/innovate-status                     (TRL, phase, open assumptions, next steps)
+/innovate-icd [init|validate|show|diff|save]
+/innovate-redteam [target]           (standalone adversarial challenge)
+/innovate-experiment [assumption]    (one experiment, one assumption, one threshold)
+/innovate-loopback [trigger]         (mini-gate assessment)
+/innovate-export [summary|decision-log|artifact-spec|status]
+/chaos                               (divergent chaos protocol, on demand)
 ```
 
 ### With any LLM (ChatGPT, Gemini, and so on)
