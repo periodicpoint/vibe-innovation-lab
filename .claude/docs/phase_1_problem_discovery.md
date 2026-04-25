@@ -192,7 +192,7 @@ _Step 6 done. We now have an effectuation inventory in Section 3.4. Next: Step 7
 
 **Goal:** Stress-test the problem definition before freezing it into the ICD.
 **Prior:** JTBD, problem statement, assumption map, effectuation inventory all populated.
-**Here:** Challenges raised and addressed; problem either confirmed or revised.
+**Here:** Challenges raised and addressed. Problem either confirmed or revised.
 **Next:** Step 8 will synthesize the outputs and update the TRL to 0.
 
 Challenge the problem definition:
@@ -230,7 +230,7 @@ What you produced:
   - Falsifiable, solution-free problem statement with Cynefin classification (Section 3.2)
   - Assumption map with at least 5 scored assumptions and top 3 priorities (Section 3.3)
   - Effectuation inventory with specific who/what/whom entries (Section 3.4)
-What remains open: No solution concepts yet; assumptions are all Untested.
+What remains open: No solution concepts yet. Assumptions are all Untested.
 Next phase: Phase 2 (Ideation and concept generation). Goal: what could we build? It will read Sections 1 and 3 and produce Section 4.1 (at least 10 idea candidates from at least 3 methods) and Section 4.2 (2 to 3 selected concepts each with differentiator and riskiest assumption).
 ```
 

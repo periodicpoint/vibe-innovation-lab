@@ -8,7 +8,7 @@
 
 **Style rules.** English or the team's working language. Sentence case throughout. No emojis. No em-dashes with spaces. Numbered lists only (no bullets). No insider jargon, no unexplained acronyms. Cite ICD section numbers in parentheses where sources matter. Obey the global style conventions in CLAUDE.md.
 
-**Relationship to the ICD.** This document is a view, not a replacement. The ICD remains the authoritative source of record. If the executive summary and the ICD diverge, the ICD wins and the summary must be updated. Do not duplicate content verbatim; distill.
+**Relationship to the ICD.** This document is a view, not a replacement. The ICD remains the authoritative source of record. If the executive summary and the ICD diverge, the ICD wins and the summary must be updated. Do not duplicate content verbatim. Distill.
 
 ## Template
 
@@ -50,7 +50,7 @@ Fill in the fields below. Delete the guidance text in italics before saving.
 
 ## 5. Business case
 
-*Market segment, revenue model, unit economics if known. One short paragraph. Source: ICD §4.4 (Business model canvas). If the business model was not validated, say so explicitly. Unknowns are not a flaw; hidden unknowns are.*
+*Market segment, revenue model, unit economics if known. One short paragraph. Source: ICD §4.4 (Business model canvas). If the business model was not validated, say so explicitly. Unknowns are not a flaw. Hidden unknowns are.*
 
 ## 6. Key design decisions
 
@@ -75,8 +75,6 @@ Fill in the fields below. Delete the guidance text in italics before saving.
 ## 9. Next milestone and resource ask
 
 *For Go: the next milestone (TRL 5 or TRL 6), the resources needed (people, budget, timeline), and the named owner who will drive it. For Pivot: the proposed new entry phase (Phase 1 or Phase 2), the new hypothesis, and who owns the re-entry. For Kill: none. Source: ICD §6.2 (Next actions).*
-
----
 
 ## Authoring notes (remove before saving)
 

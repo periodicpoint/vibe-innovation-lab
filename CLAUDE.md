@@ -1,12 +1,12 @@
 # Vibe Innovation Lab
 
-General-purpose innovation framework for human-AI co-creation. Covers TRL -2 (pre-concept exploration) through TRL 4 (validated learning). Applies to technical innovations (software, hardware, data products) and non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes). Phases 0 through 3 and Phase 5 are domain-agnostic. Phase 4 has a code branch and an institutional-drafting branch; both produce a spike, prototype, or MVP at the same TRL level. See `framework/trl_specification.md` for the full extended TRL scale.
+General-purpose innovation framework for human-AI co-creation. Covers TRL -2 (pre-concept exploration) through TRL 4 (validated learning). Applies to technical innovations (software, hardware, data products) and non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes). Phases 0 through 3 and Phase 5 are domain-agnostic. Phase 4 has a code branch and an institutional-drafting branch. Both produce a spike, prototype, or MVP at the same TRL level. See `.claude/docs/trl_specification.md` for the full extended TRL scale.
 
 ## Default behavior
 
 When a user starts a conversation in this repository without a specific technical request (code fix, file edit, and so on), assume they want to use the innovation framework. Proactively offer to run the entry diagnostic:
 
-1. Read `framework/orchestrator.md` and `framework/innovation_canvas_document.md`.
+1. Read `.claude/docs/orchestrator.md` and `.claude/docs/innovation_canvas_document.md`.
 2. Ask whether they have an existing Innovation Canvas Document (ICD).
 3. Run the entry diagnostic from the Orchestrator: starting point, team, constraints, prior knowledge, success criteria, biggest uncertainty.
 4. Profile the uncertainty and map it to a TRL entry point (see table below).
@@ -17,7 +17,7 @@ This diagnostic is also available explicitly via `/innovate`.
 
 ## TRL entry mapping
 
-See `framework/trl_specification.md` for the full extended TRL scale definition.
+See `.claude/docs/trl_specification.md` for the full extended TRL scale definition.
 
 | Situation | TRL | Entry phase |
 |---|---|---|
@@ -31,9 +31,11 @@ See `framework/trl_specification.md` for the full extended TRL scale definition.
 
 ## Repository structure
 
-1. `framework/` contains the innovation process: Orchestrator, Innovation Canvas Document (ICD), TRL specification, 6 phase prompts, principles and anti-patterns.
-2. `prototype/` contains Streamlit starter infrastructure for rapid prototyping (app.py, requirements.txt).
-3. `.claude/skills/` contains Claude Code skill definitions (`/innovate`, `/innovate-phase`, `/innovate-status`).
+1. `.claude/docs/` contains the innovation process specification: Orchestrator, Innovation Canvas Document (ICD), TRL specification, 6 phase prompts, principles and anti-patterns, executive summary template. These are the lazy-loaded reference texts that the skills read on demand.
+2. `.claude/skills/` contains Claude Code skill definitions (`/innovate`, `/innovate-phase`, `/innovate-status`).
+3. `.claude/agents/`, `.claude/commands/`, `.claude/rules/`, `.claude/schemas/` complete the Claude Code surface: thin orchestrator agent, slash-command discovery layer, glob-bound editing rules, and the ICD JSON schema.
+4. `prototype/` contains Streamlit starter infrastructure for rapid prototyping (`app.py`, `pyproject.toml`, `requirements.txt`, vibe coding constraints).
+5. `mise.toml` defines the lint, structure-check, ICD-validate, and format tasks. The PostToolUse hook in `.claude/settings.json` enforces lint on every Markdown edit.
 
 ## Conventions
 

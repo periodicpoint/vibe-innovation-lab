@@ -1,0 +1,225 @@
+[tasks.lint]
+description = "Check markdown files for forbidden element violations (CLAUDE.md rules)"
+dir = "{{ config_root }}"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+errors=0
+
+extract_prose() {
+  awk '
+    NR==1 && /^---$/ { in_fm=1; next }
+    in_fm && /^---$/ { in_fm=0; next }
+    in_fm { next }
+    /^[[:space:]]*```/ { in_code=!in_code; next }
+    in_code { next }
+    { print }
+  ' "$1"
+}
+
+extract_prose_clean() {
+  extract_prose "$1" | sed -E 's/`[^`]*`//g; s/"[^"]*"//g'
+}
+
+while IFS= read -r -d '' f; do
+  rel="${f#./}"
+
+  fm_end=$(awk 'NR>1 && /^---$/ { print NR; exit }' "${f}")
+
+  if [ -n "${fm_end}" ]; then
+    if awk -v start="$((fm_end + 1))" 'NR>=start && /^---$/' "${f}" | grep -q .; then
+      echo "ERROR: ${rel} contains horizontal separator outside frontmatter (forbidden #3)"
+      errors=$((errors + 1))
+    fi
+  else
+    if grep -q '^---$' "${f}"; then
+      echo "ERROR: ${rel} contains horizontal separator (forbidden #3)"
+      errors=$((errors + 1))
+    fi
+  fi
+
+  if extract_prose_clean "${f}" | grep -Pn '&(?!amp;|lt;|gt;|nbsp;|quot;|#[0-9])' | grep -Pvq '^[0-9]+:[|]'; then
+    echo "ERROR: ${rel} contains ampersand in prose (forbidden #2)"
+    errors=$((errors + 1))
+  fi
+
+  if extract_prose "${f}" | grep -qn ';'; then
+    echo "ERROR: ${rel} contains semicolon in prose (forbidden #4)"
+    errors=$((errors + 1))
+  fi
+
+  if extract_prose "${f}" | grep -Eq '\. {2,}'; then
+    echo "ERROR: ${rel} contains double space after full stop (forbidden #8)"
+    errors=$((errors + 1))
+  fi
+
+  if extract_prose "${f}" | grep -Eq '^\s*[-*+] '; then
+    echo "ERROR: ${rel} contains unordered list (forbidden #9)"
+    errors=$((errors + 1))
+  fi
+
+  if extract_prose_clean "${f}" | grep -Eq ' -- | --- '; then
+    echo "ERROR: ${rel} contains em-dash with spaces (forbidden #14)"
+    errors=$((errors + 1))
+  fi
+
+  if extract_prose_clean "${f}" | grep -Eiq '(^|[^a-zA-Z])(ca\.|etc\.|bzw\.|z\.B\.|e\.g\.|i\.e\.)'; then
+    echo "ERROR: ${rel} contains abbreviation (forbidden #16)"
+    errors=$((errors + 1))
+  fi
+
+done < <(find . -name '*.md' \
+  -not -path './boilerplate/*' \
+  -not -path './.git/*' \
+  -not -path './.venv/*' \
+  -not -path './prototype/.venv/*' \
+  -not -path './node_modules/*' \
+  -not -path './.ruff_cache/*' \
+  -print0)
+
+if [ "${errors}" -eq 0 ]; then
+  echo "Lint passed."
+else
+  echo "${errors} lint error(s) found."
+  exit 1
+fi
+'''
+
+[tasks.check]
+description = "Validate .claude/ structure: skills, agents, rules, commands, schemas"
+dir = "{{ config_root }}"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+errors=0
+
+for skill_dir in .claude/skills/*/; do
+  [ -d "${skill_dir}" ] || continue
+  if [ ! -f "${skill_dir}SKILL.md" ]; then
+    echo "ERROR: ${skill_dir} missing SKILL.md"
+    errors=$((errors + 1))
+  fi
+done
+
+for skill_file in .claude/skills/*/SKILL.md; do
+  [ -f "${skill_file}" ] || continue
+  if ! head -1 "${skill_file}" | grep -q '^---$'; then
+    echo "ERROR: ${skill_file} missing YAML frontmatter"
+    errors=$((errors + 1))
+  fi
+  if ! grep -q '^name:' "${skill_file}"; then
+    echo "ERROR: ${skill_file} missing name field"
+    errors=$((errors + 1))
+  fi
+  if ! grep -q '^description:' "${skill_file}"; then
+    echo "ERROR: ${skill_file} missing description field"
+    errors=$((errors + 1))
+  fi
+done
+
+for agent_file in .claude/agents/*.md; do
+  [ -f "${agent_file}" ] || continue
+  if ! head -1 "${agent_file}" | grep -q '^---$'; then
+    echo "ERROR: ${agent_file} missing YAML frontmatter"
+    errors=$((errors + 1))
+  fi
+  if ! grep -q '^name:' "${agent_file}"; then
+    echo "ERROR: ${agent_file} missing name field"
+    errors=$((errors + 1))
+  fi
+  if ! grep -q '^description:' "${agent_file}"; then
+    echo "ERROR: ${agent_file} missing description field"
+    errors=$((errors + 1))
+  fi
+done
+
+for rule_file in .claude/rules/*.md; do
+  [ -f "${rule_file}" ] || continue
+  if ! head -1 "${rule_file}" | grep -q '^---$'; then
+    echo "ERROR: ${rule_file} missing YAML frontmatter"
+    errors=$((errors + 1))
+  fi
+  if ! grep -q '^paths:' "${rule_file}"; then
+    echo "ERROR: ${rule_file} missing paths field"
+    errors=$((errors + 1))
+  fi
+done
+
+for cmd_file in .claude/commands/*.md; do
+  [ -f "${cmd_file}" ] || continue
+  if [ "$(wc -l < "${cmd_file}")" -lt 3 ]; then
+    echo "ERROR: ${cmd_file} appears empty or too short"
+    errors=$((errors + 1))
+  fi
+done
+
+for schema_file in .claude/schemas/*.json; do
+  [ -f "${schema_file}" ] || continue
+  if ! python3 -c "import json; json.load(open('${schema_file}'))" 2>/dev/null; then
+    echo "ERROR: ${schema_file} is not valid JSON"
+    errors=$((errors + 1))
+  fi
+done
+
+if [ "${errors}" -eq 0 ]; then
+  echo "Structure check passed."
+else
+  echo "${errors} error(s) found."
+  exit 1
+fi
+"""
+
+[tasks.validate-icd]
+description = "Validate an ICD JSON file against innovation_canvas.schema.json"
+dir = "{{ config_root }}"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+  echo "Usage: mise run validate-icd <icd-file.json>"
+  exit 1
+fi
+
+TARGET_FILE="$1"
+SCHEMA_FILE=".claude/schemas/innovation_canvas.schema.json"
+
+if [ ! -f "${SCHEMA_FILE}" ]; then
+  echo "ERROR: Schema not found: ${SCHEMA_FILE}"
+  exit 1
+fi
+
+if [ ! -f "${TARGET_FILE}" ]; then
+  echo "ERROR: ICD file not found: ${TARGET_FILE}"
+  exit 1
+fi
+
+python3 -c "
+import json, sys
+try:
+    from jsonschema import validate, ValidationError
+except ImportError:
+    print('jsonschema not installed. Install with: uv pip install jsonschema')
+    sys.exit(1)
+
+with open('${SCHEMA_FILE}') as f:
+    schema = json.load(f)
+with open('${TARGET_FILE}') as f:
+    data = json.load(f)
+
+try:
+    validate(instance=data, schema=schema)
+    print('ICD validation passed.')
+except ValidationError as e:
+    print(f'ICD validation failed: {e.message}')
+    print(f'Path: {list(e.absolute_path)}')
+    sys.exit(1)
+"
+"""
+
+[tasks.format]
+description = "Format Python code in prototype/ with ruff"
+dir = "{{ config_root }}"
+run = "uv run --project prototype ruff format prototype/"

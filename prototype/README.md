@@ -29,7 +29,7 @@ Streamlit starter for Phase 4 (Build and validate) of the Vibe Innovation Framew
 
     A manually started Streamlit runs in the foreground of your terminal and prints logs directly, which is the usual setup for iterating on errors.
 
-The devcontainer bootstrap lives in [.devcontainer/post_create.sh](../.devcontainer/post_create.sh) and runs once on container creation via `postCreateCommand`. It installs `uv`, runs `uv sync` in `prototype/`, falls back to `pip install -r prototype/requirements.txt` if `uv sync` fails, and as a last-resort fallback to `pip install streamlit pandas` so the app can boot even when the full requirements file cannot resolve. The script always exits 0 so a partial install never marks the Codespace creation as failed; `post_start.sh` self-heals on first start if no streamlit binary is found. Either install path produces the same runnable environment.
+The devcontainer bootstrap lives in [.devcontainer/post_create.sh](../.devcontainer/post_create.sh) and runs once on container creation via `postCreateCommand`. It installs `uv`, runs `uv sync` in `prototype/`, falls back to `pip install -r prototype/requirements.txt` if `uv sync` fails, and as a last-resort fallback to `pip install streamlit pandas` so the app can boot even when the full requirements file cannot resolve. The script always exits 0 so a partial install never marks the Codespace creation as failed. `post_start.sh` self-heals on first start if no streamlit binary is found. Either install path produces the same runnable environment.
 
 ## Local development
 
@@ -68,13 +68,13 @@ uv export --format requirements-txt --no-hashes --no-emit-project --output-file 
 
 ## Troubleshooting
 
-1. **App does not start:** First read `.devcontainer/logs/bootstrap.log` and `.devcontainer/logs/streamlit.log` in the VS Code file explorer. The banner in every new terminal also dumps both logs inline on the first shell after each container start. If the bootstrap log shows a failed install, run `bash .devcontainer/post_create.sh` in a terminal to retry it; the script is idempotent and prints every step.
+1. **App does not start:** First read `.devcontainer/logs/bootstrap.log` and `.devcontainer/logs/streamlit.log` in the VS Code file explorer. The banner in every new terminal also dumps both logs inline on the first shell after each container start. If the bootstrap log shows a failed install, run `bash .devcontainer/post_create.sh` in a terminal to retry it. The script is idempotent and prints every step.
 2. **Port not visible or stops working:** This is the most common Codespace issue. The fix depends on timing:
    1. If the port **never appeared**: Open the PORTS tab in VS Code, right-click port 8501, set visibility to "Public".
    2. If the port **stopped working after a while**: Restart Streamlit with `pkill -f 'streamlit run' && cd prototype && .venv/bin/streamlit run app.py`. The environment is pre-configured to bind to the correct address.
    3. If restarting does not help, run `mkdir -p ~/.streamlit && cp prototype/.streamlit/config.toml ~/.streamlit/config.toml` and then restart Streamlit.
    4. As a last resort: Stop the Codespace (Codespaces menu, top left, "Stop Codespace"), then restart it. Do **not** rebuild.
-3. **Claude Code not available:** Use the copy-paste workflow instead. Open `framework/orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).
+3. **Claude Code not available:** Use the copy-paste workflow instead. Open `.claude/docs/orchestrator.md` in the repo, click "Raw", copy everything, paste into any LLM (ChatGPT, Gemini, Mistral, and others).
 4. **Codespace does not start:** Pair up with a working team. One Codespace, two screens.
 
 ## Installed libraries

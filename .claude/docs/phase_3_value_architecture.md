@@ -196,7 +196,7 @@ _Step 6 done. We now have a pre-mortem with top 5 failure scenarios and mitigati
 
 **Goal:** Stress-test the business model for revenue realism, competitive response, and partnership feasibility.
 **Prior:** Value proposition, BMC, experiments, pre-mortem all populated.
-**Here:** Challenges raised and addressed; business model either confirmed or revised.
+**Here:** Challenges raised and addressed. Business model either confirmed or revised.
 **Next:** Step 8 will freeze outputs into ICD Sections 4.3, 4.4, 4.5 and update TRL to 2.
 
 Challenge the business model:
@@ -225,16 +225,16 @@ Emit this block at phase close, before running the Orchestrator's phase transiti
 
 ```
 PHASE 3 COMPLETE
-Result: Value architecture and business model designed; experiments ready to falsify the riskiest assumptions.
+Result: Value architecture and business model designed. Experiments ready to falsify the riskiest assumptions.
 TRL: 1 → 2
-ICD updated: Sections 4.3 (Value proposition canvas), 4.4 (Business model canvas), 4.5 (Experiment design) complete; Section 3.3 updated with business model assumptions.
+ICD updated: Sections 4.3 (Value proposition canvas), 4.4 (Business model canvas), 4.5 (Experiment design) complete. Section 3.3 updated with business model assumptions.
 What you produced:
   - Value Proposition Canvas with fit assessment (Section 4.3)
   - Business Model Canvas, all 9 blocks with evidence/assumption markers (Section 4.4)
   - At least 2 experiment designs, each testing one assumption with a numeric threshold (Section 4.5)
   - Re-prioritized assumption map including BMC assumptions (Section 3.3)
   - Pre-mortem top 5 failure scenarios with mitigation for the top 3
-What remains open: Assumptions remain Untested; no artifact built yet.
+What remains open: Assumptions remain Untested. No artifact built yet.
 Next phase: Phase 4 (Build and validate). Goal: can we build it, and does it work? It will read Sections 1, 3, and 4.1 through 4.5 and produce Section 5 (Validation space) with a working artifact (technical or institutional), experiment results against thresholds, user or stakeholder feedback, and a populated Section 5.2 (Artifact specification).
 ```
 

@@ -6,7 +6,7 @@ user-invocable: true
 
 Read the current ICD file. If no ICD file exists in the working directory, ask the user to paste their current ICD.
 
-Then read `framework/trl_specification.md` for advancement criteria.
+Then read `.claude/docs/trl_specification.md` for advancement criteria.
 
 Produce a status report:
 

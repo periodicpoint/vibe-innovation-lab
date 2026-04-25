@@ -32,7 +32,7 @@ You do not need to write code or have technical skills to use this framework. Yo
 ### Option B: with any other LLM (ChatGPT, Copilot, Gemini, Mistral, and so on)
 
 1. Open the repository in a GitHub Codespace (same as above).
-2. Open the file `framework/orchestrator.md` in the repository. Click "Raw" to see the plain text. Copy everything.
+2. Open the file `.claude/docs/orchestrator.md` in the repository. Click "Raw" to see the plain text. Copy everything.
 3. Open your preferred LLM in a separate browser tab.
 4. Paste the entire contents into a new conversation.
 5. The LLM will start the entry diagnostic and guide you through the process.
@@ -49,7 +49,7 @@ You do not need to write code or have technical skills to use this framework. Yo
 
 | Aspect | Claude Code (`/innovate`) | Any other LLM (copy-paste) |
 |---|---|---|
-| Setup | Type `/innovate` in terminal | Copy `framework/orchestrator.md` into LLM chat |
+| Setup | Type `/innovate` in terminal | Copy `.claude/docs/orchestrator.md` into LLM chat |
 | Framework loading | Automatic (reads all files) | Manual (paste the orchestrator text) |
 | Phase transitions | Automatic dispatch | Say "Bitte weiter mit Phase N" |
 | ICD management | Saved as file in the project | Copy-paste between sessions |
@@ -89,7 +89,7 @@ You do not have to start at Phase 0. Enter at the phase that matches where you a
 
 ### Why the framework stops at TRL 4
 
-TRL 4 produces a validated MVP and a Go, Kill, Pivot, or Loop-back decision. Everything beyond TRL 4 is product development, not innovation. The two disciplines require different feedback loops, different failure modes, and different team structures. A Go decision at TRL 4 is the handoff point to a product team. See `framework/trl_specification.md` for the full rationale and the mapping to standard TRL (NASA, ISO 16290).
+TRL 4 produces a validated MVP and a Go, Kill, Pivot, or Loop-back decision. Everything beyond TRL 4 is product development, not innovation. The two disciplines require different feedback loops, different failure modes, and different team structures. A Go decision at TRL 4 is the handoff point to a product team. See `.claude/docs/trl_specification.md` for the full rationale and the mapping to standard TRL (NASA, ISO 16290).
 
 ### Design principles
 
@@ -98,7 +98,7 @@ TRL 4 produces a validated MVP and a Go, Kill, Pivot, or Loop-back decision. Eve
 3. **Diverge before converge.** Separate idea generation from evaluation.
 4. **Red team everything.** Every phase ends with a structured challenge to its own output.
 5. **Iteration has a budget.** Max 2 intra-phase, max 2 inter-phase to same target, max 5 total.
-6. **Quality-gated advancement.** A phase closes only when its output contract is satisfied. The framework does not manage time; what matters is that each phase hands the next one robust, evidence-grounded input.
+6. **Quality-gated advancement.** A phase closes only when its output contract is satisfied. The framework does not manage time. What matters is that each phase hands the next one robust, evidence-grounded input.
 
 ### Methodological foundations
 
@@ -107,11 +107,18 @@ Synthesizes classical (Stage-Gate, Double Diamond, Design Thinking, Business Mod
 ## Repository structure
 
 ```
-framework/          Innovation process (Orchestrator, ICD, TRL spec, 6 phases, principles)
-prototype/          Streamlit starter for rapid prototyping (Phase 4)
+.claude/docs/       Innovation process (Orchestrator, ICD, TRL spec, 6 phases, principles)
 .claude/skills/     Claude Code skill definitions (/innovate, /innovate-phase, /innovate-status)
+.claude/agents/     Phase orchestrator agent (thin skill sequencer)
+.claude/commands/   Slash command discovery layer
+.claude/rules/      Glob-bound editing rules (python, markdown, streamlit)
+.claude/schemas/    JSON schema for the Innovation Canvas Document
+prototype/          Streamlit starter for rapid prototyping (Phase 4)
 .devcontainer/      GitHub Codespaces configuration (auto-setup for workshops)
+mise.toml           Lint, structure check, ICD validate, format tasks
 ```
+
+The full process specification, including the Orchestrator prompt and all six phase prompts, lives under `.claude/docs/`. Browse `.claude/docs/README.md` for the file index. Users on any LLM other than Claude Code can copy-paste these files directly.
 
 ## Troubleshooting
 

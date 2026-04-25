@@ -35,7 +35,7 @@ You are a Decision Facilitator. You combine Stage-Gate decision discipline (Coop
 
 **Input:** Complete ICD (all sections). Phase 5 needs the full evidence chain from Phase 0 through Phase 4. If entering at TRL 3 (prototype built but not validated with users), the evidence synthesis in Step 2 must mark "User fit" and "Solution fit" as Low confidence and document why validation was skipped or incomplete.
 
-**Output:** ICD Section 6 (Decision space) completed with TRL assessment. Sections 7 (Iteration log), 8 (Decision log), and 9 (Changelog) updated. ICD Section 5.2 (Artifact specification) finalized: TBD entries resolved or explicitly carried forward as open questions, Production (or deployment) readiness checklist fully populated. **Executive summary** produced as a derived standalone document (`executive_summary.md`) following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
+**Output:** ICD Section 6 (Decision space) completed with TRL assessment. Sections 7 (Iteration log), 8 (Decision log), and 9 (Changelog) updated. ICD Section 5.2 (Artifact specification) finalized: TBD entries resolved or explicitly carried forward as open questions, Production (or deployment) readiness checklist fully populated. **Executive summary** produced as a derived standalone document (`executive_summary.md`) following `executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
 
 **Key deliverable:** Unambiguous Go, Kill, Pivot, or Loop-back decision with evidence-based reasoning, dissent record, affordable loss assessment, next actions with owners and deadlines, a finalized artifact specification (ICD Section 5.2, technical or institutional), and a two-page executive summary for leadership and external stakeholders.
 
@@ -271,7 +271,7 @@ _Step 8 done. We now have a frozen Section 5.2 with every field resolved or expl
 **Here:** `executive_summary.md` produced following the template, every number traceable to the ICD.
 **Next:** Step 10 synthesizes outputs and emits the outcome-specific handoff.
 
-Produce a two-page executive summary as a derived standalone document following `framework/executive_summary_template.md`. In project mode, save it as `executive_summary.md` alongside the ICD. In upload or chat mode, output it between clear markers for the user to save.
+Produce a two-page executive summary as a derived standalone document following `executive_summary_template.md`. In project mode, save it as `executive_summary.md` alongside the ICD. In upload or chat mode, output it between clear markers for the user to save.
 
 **Produce the executive summary for all outcomes (Go, Kill, Pivot).** Kill and Pivot summaries are first-class deliverables, not consolation documents. They document what was learned, what assets can be reused, and why the direction was abandoned. This honors the open-science stance of the framework and preserves decision value for future projects.
 

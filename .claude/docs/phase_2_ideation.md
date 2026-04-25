@@ -296,7 +296,7 @@ _Step 6 done. We now have Section 4.2 with 2 to 3 selected concepts each with a 
 
 **Goal:** Stress-test the selected concepts for adoption risk, competitive response, and failure modes.
 **Prior:** 2 to 3 selected concepts in Section 4.2.
-**Here:** Challenges raised and addressed; concepts either confirmed or revised.
+**Here:** Challenges raised and addressed. Concepts either confirmed or revised.
 **Next:** Step 8 will synthesize outputs into Section 4.1, 4.2 and update TRL to 1.
 
 For each selected concept:
@@ -325,7 +325,7 @@ Emit this block at phase close, before running the Orchestrator's phase transiti
 
 ```
 PHASE 2 COMPLETE
-Result: Wide divergence followed by sharp convergence; 2 to 3 selected concepts with named riskiest assumptions.
+Result: Wide divergence followed by sharp convergence. 2 to 3 selected concepts with named riskiest assumptions.
 TRL: 0 → 1
 ICD updated: Sections 4.1 (Idea candidates) and 4.2 (Selected concepts) complete, Section 1.3 updated.
 What you produced:

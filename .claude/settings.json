@@ -1,5 +1,23 @@
 {
   "permissions": {
-    "allow": []
+    "allow": [
+      "Bash(mise run lint)",
+      "Bash(mise run check)",
+      "Bash(mise run validate-icd:*)",
+      "Bash(mise run format)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mise run lint 2>&1 || { echo 'Lint failed. Fix forbidden element violations before continuing.' >&2; exit 2; }"
+          }
+        ]
+      }
+    ]
   }
 }

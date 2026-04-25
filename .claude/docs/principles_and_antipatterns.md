@@ -196,4 +196,4 @@ Use this checklist at every gate assessment to verify the deliverable is genuine
 4. [ ] Next actions table has owners and deadlines
 5. [ ] If pivoting, the pivot record documents what is preserved and what changes
 6. [ ] Artifact specification (Section 5.2) is finalized: TBDs resolved or explicitly carried forward, Production or deployment readiness checklist fully populated
-7. [ ] Executive summary (`executive_summary.md`) is produced following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot)
+7. [ ] Executive summary (`executive_summary.md`) is produced following `executive_summary_template.md`, for all outcomes (Go, Kill, Pivot)

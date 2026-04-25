@@ -11,15 +11,15 @@ Valid phase numbers: 0, 1, 2, 3, 4, 5.
 
 Read the following files:
 
-1. `framework/orchestrator.md` (for process context and phase contracts)
+1. `.claude/docs/orchestrator.md` (for process context and phase contracts)
 2. The phase-specific prompt file:
-   1. Phase 0: `framework/phase_0_strategic_framing.md`
-   2. Phase 1: `framework/phase_1_problem_discovery.md`
-   3. Phase 2: `framework/phase_2_ideation.md`
-   4. Phase 3: `framework/phase_3_value_architecture.md`
-   5. Phase 4: `framework/phase_4_build_and_validate.md`
-   6. Phase 5: `framework/phase_5_decision.md`
-3. `framework/principles_and_antipatterns.md`
+   1. Phase 0: `.claude/docs/phase_0_strategic_framing.md`
+   2. Phase 1: `.claude/docs/phase_1_problem_discovery.md`
+   3. Phase 2: `.claude/docs/phase_2_ideation.md`
+   4. Phase 3: `.claude/docs/phase_3_value_architecture.md`
+   5. Phase 4: `.claude/docs/phase_4_build_and_validate.md`
+   6. Phase 5: `.claude/docs/phase_5_decision.md`
+3. `.claude/docs/principles_and_antipatterns.md`
 
 Then:
 

@@ -1,4 +1,4 @@
-# Vibe Innovation Framework
+# Vibe Innovation Framework documentation
 
 A prompt-based framework for human-AI co-creation across the full innovation lifecycle, from strategic framing to working prototype. The framework covers technical innovations (software, hardware, data products) and non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes) with the same phase structure and the same validation discipline.
 

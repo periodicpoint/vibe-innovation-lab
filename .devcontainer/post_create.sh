@@ -116,7 +116,7 @@ if command -v npm >/dev/null 2>&1; then
     if npm install -g @anthropic-ai/claude-code; then
         echo "Claude Code CLI installed at $(command -v claude || echo 'unknown')"
     else
-        echo "Claude Code CLI not installed. Fallback: paste framework/orchestrator.md into any LLM."
+        echo "Claude Code CLI not installed. Fallback: paste .claude/docs/orchestrator.md into any LLM."
     fi
 else
     echo "npm not available, skipping Claude Code CLI."

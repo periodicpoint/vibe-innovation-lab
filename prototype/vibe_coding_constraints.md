@@ -2,7 +2,7 @@
 
 This file defines the hard constraints for LLM-generated code and LLM suggestions when a session runs in project mode against this repository. It is the authoritative source consulted by the Orchestrator during environment detection and by Phase 4 during tech stack selection. The constraints apply to every phase that produces code.
 
-**Mirror copy for chat and upload mode.** A verbatim-equivalent inline copy of the pinned stack, the blocklist, the override clause, and the escape hatch also lives in [framework/orchestrator.md](../framework/orchestrator.md), in the section *Vibe coding constraints (inline reference)*. That mirror is the fallback source for users who paste the Orchestrator into a chat-only LLM without attaching this file. Any change to the constraints here must be replicated in the Orchestrator inline section in the same commit. Out-of-sync copies will silently diverge between workshop delivery modes.
+**Mirror copy for chat and upload mode.** A verbatim-equivalent inline copy of the pinned stack, the blocklist, the override clause, and the escape hatch also lives in [.claude/docs/orchestrator.md](../.claude/docs/orchestrator.md), in the section *Vibe coding constraints (inline reference)*. That mirror is the fallback source for users who paste the Orchestrator into a chat-only LLM without attaching this file. Any change to the constraints here must be replicated in the Orchestrator inline section in the same commit. Out-of-sync copies will silently diverge between workshop delivery modes.
 
 The goal is to match the pre-configured Codespace environment, prevent workshop incidents caused by dependency installation or long-lived service daemons, and keep non-technical participants in a working state for the full duration of the session.
 
@@ -10,7 +10,7 @@ The goal is to match the pre-configured Codespace environment, prevent workshop 
 
 These constraints activate when all of the following are true:
 
-1. The session runs in project mode as defined in [framework/orchestrator.md](../framework/orchestrator.md), Step 2 (Environment detection).
+1. The session runs in project mode as defined in [.claude/docs/orchestrator.md](../.claude/docs/orchestrator.md), Step 2 (Environment detection).
 2. The working directory is this repository or a fork of it.
 3. The current phase is Phase 4 (Build and validate).
 
@@ -21,7 +21,7 @@ Outside these conditions the constraints are advisory only. In upload mode and c
 In project mode the tech stack is not subject to LLM selection. It is pinned as follows.
 
 1. **Target file.** All generated code goes into `prototype/app.py`, replacing the current content. Do not create new files unless the team explicitly requests one and the request is necessary for the experiment. Do not create helper modules, package directories, or separate entry points.
-2. **Runtime.** Streamlit. The app runs via the auto-start task in [.vscode/tasks.json](../.vscode/tasks.json) on port 8501. No alternative runtimes such as Flask, FastAPI, Vue, React, Express, Django, plain Python scripts, or Jupyter notebooks.
+2. **Runtime.** Streamlit. The app runs via the auto-start sequence in [.devcontainer/post_start.sh](../.devcontainer/post_start.sh) on port 8501. No alternative runtimes such as Flask, FastAPI, Vue, React, Express, Django, plain Python scripts, or Jupyter notebooks.
 3. **Interpreter.** Python 3.10 inside the devcontainer, invoked via `uv run` where available or the pip-fallback virtualenv otherwise. The team does not need to manage this.
 4. **Available libraries.** Only the libraries pre-installed by the devcontainer are permitted. The authoritative list is maintained in [prototype/README.md](README.md), section *Installed libraries*. Treat the README as the source of truth. If a library you would like to use is not in that list, it is blocked by default (see the Blocklist section below) and requires an explicit override from the team.
 5. **Data persistence.** Use in-memory structures, Streamlit session state, or the Python standard library `sqlite3` module for small local databases. No external database servers, no cloud storage, no file mounts outside the repository.
@@ -63,5 +63,5 @@ If the dominant Phase 4 assumption genuinely cannot be tested under the pinned s
 ## File references
 
 1. [prototype/README.md](README.md): authoritative list of installed libraries, Codespace startup behavior, and Streamlit auto-start task.
-2. [framework/orchestrator.md](../framework/orchestrator.md): Step 2 (Environment detection) loads this file in project mode.
-3. [framework/phase_4_build_and_validate.md](../framework/phase_4_build_and_validate.md): Step 3 (Tech stack selection) references this file as the authoritative source in project mode.
+2. [.claude/docs/orchestrator.md](../.claude/docs/orchestrator.md): Step 2 (Environment detection) loads this file in project mode.
+3. [.claude/docs/phase_4_build_and_validate.md](../.claude/docs/phase_4_build_and_validate.md): Step 3 (Tech stack selection) references this file as the authoritative source in project mode.

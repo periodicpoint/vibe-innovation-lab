@@ -26,7 +26,7 @@ The extended TRL serves three functions in this framework:
 
 The framework defines four artifact types at increasing levels of maturity. Each requires the previous level's learnings but not its code. Teams may skip levels (for example, build an MVP directly without a separate spike) if confidence is high enough.
 
-The artifact types apply to technical and to non-technical innovations. For technical innovations, the artifact is typically software (or a data product, or a hardware sketch). For non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes), the artifact is a structured document, a diagram, a role-play script, or a live pilot run. The labels and the TRL levels are the same; only the medium changes.
+The artifact types apply to technical and to non-technical innovations. For technical innovations, the artifact is typically software (or a data product, or a hardware sketch). For non-technical innovations (protocols, pilot designs, service blueprints, policy drafts, institutional processes), the artifact is a structured document, a diagram, a role-play script, or a live pilot run. The labels and the TRL levels are the same. Only the medium changes.
 
 ```
 Idea ─────> Proof of Concept ─────> Spike / Prototype ─────> MVP
@@ -42,7 +42,7 @@ no code     no code                 not production-ready     delivers core value
 
 3. **Spike** (TRL 3). The lightest possible working artifact that answers a single feasibility question: "Can this work at all?" A spike tests feasibility, not usability. It may be ugly, hardcoded, and throwaway. For technical innovations: the lightest working code (for example, a 20-line script that calls an API to verify the data format is usable). For non-technical innovations: the lightest mechanism sketch or tabletop walkthrough that answers one design-feasibility question (for example, a one-page protocol draft walked through once with two role-players to confirm the decision logic holds).
 
-4. **Prototype** (TRL 3). A working artifact that demonstrates the core user or participant interaction. More complete than a spike but still not production-ready. No authentication, no error handling, no edge cases; for non-technical artifacts, no full rollout, no staff training, no permanent infrastructure. For technical innovations, for example: a Streamlit app with one screen, one input, one output. For non-technical innovations, for example: a Wizard-of-Oz service run, a single pilot session of a new classroom protocol, a role-played walkthrough of a new handoff procedure.
+4. **Prototype** (TRL 3). A working artifact that demonstrates the core user or participant interaction. More complete than a spike but still not production-ready. No authentication, no error handling, and no edge cases. For non-technical artifacts, no full rollout, no staff training, and no permanent infrastructure. For technical innovations, for example: a Streamlit app with one screen, one input, one output. For non-technical innovations, for example: a Wizard-of-Oz service run, a single pilot session of a new classroom protocol, a role-played walkthrough of a new handoff procedure.
 
 5. **MVP** (TRL 4). The minimum viable product: the smallest artifact that delivers the core value proposition to a real user or stakeholder and generates measurable feedback. An MVP is not a prototype with polish. It is the thing that answers "would anyone actually use this?" For technical innovations, for example: a deployed Streamlit app that 3 to 5 users interact with, producing feedback quotes and usage metrics. For non-technical innovations, for example: a single-ward rollout of a new handoff protocol run for two weeks with structured observation and debrief, or a classroom pilot of a new assessment method run across one unit with measured outcomes.
 
@@ -163,7 +163,7 @@ A phase may only claim its exit TRL if the following evidence exists. These crit
 4. Next actions have named owners and deadlines.
 5. Dissenting views are recorded.
 6. ICD Section 5.2 (Artifact specification) is finalized: TBDs resolved or explicitly carried forward as open questions, Production (or deployment) readiness checklist fully populated.
-7. An executive summary (`executive_summary.md`) is produced following `framework/executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
+7. An executive summary (`executive_summary.md`) is produced following `executive_summary_template.md`, for all outcomes (Go, Kill, Pivot).
 
 ## Relationship to standard TRL
 
