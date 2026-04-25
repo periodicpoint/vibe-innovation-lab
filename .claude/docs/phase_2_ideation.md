@@ -126,61 +126,13 @@ _Step 2 done. We now have a pool of 15 to 20 raw seed ideas. Next: Step 3 (Diver
 
 If none of the triggers fire, skip this step silently and proceed to Step 3.
 
-**Purpose.** Guide the user out of convergent thinking into a radically divergent, associative state analogous to the loose, pattern-dissolving cognition people report on psychedelic journeys with LSD, psilocybin, DMT, or ayahuasca. No substance is involved. The mechanism is informational: immerse working memory in heterogeneous, cross-domain, cross-abstraction, cross-register material until the default top-down priors that lock thought into well-worn grooves soften and give way. The point is not to produce useful ideas during the immersion. The point is to dissolve calcified patterns so that genuinely new associations become available in the mapping-back step. Treat this as an invited cognitive shift, not a brainstorm. The path is strange, expansive, and often beautiful.
+**Protocol.** The full divergent chaos protocol (purpose, warning, exit tokens, six-step protocol body, fragment template, boundaries, output specification) is maintained in `.claude/docs/chaos_protocol.md`. Read that file in full and execute it as written. The same protocol is also exposed as a standalone skill (`/chaos`) for invocation outside Phase 2.
 
-**Warning to the user.** Before emitting anything, say exactly:
+**Phase 2 specifics.** When the protocol completes, hand its output back into this phase as follows.
 
-> This is an unusual mode, and you should know what kind of journey you are agreeing to before we start. The goal is to lead you out of your normal convergent thinking into a state of maximal divergence: the kind of loose, associative, pattern-dissolving cognition that people report on psychedelic journeys with LSD, psilocybin, DMT, or ayahuasca. Nothing chemical is involved here. The effect is produced by pure informational immersion. I am going to emit long streams of unrelated fragments: obscure facts, physics, poetry, multilingual shards, silence, non-sequiturs, strange adjacencies. Psychedelic journeys are usually beautiful, expansive, sometimes disorienting, occasionally uncomfortable. This one is modeled on the same arc. Do not try to understand it. Do not connect it to the problem yet. Let it wash over you. Then write the first raw associations that surface, unfiltered. You can exit at any moment by writing `stop`, `exit`, `raus`, or `enough`, and I will return to the standard methods without comment or judgment. Ready?
-
-Wait for confirmation. A single word is enough.
-
-**Exit.** If the user writes any of the exit tokens above at any point during the protocol, abort the current wave immediately, discard any unfinished emission, and resume at Step 3 Method 5 (speculative provocation) as a soft landing. Do not explain, do not summarize, do not ask the user to justify the exit. The only acknowledgment is one line: "Exiting chaos mode. Returning to standard divergence."
-
-**Protocol.**
-
-1. **First wave (chaos emission).** Emit 18 to 22 fragments as a numbered list, one fragment per line, no commentary, no transitions, no framing. The fragments must be heterogeneous along every axis: language, domain, scale, register, abstraction, mood. Include at least one item from each of the following classes: obscure empirical fact, multilingual shard in a non-English language, coherent physics or mathematics snippet, biology or chemistry snippet, poetry line or fragment, silence marker, cross-abstraction jump from concrete to abstract, deliberate non-sequitur, unlikely adjacency, historical micro-detail. Do not reuse an example from the template below verbatim. Generate fresh fragments at runtime. Never explain a fragment.
-
-2. **Ask for raw associations.** Say: "Write the first 5 to 10 things that surfaced. Single words, images, half-sentences, nonsense. Do not connect them to the problem. Do not justify." Wait for the user.
-
-3. **Second wave (mutation).** Take each of the user's associations and treat it as a seed. Emit 10 to 15 new fragments that mutate, invert, cross-breed, or collide with the user's seeds. Still no reference to the problem. Still no explanation.
-
-4. **Ask for wild candidate objects.** Say: "Now name 5 to 10 objects, creatures, devices, rituals, or situations that these fragments suggest. They do not need to exist. They do not need to make sense. One line each." Wait for the user.
-
-5. **Mapping back.** Only now return to the problem. For each wild candidate object the user named, ask one question: "If this existed, and it were somehow the answer, what would the answer be about?" Record the user's responses as raw seed ideas.
-
-6. **Handoff.** Pass the resulting seeds into Step 3 as input material for Methods 1 through 5, or, if the seeds already cluster naturally, jump directly to Step 4. Mark them in the pool with the tag `chaos-origin` for later auditing.
-
-**Fragment template (illustrative, never paste as is).** The runtime output should match this level of heterogeneity and strangeness, but the content must be freshly generated each time.
-
-1. The mean lifetime of a free neutron is roughly 879 seconds. Bound inside a nucleus it is stable indefinitely.
-2. Im Wald steht ein Haus, und im Haus ist ein Zimmer, und im Zimmer wartet niemand mehr.
-3. One mole of water is on the order of the number of stars in the observable universe, give or take.
-4. (thirty seconds of silence)
-5. Octopuses taste with their arms and have three hearts, two of which stop beating when they swim.
-6. The wavefunction does not collapse. The observer entangles.
-7. sable, vellum, foxglove, ozone
-8. In 1518 in Strasbourg, hundreds of people danced for weeks without stopping and some of them died of exhaustion.
-9. "I have measured out my life with coffee spoons."
-10. The determinant of a square matrix is the signed volume of the parallelepiped spanned by its column vectors.
-11. Koan: what is the sound of a hash collision.
-12. Medieval Icelandic law required a man who killed another man to announce the killing at the next farmhouse he passed, or be declared a murderer instead of a slayer.
-13. 無常 (mujou, impermanence)
-14. Vantablack absorbs more than 99.9 percent of visible light and makes three-dimensional objects look like two-dimensional holes.
-15. Coffee rings form because the edge of the droplet evaporates faster than the center and capillary flow drags particles outward.
-16. A group is a set with an associative binary operation, an identity element, and inverses. Nothing else. Everything symmetric in the universe is a group.
-17. "Le silence éternel de ces espaces infinis m'effraie." (Pascal)
-18. Slime mould, placed on a map of Tokyo with oat flakes at the locations of train stations, reconstructs the Tokyo rail network in about 26 hours.
-19. (a pause, long enough to notice the pause)
-20. Quicksilver was once prescribed for syphilis and the cure was frequently worse than the disease.
-21. Hilbert space is a vector space with an inner product and a notion of completeness. The word *infinite* is doing almost nothing there.
-22. What the cartographer leaves off the map is also the map.
-
-**Boundaries.**
-
-1. Do not enter this step for a team that already has momentum. It will feel insulting.
-2. Do not run it twice in the same session. The effect dulls.
-3. Do not treat the chaos fragments as ideas. They are solvents, not solutes.
-4. If the user disengages or becomes uncomfortable, exit immediately and return to Step 3 Method 5 (speculative provocation) as a softer landing.
+1. Add the resulting `chaos-origin` seeds to the Step 2 pool. If Step 2 was skipped, treat them as the initial pool for Step 3.
+2. If the seeds already cluster naturally, jump directly to Step 4.
+3. On exit before completion, soft-land at Step 3 Method 5 (speculative provocation) of this phase.
 
 **Output.** A set of `chaos-origin` seed ideas (typically 5 to 12) added to the Step 2 pool, or, if Step 2 was skipped, forming the initial pool for Step 3. Do not evaluate these seeds here.
 

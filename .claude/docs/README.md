@@ -22,6 +22,7 @@ The framework synthesizes classical, battle-proven innovation methodologies (Sta
 | `phase_3_value_architecture.md` | Value proposition, business model, experiment design, pre-mortem analysis (Osterwalder, pretotyping). |
 | `phase_4_build_and_validate.md` | Build and validate (vibe coding, experiment execution, user testing). |
 | `phase_5_decision.md` | Decision and iteration (go, kill, pivot, loop back, affordable loss assessment). |
+| `chaos_protocol.md` | Standalone divergent chaos protocol. Originally Step 2.5 of Phase 2, now also exposed as the `/chaos` skill for invocation in any phase or outside any phase. |
 | `executive_summary_template.md` | Two-page template for the executive summary produced at Phase 5 exit for leadership and external stakeholders. |
 
 ## Extended TRL scale
@@ -47,6 +48,7 @@ Phase 5 (Decision) operates at TRL 4, or at TRL 3 with reduced confidence, and p
 ```
 /innovate
 /innovate-phase N    (0 through 5)
+/chaos               (divergent chaos protocol, on demand)
 ```
 
 ### With any LLM (ChatGPT, Gemini, and so on)
