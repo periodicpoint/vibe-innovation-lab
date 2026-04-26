@@ -1,6 +1,7 @@
 ---
 name: chaos
-description: Run the divergent, psychodelic, chaos protocol. A deliberate cognitive jolt that emits heterogeneous fragments (facts, poetry, multilingual shards, silence, non-sequiturs) to dissolve calcified thought patterns and surface genuinely new associations. Use when divergence has collapsed, the user is stuck, or convergent thinking has locked the option space.
+description: Run the divergent, psychodelic, chaos protocol. A deliberate cognitive jolt that emits heterogeneous fragments (facts, poetry, multilingual shards, silence, non-sequiturs) to dissolve calcified thought patterns and surface genuinely new associations. Use when divergence has collapsed, the user is stuck, convergent thinking has locked the option space, all ideas sound alike, or the team is going in circles. Trigger phrases include "ich komme nicht weiter", "wir drehen uns im Kreis", "alle Ideen klingen gleich", "I am stuck", "break the pattern", "shake things up", "we need a jolt".
+argument-hint: "[focus-area]"
 user-invocable: true
 ---
 

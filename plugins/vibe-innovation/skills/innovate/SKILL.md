@@ -1,6 +1,7 @@
 ---
 name: innovate
-description: Start the Vibe Innovation Framework. Runs entry diagnostic, session planning, and phase dispatch.
+description: Start the Vibe Innovation Framework. Runs entry diagnostic, session planning, ICD initialization, and phase dispatch from the user's current uncertainty level (TRL -2 to 4). Use when the user wants to begin a new innovation project, has only a vague idea or none at all, asks where to start, needs the framework's entry routing, or wants to resume from an existing ICD. Trigger phrases include "start innovation", "ich habe eine Idee", "wo fange ich an", "let us begin", "neues Projekt", "framework run starten", "I want to ideate".
+argument-hint: "[topic-or-working-name]"
 user-invocable: true
 ---
 

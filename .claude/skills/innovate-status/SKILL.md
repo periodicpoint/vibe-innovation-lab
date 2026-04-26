@@ -1,6 +1,6 @@
 ---
 name: innovate-status
-description: Show current innovation project status (TRL, phase, open assumptions, next steps).
+description: Show current innovation project status: TRL, active phase, open assumptions, loop-back budget, and recommended next step. Use when the user wants a quick situational read, asks where the project stands, needs a status report between sessions, or before deciding the next move. Trigger phrases include "status", "wo stehen wir", "was ist offen", "current TRL", "what is next", "Lagebild".
 user-invocable: true
 ---
 

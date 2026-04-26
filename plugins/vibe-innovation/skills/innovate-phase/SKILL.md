@@ -1,8 +1,8 @@
 ---
 name: innovate-phase
-description: Run a specific phase of the Vibe Innovation Framework (0 through 5).
-user-invocable: true
+description: Run a specific phase (0 through 5) of the Vibe Innovation Framework. Reads the current ICD, executes the full phase prompt, writes the structured output back to the ICD. Use when the user wants to advance to the next phase, re-run a specific phase, or jump directly into Phase N because their starting TRL maps there. Trigger phrases include "Phase 2 starten", "weiter mit Phase 3", "run phase 1", "ideation phase", "do phase 4 build", "advance to validation".
 argument-hint: "[phase-number]"
+user-invocable: true
 ---
 
 **Phase requested:** $ARGUMENTS
