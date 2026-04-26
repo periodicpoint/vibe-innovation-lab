@@ -1,0 +1,19 @@
+{
+  "name": "vibe-innovation",
+  "description": "Innovation framework for human-AI co-creation across TRL -2 through TRL 4. Provides 9 skills, the Innovation Canvas Document, the TRL ladder, and a phase-orchestrator agent.",
+  "version": "2026.04.25",
+  "author": {
+    "name": "Martin Maga",
+    "email": "contact@martinmaga.com"
+  },
+  "homepage": "https://github.com/periodicpoint/vibe-innovation-lab",
+  "repository": "https://github.com/periodicpoint/vibe-innovation-lab",
+  "license": "MIT",
+  "keywords": [
+    "innovation",
+    "ideation",
+    "TRL",
+    "validation",
+    "vibe-coding"
+  ]
+}

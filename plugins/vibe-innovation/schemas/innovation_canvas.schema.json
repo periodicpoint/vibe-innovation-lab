@@ -1,0 +1,344 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vibe-innovation-lab.local/schemas/innovation_canvas.schema.json",
+  "title": "Innovation Canvas Document",
+  "description": "Validates the structure of an Innovation Canvas Document (ICD). Source of record for the prose specification: .claude/docs/innovation_canvas_document.md.",
+  "type": "object",
+  "required": [
+    "meta",
+    "situation_map",
+    "problem_space",
+    "solution_space",
+    "validation_space",
+    "decision_space",
+    "iteration_log",
+    "decision_log",
+    "changelog"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "meta": {
+      "description": "Cross-phase project metadata. Identity and constraints established at intake. Uncertainty profile and innovation horizon set in Phase 0 or by the entry diagnostic in the Orchestrator. Read by every phase, written by Phase 0.",
+      "type": "object",
+      "required": ["project_identity", "constraints", "uncertainty_profile", "innovation_horizon"],
+      "additionalProperties": true,
+      "properties": {
+        "project_identity": {
+          "type": "object",
+          "required": ["project_name", "one_sentence_description", "current_phase"],
+          "properties": {
+            "project_name": { "type": "string", "minLength": 1 },
+            "one_sentence_description": { "type": "string", "minLength": 1 },
+            "date_initiated": { "type": "string" },
+            "current_phase": {
+              "type": "string",
+              "enum": ["0", "1", "2", "3", "4", "5"]
+            },
+            "team_members": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "time_budget": { "type": "string" },
+            "financial_budget": { "type": "string" },
+            "team_size": { "type": "string" },
+            "technical_constraints": { "type": "string" },
+            "regulatory_constraints": { "type": "string" },
+            "organizational_constraints": { "type": "string" }
+          }
+        },
+        "uncertainty_profile": {
+          "type": "object",
+          "required": ["dominant_uncertainty_type", "current_trl", "recommended_entry_phase"],
+          "properties": {
+            "problem_uncertainty": { "$ref": "#/$defs/uncertaintyScore" },
+            "user_uncertainty": { "$ref": "#/$defs/uncertaintyScore" },
+            "solution_uncertainty": { "$ref": "#/$defs/uncertaintyScore" },
+            "market_uncertainty": { "$ref": "#/$defs/uncertaintyScore" },
+            "technical_uncertainty": { "$ref": "#/$defs/uncertaintyScore" },
+            "execution_uncertainty": { "$ref": "#/$defs/uncertaintyScore" },
+            "dominant_uncertainty_type": {
+              "type": "string",
+              "enum": ["problem", "user", "solution", "market", "technical", "execution"]
+            },
+            "current_trl": {
+              "type": "integer",
+              "minimum": -2,
+              "maximum": 4
+            },
+            "recommended_entry_phase": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            }
+          }
+        },
+        "innovation_horizon": {
+          "type": "object",
+          "required": ["classification"],
+          "properties": {
+            "classification": {
+              "type": "string",
+              "enum": ["Horizon 1", "Horizon 2", "Horizon 3"]
+            },
+            "rationale": { "type": "string" },
+            "implication_for_validation": { "type": "string" }
+          }
+        }
+      }
+    },
+    "situation_map": {
+      "description": "Phase 0 output. Strategic framing of why we are innovating and where to look. Includes Wardley-style landscape components, stakeholder map, and weak signals or trends. Required input for Phase 1 problem framing.",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "strategic_context": { "type": "object", "additionalProperties": true },
+        "landscape_components": { "type": "array" },
+        "stakeholder_map": { "type": "array" }
+      }
+    },
+    "problem_space": {
+      "description": "Phase 1 output. Sharp, falsifiable problem definition with JTBD profiles, scored assumption map, effectuation inventory, and Cynefin classification. Phase 4 may revise the problem statement if validation evidence demands it.",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "user_profiles": { "type": "array", "items": { "$ref": "#/$defs/jtbdProfile" } },
+        "problem_statement": {
+          "type": "object",
+          "properties": {
+            "sharp_statement": { "type": "string" },
+            "problem_type": {
+              "type": "string",
+              "enum": ["simple", "complicated", "complex", "chaotic"]
+            },
+            "revision_history": { "type": "array" }
+          }
+        },
+        "assumption_map": { "type": "array", "items": { "$ref": "#/$defs/assumption" } },
+        "effectuation_inventory": {
+          "type": "object",
+          "properties": {
+            "who_we_are": { "type": "string" },
+            "what_we_know": { "type": "string" },
+            "whom_we_know": { "type": "string" }
+          }
+        }
+      }
+    },
+    "solution_space": {
+      "description": "Phase 2 and Phase 3 output. Idea candidates produced by divergent ideation, selected concepts after convergence, then value proposition canvas, business model canvas, and experiment designs that target the riskiest assumptions.",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "idea_candidates": { "type": "array", "items": { "$ref": "#/$defs/ideaCandidate" } },
+        "selected_concepts": { "type": "array", "items": { "$ref": "#/$defs/concept" } },
+        "value_proposition_canvas": { "type": "object", "additionalProperties": true },
+        "business_model_canvas": { "type": "object", "additionalProperties": true },
+        "experiment_design": { "type": "array", "items": { "$ref": "#/$defs/experimentDesign" } }
+      }
+    },
+    "validation_space": {
+      "description": "Phase 4 output. Experiment results scored against thresholds, the artifact specification accumulated during build, and the implementation log. Section 5.2 (artifact specification) is finalized at Phase 5 exit, not earlier.",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "experiment_results": { "type": "array", "items": { "$ref": "#/$defs/experimentResult" } },
+        "artifact_specification": { "$ref": "#/$defs/artifactSpec" },
+        "implementation_log": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "decision_space": {
+      "description": "Phase 5 output. Terminal gate decision (Go, Kill, Pivot, Loop) with TRL assessment, evidence-based reasoning, dissent record, named next actions, and a pivot record when applicable. Kill and Pivot are first-class outcomes, not failures.",
+      "type": "object",
+      "required": ["gate_decision"],
+      "additionalProperties": true,
+      "properties": {
+        "gate_decision": {
+          "description": "The terminal decision: Go (hand off to product team), Kill (close the project), Pivot (re-enter with revised hypothesis), or Loop (return to an earlier phase with new evidence).",
+          "type": "object",
+          "required": ["decision"],
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": ["Go", "Kill", "Pivot", "Loop"]
+            },
+            "trl_at_decision": {
+              "type": "integer",
+              "minimum": -2,
+              "maximum": 4
+            },
+            "trl_change": { "type": "string" },
+            "reasoning": { "type": "string" },
+            "dissenting_views": { "type": "string" }
+          }
+        },
+        "next_actions": { "type": "array" },
+        "pivot_record": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "iteration_log": {
+      "description": "Append-only record of all loop-backs and intra-phase iterations. Each entry captures trigger evidence, scope of revision, and outcome. Counters enforce iteration budgets (max 2 intra-phase, max 2 inter-phase to the same target, max 5 total).",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "entries": { "type": "array" },
+        "counters": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "decision_log": {
+      "description": "Append-only register of major decisions across all phases (Strategic, Product, Technical, Institutional). Each entry is written at the moment of decision, not retrospectively. Authoritative source for technology and architecture entries in the artifact specification.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": { "type": "string" },
+          "phase": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["Strategic", "Product", "Technical", "Institutional"]
+          },
+          "decision": { "type": "string" },
+          "alternatives_considered": { "type": "string" },
+          "rationale": { "type": "string" },
+          "implications": { "type": "string" },
+          "evidence": { "type": "string" }
+        }
+      }
+    },
+    "changelog": {
+      "description": "Versioning log for the ICD itself. Each entry records date, originating phase, and a short summary of what was added or revised. Distinct from the decision log, which tracks substantive choices.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "changes"],
+        "properties": {
+          "date": { "type": "string" },
+          "phase": { "type": "string" },
+          "changes": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "uncertaintyScore": {
+      "description": "Uncertainty rating on a 1-to-5 scale. 1 means low uncertainty (known territory), 5 means high uncertainty (open question). Used in the entry diagnostic to identify the dominant uncertainty type and route to the right phase.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "jtbdProfile": {
+      "description": "Jobs-to-be-Done user profile. Captures the situation, motivation, and expected outcome that frame why a user would adopt the solution. Functional, emotional, and social jobs are separated to surface the full need landscape.",
+      "type": "object",
+      "required": ["user_type", "core_jtbd"],
+      "properties": {
+        "user_type": { "type": "string" },
+        "core_jtbd": { "type": "string" },
+        "functional_jobs": { "type": "array", "items": { "type": "string" } },
+        "emotional_jobs": { "type": "array", "items": { "type": "string" } },
+        "social_jobs": { "type": "array", "items": { "type": "string" } },
+        "current_workarounds": { "type": "string" },
+        "pains": { "type": "string" },
+        "gains": { "type": "string" }
+      }
+    },
+    "assumption": {
+      "description": "A testable belief that the project depends on. Priority is criticality multiplied by uncertainty. Status drives gate decisions: Validated supports Go, Falsified triggers Pivot or Kill, twice-Falsified triggers a structural rethink.",
+      "type": "object",
+      "required": ["id", "assumption", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "assumption": { "type": "string" },
+        "source": { "type": "string" },
+        "criticality": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "uncertainty": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "priority_score": { "type": "integer" },
+        "status": {
+          "type": "string",
+          "enum": ["Untested", "Validated", "Falsified"]
+        },
+        "evidence": { "type": "string" }
+      }
+    },
+    "ideaCandidate": {
+      "description": "Single idea generated during Phase 2 divergent ideation. Scored on feasibility, desirability, and viability to support convergence. Non-selected ideas are marked Parked rather than Killed so they remain retrievable for future revisits.",
+      "type": "object",
+      "required": ["id", "idea", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "idea": { "type": "string" },
+        "origin_method": { "type": "string" },
+        "feasibility": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "desirability": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "viability": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "total": { "type": "integer" },
+        "status": {
+          "type": "string",
+          "enum": ["Selected", "Parked", "Killed"]
+        }
+      }
+    },
+    "concept": {
+      "description": "Selected concept after Phase 2 convergence. Riskiest assumption is mandatory because it drives Phase 3 experiment design: every concept must name the single belief that, if false, would invalidate it.",
+      "type": "object",
+      "required": ["concept_name", "description", "riskiest_assumption"],
+      "properties": {
+        "concept_name": { "type": "string" },
+        "description": { "type": "string" },
+        "key_differentiator": { "type": "string" },
+        "riskiest_assumption": { "type": "string" }
+      }
+    },
+    "experimentDesign": {
+      "description": "Phase 3 pretotype design. One experiment isolates one assumption with a numeric success threshold defined upfront. Without an upfront threshold the experiment cannot falsify, only confirm.",
+      "type": "object",
+      "required": ["id", "assumption_tested", "success_metric", "threshold"],
+      "properties": {
+        "id": { "type": "string" },
+        "assumption_tested": { "type": "string" },
+        "pretotype_type": { "type": "string" },
+        "success_metric": { "type": "string" },
+        "threshold": { "type": "string" },
+        "estimated_cost_and_time": { "type": "string" }
+      }
+    },
+    "experimentResult": {
+      "description": "Phase 4 outcome of one experiment. The boolean meets_threshold field is binary by design: pre-committed thresholds prevent retroactive goal-shifting. The implication routes the next gate decision (Proceed, Pivot, Kill).",
+      "type": "object",
+      "required": ["experiment_id", "result", "meets_threshold"],
+      "properties": {
+        "experiment_id": { "type": "string" },
+        "result": { "type": "string" },
+        "meets_threshold": { "type": "boolean" },
+        "key_learning": { "type": "string" },
+        "implication": {
+          "type": "string",
+          "enum": ["Proceed", "Pivot", "Kill"]
+        }
+      }
+    },
+    "artifactSpec": {
+      "description": "Handoff artifact for the receiving owner (engineering, product, or institutional). Accumulates during Phase 4, freezes at Phase 5 exit. Field labels keep engineering-oriented names because most users build software, but every field has a non-technical analogue documented in the prose ICD spec.",
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "artifact_type": {
+          "type": "string",
+          "enum": ["Spike", "Prototype", "MVP"]
+        },
+        "scope": { "type": "string" },
+        "functional_requirements": { "type": "array" },
+        "non_functional_requirements": { "type": "array" },
+        "technology_stack_and_rationale": { "type": "string" },
+        "architecture_overview": { "type": "string" },
+        "data_model": { "type": "string" },
+        "external_dependencies": { "type": "array" },
+        "known_limitations": { "type": "array" },
+        "open_technical_questions": { "type": "array" },
+        "production_readiness_checklist": { "type": "array" },
+        "success_criteria": { "type": "string" }
+      }
+    }
+  }
+}

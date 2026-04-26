@@ -20,7 +20,20 @@ You do not need to write code or have technical skills to use this framework. Yo
 
 ## Getting started: step by step
 
-### Option A: with Claude Code (recommended if available)
+### Option A: install as Claude Code plugin (recommended)
+
+Use this when you have a local Claude Code installation and want the framework available in any working directory.
+
+1. In Claude Code, run `/plugin marketplace add periodicpoint/vibe-innovation-lab`.
+2. Run `/plugin install vibe-innovation@vibe-innovation-lab`.
+3. Invoke `/vibe-innovation:innovate` to start the entry diagnostic.
+4. The skill loads the framework from the plugin cache, asks the diagnostic questions, and guides you through the phases.
+
+All nine skills are namespaced under `vibe-innovation:` (for example `/vibe-innovation:innovate-phase`, `/vibe-innovation:chaos`).
+
+### Option B: with Claude Code in GitHub Codespaces (no install required)
+
+Use this for one-off runs or workshops without touching a local setup.
 
 1. Open the repository in a GitHub Codespace (green "Code" button on GitHub, then "Create codespace on main").
 2. Wait until the environment finishes loading (1 to 2 minutes).
@@ -29,7 +42,7 @@ You do not need to write code or have technical skills to use this framework. Yo
 5. Type `/innovate` and press Enter.
 6. Claude loads the framework automatically, asks your starting point, team, prior knowledge, success criteria, and biggest uncertainty, then guides you through the process.
 
-### Option B: with any other LLM (ChatGPT, Copilot, Gemini, Mistral, and so on)
+### Option C: with any other LLM (ChatGPT, Copilot, Gemini, Mistral, and so on)
 
 1. Open the repository in a GitHub Codespace (same as above).
 2. Open the file `.claude/docs/orchestrator.md` in the repository. Click "Raw" to see the plain text. Copy everything.
@@ -37,7 +50,7 @@ You do not need to write code or have technical skills to use this framework. Yo
 4. Paste the entire contents into a new conversation.
 5. The LLM will start the entry diagnostic and guide you through the process.
 
-### What happens next (both options)
+### What happens next (all options)
 
 1. The Orchestrator asks about your starting point, team, prior knowledge, success criteria, and biggest uncertainty.
 2. It maps your situation to a phase and assembles a session plan (which phases to run).
@@ -45,19 +58,20 @@ You do not need to write code or have technical skills to use this framework. Yo
 4. In Phase 4 (Build), the AI generates Streamlit code. You copy it into `prototype/app.py`, and the app updates automatically in your browser.
 5. Between sessions: copy the ICD output and save it. Paste it back when you resume.
 
-## Comparison: Claude Code versus other LLMs
+## Comparison: the three options
 
-| Aspect | Claude Code (`/innovate`) | Any other LLM (copy-paste) |
-|---|---|---|
-| Setup | Type `/innovate` in terminal | Copy `.claude/docs/orchestrator.md` into LLM chat |
-| Framework loading | Automatic (reads all files) | Manual (paste the orchestrator text) |
-| Phase transitions | Automatic dispatch | Say "Bitte weiter mit Phase N" |
-| ICD management | Saved as file in the project | Copy-paste between sessions |
-| Prototyping (Phase 4) | AI writes directly to `prototype/app.py` | AI generates code, you copy it into the file |
-| State between sessions | Preserved in project files | You must save and re-paste the ICD |
-| Cost | Requires Anthropic API key or Claude subscription | Works with free LLM tiers |
+| Aspect | Plugin install (Option A) | Codespaces (Option B) | Any other LLM (Option C) |
+|---|---|---|---|
+| Setup | `/plugin install vibe-innovation@vibe-innovation-lab` | Open repo in Codespaces, run `claude` | Copy `.claude/docs/orchestrator.md` into LLM chat |
+| Skill prefix | `/vibe-innovation:innovate` | `/innovate` | None, free-form chat |
+| Framework loading | Automatic from plugin cache | Automatic from `.claude/` | Manual paste |
+| Phase transitions | Automatic dispatch | Automatic dispatch | Say "Bitte weiter mit Phase N" |
+| ICD management | Saved as file in working project | Saved as file in the project | Copy-paste between sessions |
+| Prototyping (Phase 4) | AI writes to `prototype/app.py` of your project | AI writes to repo `prototype/app.py` | AI generates code, you copy it |
+| State between sessions | Preserved in project files | Preserved in project files | You must save and re-paste the ICD |
+| Cost | Requires Anthropic API key or Claude subscription | Anthropic key plus Codespaces minutes | Works with free LLM tiers |
 
-Both paths use the same process, the same phases, and produce the same outputs. The only difference is how you start and how state is managed.
+All paths run the same process, the same phases, and produce the same outputs.
 
 ## Framework overview
 
@@ -107,6 +121,9 @@ Synthesizes classical (Stage-Gate, Double Diamond, Design Thinking, Business Mod
 ## Repository structure
 
 ```
+.claude-plugin/     Marketplace manifest (marketplace.json) for plugin distribution
+plugins/            Plugin payload synced from .claude/, distributed via the marketplace
+                    (.claude-plugin/plugin.json, skills/, agents/, docs/, schemas/)
 .claude/docs/       Innovation process (Orchestrator, ICD, TRL spec, 6 phases, principles,
                     chaos, red team, loop-back, validation methods, personas, glossary,
                     institutional templates, bias field guide, two worked example ICDs)
@@ -119,8 +136,10 @@ Synthesizes classical (Stage-Gate, Double Diamond, Design Thinking, Business Mod
 .claude/schemas/    JSON schema for the Innovation Canvas Document
 prototype/          Streamlit starter for rapid prototyping (Phase 4)
 .devcontainer/      GitHub Codespaces configuration (auto-setup for workshops)
-mise.toml           Lint, structure check, ICD validate, format tasks
+mise.toml           Lint, structure check, ICD validate, format, sync-plugin, check-plugin
 ```
+
+`.claude/` is the editable source of truth. `plugins/vibe-innovation/` is regenerated from it via `mise run sync-plugin`, which copies the four subdirectories and rewrites file paths in skill bodies from `.claude/docs/...` to `${CLAUDE_SKILL_DIR}/../../docs/...` so the skills resolve correctly inside the plugin cache. Run `mise run check-plugin` to verify the plugin payload is in sync.
 
 The full process specification, including the Orchestrator prompt and all six phase prompts, lives under `.claude/docs/`. Browse `.claude/docs/README.md` for the file index. Users on any LLM other than Claude Code can copy-paste these files directly.
 

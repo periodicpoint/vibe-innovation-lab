@@ -62,6 +62,7 @@ while IFS= read -r -d '' f; do
 
 done < <(find . -name '*.md' \
   -not -path './boilerplate/*' \
+  -not -path './plugins/*' \
   -not -path './.git/*' \
   -not -path './.venv/*' \
   -not -path './prototype/.venv/*' \
@@ -214,3 +215,102 @@ except ValidationError as e:
 description = "Format Python code in prototype/ with ruff"
 dir = "{{ config_root }}"
 run = "uv run --project prototype ruff format prototype/"
+
+[tasks.sync-plugin]
+description = "Regenerate plugins/vibe-innovation/ from .claude/ with path rewrites for plugin context"
+dir = "{{ config_root }}"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+PLUGIN_DIR="plugins/vibe-innovation"
+
+if [ ! -d ".claude" ]; then
+  echo "ERROR: .claude/ not found, nothing to sync"
+  exit 1
+fi
+
+if [ ! -f "${PLUGIN_DIR}/.claude-plugin/plugin.json" ]; then
+  echo "ERROR: ${PLUGIN_DIR}/.claude-plugin/plugin.json missing, run manifest setup first"
+  exit 1
+fi
+
+for sub in skills agents docs schemas; do
+  rm -rf "${PLUGIN_DIR}/${sub}"
+  if [ -d ".claude/${sub}" ]; then
+    cp -r ".claude/${sub}" "${PLUGIN_DIR}/${sub}"
+  fi
+done
+
+# Rewrite paths in plugin skill files: relative .claude/* references become CLAUDE_SKILL_DIR-relative.
+while IFS= read -r -d '' f; do
+  sed -i \
+    -e 's|`\\.claude/docs/|`${CLAUDE_SKILL_DIR}/../../docs/|g' \
+    -e 's|`\\.claude/schemas/|`${CLAUDE_SKILL_DIR}/../../schemas/|g' \
+    -e 's|`\\.claude/agents/|`${CLAUDE_SKILL_DIR}/../../agents/|g' \
+    "${f}"
+done < <(find "${PLUGIN_DIR}/skills" -name 'SKILL.md' -print0 2>/dev/null)
+
+# Rewrite paths in plugin agent files: use CLAUDE_PLUGIN_ROOT for orientation references.
+# Match both backtick-quoted and bare occurrences (description fields use prose).
+while IFS= read -r -d '' f; do
+  sed -i \
+    -e 's|`\\.claude/docs/|`${CLAUDE_PLUGIN_ROOT}/docs/|g' \
+    -e 's|`\\.claude/schemas/|`${CLAUDE_PLUGIN_ROOT}/schemas/|g' \
+    -e 's|\\.claude/docs/|${CLAUDE_PLUGIN_ROOT}/docs/|g' \
+    -e 's|\\.claude/schemas/|${CLAUDE_PLUGIN_ROOT}/schemas/|g' \
+    "${f}"
+done < <(find "${PLUGIN_DIR}/agents" -name '*.md' -print0 2>/dev/null)
+
+skill_count=$(find "${PLUGIN_DIR}/skills" -name 'SKILL.md' 2>/dev/null | wc -l)
+doc_count=$(find "${PLUGIN_DIR}/docs" -name '*.md' 2>/dev/null | wc -l)
+echo "Synced ${skill_count} skill(s) and ${doc_count} doc(s) into ${PLUGIN_DIR}/."
+"""
+
+[tasks.check-plugin]
+description = "Validate plugin manifests and that plugins/vibe-innovation/ matches .claude/ structure"
+dir = "{{ config_root }}"
+run = """
+#!/usr/bin/env bash
+set -euo pipefail
+
+errors=0
+
+for manifest in .claude-plugin/marketplace.json plugins/vibe-innovation/.claude-plugin/plugin.json; do
+  if [ ! -f "${manifest}" ]; then
+    echo "ERROR: ${manifest} missing"
+    errors=$((errors + 1))
+    continue
+  fi
+  if ! python3 -c "import json; json.load(open('${manifest}'))" 2>/dev/null; then
+    echo "ERROR: ${manifest} is not valid JSON"
+    errors=$((errors + 1))
+  fi
+done
+
+claude_skills=$(find .claude/skills -name 'SKILL.md' 2>/dev/null | wc -l)
+plugin_skills=$(find plugins/vibe-innovation/skills -name 'SKILL.md' 2>/dev/null | wc -l)
+if [ "${claude_skills}" != "${plugin_skills}" ]; then
+  echo "ERROR: skill count mismatch (.claude=${claude_skills}, plugin=${plugin_skills}). Run: mise run sync-plugin"
+  errors=$((errors + 1))
+fi
+
+claude_docs=$(find .claude/docs -name '*.md' 2>/dev/null | wc -l)
+plugin_docs=$(find plugins/vibe-innovation/docs -name '*.md' 2>/dev/null | wc -l)
+if [ "${claude_docs}" != "${plugin_docs}" ]; then
+  echo "ERROR: doc count mismatch (.claude=${claude_docs}, plugin=${plugin_docs}). Run: mise run sync-plugin"
+  errors=$((errors + 1))
+fi
+
+if find plugins/vibe-innovation/skills -name 'SKILL.md' -exec grep -l '`\\.claude/' {} + 2>/dev/null | grep -q .; then
+  echo "ERROR: plugin SKILL.md files still contain raw .claude/ refs. Run: mise run sync-plugin"
+  errors=$((errors + 1))
+fi
+
+if [ "${errors}" -eq 0 ]; then
+  echo "Plugin check passed."
+else
+  echo "${errors} error(s) found."
+  exit 1
+fi
+"""

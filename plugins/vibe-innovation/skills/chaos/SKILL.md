@@ -6,7 +6,7 @@ user-invocable: true
 
 Read the following file in full before any other action.
 
-1. `.claude/docs/chaos_protocol.md`
+1. `${CLAUDE_SKILL_DIR}/../../docs/chaos_protocol.md`
 
 Then execute the protocol exactly as specified there. The protocol is self-contained: triggers, warning to the user, exit handling, six numbered protocol steps, fragment template, boundaries, and output specification.
 

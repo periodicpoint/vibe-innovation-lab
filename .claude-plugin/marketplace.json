@@ -1,0 +1,31 @@
+{
+  "name": "vibe-innovation-lab",
+  "owner": {
+    "name": "Martin Maga",
+    "email": "contact@martinmaga.com"
+  },
+  "metadata": {
+    "description": "Innovation framework for human-AI co-creation across TRL -2 through TRL 4."
+  },
+  "plugins": [
+    {
+      "name": "vibe-innovation",
+      "source": "./plugins/vibe-innovation",
+      "description": "Innovation framework with 9 skills (innovate, innovate-phase, innovate-status, innovate-icd, innovate-redteam, innovate-experiment, innovate-loopback, innovate-export, chaos), the Innovation Canvas Document, the TRL ladder, and the phase-orchestrator agent.",
+      "homepage": "https://github.com/periodicpoint/vibe-innovation-lab",
+      "repository": "https://github.com/periodicpoint/vibe-innovation-lab",
+      "license": "MIT",
+      "category": "knowledge-work",
+      "keywords": [
+        "innovation",
+        "ideation",
+        "TRL",
+        "validation",
+        "experiment-design",
+        "red-team",
+        "value-architecture",
+        "vibe-coding"
+      ]
+    }
+  ]
+}

@@ -13,7 +13,7 @@ When a user starts a conversation in this repository without a specific technica
 5. Initialize the ICD if none exists.
 6. Dispatch to the recommended phase.
 
-This diagnostic is also available explicitly via `/innovate`.
+This diagnostic is also available explicitly via `/innovate` (standalone mode) or `/vibe-innovation:innovate` (plugin mode).
 
 ## TRL entry mapping
 
@@ -34,8 +34,9 @@ See `.claude/docs/trl_specification.md` for the full extended TRL scale definiti
 1. `.claude/docs/` contains the innovation process specification: Orchestrator, Innovation Canvas Document (ICD), TRL specification, 6 phase prompts, principles and anti-patterns, chaos protocol, red team protocol, loop-back protocol, executive summary template, personas reference, validation methods catalog, glossary, institutional templates, bias and anti-pattern field guide, and two worked example ICDs (technical and institutional). These are the lazy-loaded reference texts that the skills read on demand.
 2. `.claude/skills/` contains Claude Code skill definitions: `/innovate`, `/innovate-phase`, `/innovate-status`, `/innovate-icd`, `/innovate-redteam`, `/innovate-experiment`, `/innovate-loopback`, `/innovate-export`, `/chaos`.
 3. `.claude/agents/`, `.claude/commands/`, `.claude/rules/`, `.claude/schemas/` complete the Claude Code surface: thin orchestrator agent, slash-command discovery layer, glob-bound editing rules, and the ICD JSON schema.
-4. `prototype/` contains Streamlit starter infrastructure for rapid prototyping (`app.py`, `pyproject.toml`, `requirements.txt`, vibe coding constraints).
-5. `mise.toml` defines the lint, structure-check, ICD-validate, and format tasks. The PostToolUse hook in `.claude/settings.json` enforces lint on every Markdown edit.
+4. `.claude-plugin/marketplace.json` is the marketplace manifest. `plugins/vibe-innovation/` is the distributable plugin payload (skills, agents, docs, schemas) regenerated from `.claude/` by `mise run sync-plugin`. The plugin is the source-of-truth for end users who install via `/plugin install vibe-innovation@vibe-innovation-lab`. `.claude/` is the source-of-truth for the framework author and for in-repo standalone use.
+5. `prototype/` contains Streamlit starter infrastructure for rapid prototyping (`app.py`, `pyproject.toml`, `requirements.txt`, vibe coding constraints).
+6. `mise.toml` defines the lint, structure-check, ICD-validate, format, sync-plugin, and check-plugin tasks. The PostToolUse hook in `.claude/settings.json` enforces lint on every Markdown edit.
 
 ## Conventions
 
