@@ -160,3 +160,35 @@ MIT
 ## Author
 
 Martin Maga
+
+## GitHub Actions: Automatisierung
+
+Dieses Repo enthält ein generisches GitHub-Actions-Template, das zeigt, wie Python-Logik (zum Beispiel die gleiche Logik aus einer Streamlit-App) als automatisierter, geplanter Workflow laufen kann, ohne dass jemand einen Button drückt.
+
+### Was im Repo liegt
+
+1. `.github/workflows/scheduled-task.yml` definiert den Workflow (Cron-Schedule plus manueller Trigger).
+2. `scripts/main.py` ist der Skript-Einstiegspunkt. Body ist beispielhaft mit OpenAI-Report-Generierung gefüllt und beliebig austauschbar.
+3. `requirements.txt` listet die Python-Dependencies, die der Workflow installiert.
+4. `input/` und `output/` sind die Standardpfade für Eingabe- und Ausgabe-Dateien.
+
+### Wie ihr es anpasst
+
+1. **Logik austauschen**: Body von `main()` in `scripts/main.py` durch eure Task-Logik ersetzen (Datei-Konvertierung, Datenaggregation, API-Aufrufe, Scraping, was auch immer).
+2. **Dependencies ändern**: in `requirements.txt` Pakete ergänzen oder entfernen.
+3. **Schedule ändern**: in `scheduled-task.yml` den `cron`-Ausdruck anpassen. Hilfreiches Tool: crontab.guru.
+4. **Secrets nutzen**: weitere `env:`-Einträge im Workflow ergänzen und entsprechende Secrets in den Repo-Settings anlegen.
+
+### Manuell auslösen
+
+1. Gehe im Repo auf den Tab **Actions**.
+2. Wähle links den Workflow **scheduled-task**.
+3. Klicke rechts auf **Run workflow**.
+4. Warte, bis der Job grün wird, und lade die Outputs als Artifact herunter.
+
+### API Key als Secret anlegen (für das Beispiel)
+
+1. Gehe im Repo auf **Settings** → **Secrets and variables** → **Actions**.
+2. Klicke auf **New repository secret**.
+3. Name: `OPENAI_API_KEY`, Value: dein API Key.
+4. Klicke auf **Add secret**.

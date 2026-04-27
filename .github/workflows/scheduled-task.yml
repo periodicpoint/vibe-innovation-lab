@@ -1,0 +1,30 @@
+name: scheduled-task
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'  # Default: jeden Montag 07:00 MESZ (05:00 UTC). Anpassen nach Bedarf.
+  workflow_dispatch:       # Manueller Trigger über GitHub UI
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run task
+        run: python scripts/main.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: task-output-${{ github.run_number }}
+          path: output/
