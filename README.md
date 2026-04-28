@@ -163,21 +163,21 @@ Martin Maga
 
 ## GitHub Actions: Automatisierung
 
-Dieses Repo enthält ein generisches GitHub-Actions-Template, das zeigt, wie Python-Logik (zum Beispiel die gleiche Logik aus einer Streamlit-App) als automatisierter, geplanter Workflow laufen kann, ohne dass jemand einen Button drückt.
+Dieses Repo enthält ein generisches GitHub-Actions-Template, das zeigt, wie Python-Logik als automatisierter, geplanter Workflow laufen kann, ohne dass jemand einen Button drückt. Das Default-Beispiel läuft im Action-Runner ohne jede Konfiguration durch, sodass ein frisch geforktes Repo nach einem Push direkt einen grünen Run produziert.
 
 ### Was im Repo liegt
 
 1. `.github/workflows/scheduled-task.yml` definiert den Workflow (Cron-Schedule plus manueller Trigger).
-2. `scripts/main.py` ist der Skript-Einstiegspunkt. Body ist beispielhaft mit OpenAI-Report-Generierung gefüllt und beliebig austauschbar.
-3. `requirements.txt` listet die Python-Dependencies, die der Workflow installiert.
+2. `scripts/main.py` ist der Skript-Einstiegspunkt. Beispielhaft mit deterministischer Aggregations-Logik gefüllt: liest `*.txt`-Dateien aus `input/` und schreibt einen Markdown-Report mit Zeilen-, Wort- und Zeichenzahlen pro Datei nach `output/report.md`. Nutzt nur die Python-Standard-Library.
+3. `requirements.txt` listet die Python-Dependencies, die der Workflow installiert. Aktuell leer, da das Default-Skript nichts ausserhalb der Standard-Library braucht.
 4. `input/` und `output/` sind die Standardpfade für Eingabe- und Ausgabe-Dateien.
 
 ### Wie ihr es anpasst
 
 1. **Logik austauschen**: Body von `main()` in `scripts/main.py` durch eure Task-Logik ersetzen (Datei-Konvertierung, Datenaggregation, API-Aufrufe, Scraping, was auch immer).
-2. **Dependencies ändern**: in `requirements.txt` Pakete ergänzen oder entfernen.
+2. **Dependencies ergänzen**: in `requirements.txt` Pakete hinzufügen, die euer angepasstes Skript braucht.
 3. **Schedule ändern**: in `scheduled-task.yml` den `cron`-Ausdruck anpassen. Hilfreiches Tool: crontab.guru.
-4. **Secrets nutzen**: weitere `env:`-Einträge im Workflow ergänzen und entsprechende Secrets in den Repo-Settings anlegen.
+4. **Externe APIs einbinden**: siehe Abschnitt *Optional: externe API einbinden* unten.
 
 ### Manuell auslösen
 
@@ -186,9 +186,18 @@ Dieses Repo enthält ein generisches GitHub-Actions-Template, das zeigt, wie Pyt
 3. Klicke rechts auf **Run workflow**.
 4. Warte, bis der Job grün wird, und lade die Outputs als Artifact herunter.
 
-### API Key als Secret anlegen (für das Beispiel)
+### Optional: externe API einbinden
 
-1. Gehe im Repo auf **Settings** → **Secrets and variables** → **Actions**.
-2. Klicke auf **New repository secret**.
-3. Name: `OPENAI_API_KEY`, Value: dein API Key.
-4. Klicke auf **Add secret**.
+Wenn euer angepasstes Skript einen API-Key braucht (etwa für OpenAI), legt ihr ihn als Actions Repository Secret an. Dieser Secret-Store ist getrennt vom Codespaces User Secret aus dem Workshop-Vorspiel und muss separat konfiguriert werden.
+
+1. Im Repo: **Settings → Secrets and variables → Actions → New repository secret**. Name `OPENAI_API_KEY`, Value euer API-Key.
+2. Im Workflow `.github/workflows/scheduled-task.yml` den Schritt **Run task** um einen `env`-Block erweitern:
+
+    ```yaml
+    - name: Run task
+      run: python scripts/main.py
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    ```
+
+3. Im Skript über `os.environ["OPENAI_API_KEY"]` auf den Key zugreifen.

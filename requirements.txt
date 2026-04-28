@@ -1,2 +1,4 @@
-streamlit
-openai
+# Dependencies for scripts/main.py, installed by .github/workflows/scheduled-task.yml.
+# The default main.py uses only the Python standard library, so this file is
+# intentionally empty. Add packages here if you replace the body of main() with
+# logic that needs them.

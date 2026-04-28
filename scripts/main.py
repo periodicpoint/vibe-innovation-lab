@@ -1,71 +1,88 @@
-"""
-Generic automation entry point for GitHub Actions.
+"""Generic automation entry point for GitHub Actions.
+
+Reads .txt files from input/, computes per-file line, word, and character
+counts, and writes a Markdown report to output/report.md. Uses only the Python
+standard library, so the workflow runs end-to-end in a fresh fork without any
+secret configuration.
 
 Pattern: read inputs from input/, process them, write outputs to output/.
-Swap the processing logic in main() for your own task. Examples:
-file conversion, data aggregation, API calls, scraping, report generation.
-
-This file ships with an OpenAI report-generation example as a starting point.
-Replace the body of main() with your own logic and adjust requirements.txt
-accordingly.
+Swap the body of main() for your own task logic. Add packages to
+requirements.txt if your replacement needs them.
 """
 
-import os
+from __future__ import annotations
+
+from datetime import datetime, timezone
 from pathlib import Path
-from openai import OpenAI
 
 
-def main():
-    client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-
+def main() -> None:
     input_dir = Path("input")
+    output_dir = Path("output")
     input_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(exist_ok=True)
 
-    sample_file = input_dir / "sample.txt"
     if not any(input_dir.glob("*.txt")):
-        sample_file.write_text(
+        sample = input_dir / "sample.txt"
+        sample.write_text(
             "Q1 revenue: 1.2M EUR. Q2 revenue: 1.5M EUR. "
             "Q3 revenue: 1.1M EUR. Q4 revenue: 1.8M EUR. "
             "Main cost driver: raw materials (+12% YoY). "
-            "New product line launched in Q3."
+            "New product line launched in Q3.",
+            encoding="utf-8",
         )
 
-    documents = []
-    for f in sorted(input_dir.glob("*.txt")):
-        documents.append(f.read_text(encoding="utf-8"))
-
+    documents = sorted(input_dir.glob("*.txt"))
     if not documents:
         print("No input files found. Exiting.")
         return
 
-    combined = "\n---\n".join(documents)
+    rows: list[tuple[str, int, int, int]] = []
+    total_lines = 0
+    total_words = 0
+    total_chars = 0
+    for path in documents:
+        text = path.read_text(encoding="utf-8")
+        lines = len(text.splitlines())
+        words = len(text.split())
+        chars = len(text)
+        rows.append((path.name, lines, words, chars))
+        total_lines += lines
+        total_words += words
+        total_chars += chars
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "Du bist ein Business Analyst. "
-                    "Erstelle einen kurzen, strukturierten Report "
-                    "auf Basis der folgenden Daten. "
-                    "Format: Zusammenfassung, Kernkennzahlen, Handlungsempfehlungen."
-                ),
-            },
-            {"role": "user", "content": combined},
-        ],
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+    report_lines = [
+        "# Aggregation report",
+        "",
+        f"Generated: {timestamp}",
+        "",
+        "## Per-file statistics",
+        "",
+        "| File | Lines | Words | Characters |",
+        "|---|---|---|---|",
+    ]
+    for name, lines, words, chars in rows:
+        report_lines.append(f"| {name} | {lines} | {words} | {chars} |")
+    report_lines.extend(
+        [
+            "",
+            "## Totals",
+            "",
+            f"1. Files processed: {len(documents)}",
+            f"2. Total lines: {total_lines}",
+            f"3. Total words: {total_words}",
+            f"4. Total characters: {total_chars}",
+            "",
+        ]
     )
 
-    report_text = response.choices[0].message.content
-
-    output_dir = Path("output")
-    output_dir.mkdir(exist_ok=True)
-
     report_path = output_dir / "report.md"
-    report_path.write_text(report_text, encoding="utf-8")
+    report_path.write_text("\n".join(report_lines), encoding="utf-8")
 
     print(f"Report generated: {report_path}")
-    print(f"Tokens used: {response.usage.total_tokens}")
+    print(f"Files processed: {len(documents)}, total words: {total_words}")
 
 
 if __name__ == "__main__":
