@@ -133,7 +133,11 @@ For technical innovations, the default stack is:
 
 For non-technical innovations, the default medium stack is Pandoc Markdown for protocol drafts, pilot designs, and service blueprints, with Mermaid for process diagrams and swimlane sketches. Git is used for version control of institutional artifacts as well. Phase 4 Step 3 (Method and medium selection) records the full stack for a given pilot.
 
-## License
 
-MIT
+## Licence
 
+Unless otherwise stated, all content in this repository by Martin Maga is licensed under CC BY-SA 4.0 and all code under AGPL-3.0-or-later.
+These licences apply only to rights that Martin Maga is entitled to grant.
+Separately applicable licences and statutory exceptions remain unaffected.
+`REUSE.toml` maps every path to its licence, and the licence texts live in `LICENSES/`.
+Please attribute reuse to Martin Maga, martinmaga.com.

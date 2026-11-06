@@ -153,9 +153,14 @@ The full process specification, including the Orchestrator prompt and all six ph
 | ChatGPT says the text is too long | Use a model with a larger context window (GPT-4o, Claude, Gemini Pro) |
 | Codespace takes long to start | Normal for first creation (1 to 2 minutes). Subsequent starts are faster |
 
-## License
 
-MIT
+## Licence
+
+Unless otherwise stated, all content in this repository by Martin Maga is licensed under CC BY-SA 4.0 and all code under AGPL-3.0-or-later.
+These licences apply only to rights that Martin Maga is entitled to grant.
+Separately applicable licences and statutory exceptions remain unaffected.
+`REUSE.toml` maps every path to its licence, and the licence texts live in `LICENSES/`.
+Please attribute reuse to Martin Maga, martinmaga.com.
 
 ## Author
 
